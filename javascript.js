@@ -176,7 +176,7 @@ function RefreshPlayer(){
 	//This code runs on page load, or submit hsername button.
 
 
-	$.getJSON("http://cors.io/?https://secure.runescape.com/m=hiscore_oldschool/index_lite.json?player="+user, function(result){
+	$.getJSON("https://cors.io/?https://secure.runescape.com/m=hiscore_oldschool/index_lite.json?player="+user, function(result){
 	    $.each(result, function(i, field){
 	//json player data is returned one line at a time
 	//the key aka outer value is a number
