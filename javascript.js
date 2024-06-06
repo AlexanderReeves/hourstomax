@@ -82,9 +82,9 @@ function UpdateWC(){
 	console.log("WC xp per hours = " + wcXpPerHour);
 
 	var remXP = ninetyNine - wcXP;
-	console.log("remaining Wc XP = " + remXp);
+	console.log("remaining Wc XP = " + remXP);
 	if(remXP < 0){remXP = 0};
-	console.log("remaining Wc XP = " + remXp);
+	console.log("remaining Wc XP = " + remXP);
 	wcHoursTotal = remXP/wcXpPerHour;
 	wcHoursTotal = Math.floor(wcHoursTotal);
 
