@@ -79,10 +79,12 @@ function UpdateWC(){
 	    wcXpPerHour = 50000;
 	    break;
 	}
-	console.log(wcXpPerHour);
+	console.log("WC xp per hours = " + wcXpPerHour);
 
 	var remXP = ninetyNine - wcXP;
-	if(remXP < 1){remXP = 0};
+	console.log("remaining Wc XP = " + remXp);
+	if(remXP < 0){remXP = 0};
+	console.log("remaining Wc XP = " + remXp);
 	wcHoursTotal = remXP/wcXpPerHour;
 	wcHoursTotal = Math.floor(wcHoursTotal);
 
@@ -126,8 +128,11 @@ function UpdateMa(){
 	console.log("New magic xp set to "+  maXpPerHour);
 
 	var remXP = ninetyNine - magicXp;
+	console.log("remaining magic xp" + remXP);
 	if(remXP < 1){remXP = 0};
+	console.log("remaining magic xp" + remXP);
 	maHoursTotal = remXP/maXpPerHour;
+	console.log("remaining magic hours" + maHoursTotal);
 	maHoursTotal = Math.floor(maHoursTotal);
 
 	document.getElementById('maFinal').innerText = maHoursTotal + " hours remain"
@@ -155,10 +160,16 @@ function UpdateURL(){
 			// Construct URLSearchParams object instance from current URL querystring.
 			var queryParams = new URLSearchParams(window.location.search);
 			 
-			// Set new or modify existing parameter value. 
-			queryParams.set("user", user);
-			queryParams.set("maval", maval);
-			queryParams.set("wcval", wcval);
+			// Set new or modify existing parameter value where a value exists. 
+			if(user!=null){
+				queryParams.set("user", user);
+			}
+			if(maval!=null){
+				queryParams.set("maval", maval);
+			}
+			if(wcval!=null){
+				queryParams.set("user", user);
+			}
 			 
 			// Replace current querystring with the new one.
 			history.replaceState(null, null, "?"+queryParams.toString());
