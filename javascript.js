@@ -1,50 +1,52 @@
 
 //Set variables
-const ninetyNine = 13034431;
-
-//Get user name and dropdown selections
-const queryString = window.location.search;
-console.log(queryString);
-const urlParams = new URLSearchParams(queryString);
-
+var ninetyNine = 13034431;
 var user = urlParams.get('user');
-var wcval = urlParams.get('wcval');
-var maval = urlParams.get('maval');
-
-console.log("username is " + user)
-console.log("Magic dropdown selection is " + maval);
-console.log("Woodcutting dropdown selection is " + wcval);
-
-
 var magicXp = 0;
 var wcXP = 0;
-
 var maHoursTotal = 0;
 var maXpPerHour = 0;
-
+var maval = urlParams.get('maval');
 var WcHoursTotal = 0;
 var wcXpPerHour = 0;
-
+var wcval = urlParams.get('wcval');
 maxHoursTotal = 0;
 
-
-
+PullURLVariables();
 
 //Apply the wcval from url to wcdropdown
 selectElement('wcdrop', wcval);
 selectElement('madrop', maval);
 
-function selectElement(id, valueToSelect) {    
+RefreshPlayer(); //Refresh the players data from the hiscores website
+
+UpdateWC();
+UpdateMa();
+UpdateMax();
+
+function PullURLVariables(){
+
+	//Get user name and dropdown selections from the URL parameters
+	const queryString = window.location.search;
+	console.log("Url Parameters: " + queryString);
+	const urlParams = new URLSearchParams(queryString);
+
+	console.log("username is " + user)
+	console.log("Magic dropdown selection is " + maval);
+	console.log("Woodcutting dropdown selection is " + wcval);
+}
+
+
+
+function selectElement(id, valueToSelect) {   
+	//Apply saved dropdown values from URL to page 
     let element = document.getElementById(id);
     if(valueToSelect != null){
     	element.value = valueToSelect;
   	}
 }
 
-RefreshPlayer();
-UpdateWC();
-UpdateMa();
-UpdateMax();
+
 
 
 
@@ -204,16 +206,16 @@ function RefreshPlayer(){
 	    	//	console.log(Object.keys(field));
 	    	//find xp value of field 7, the brackets are needed if a key is a number... its weird
 	    	magicXp = field['7'].xp;
-	    		console.log(magicXp)
+	    		console.log("Magic XP Downloaded in Json, Value: " + magicXp)
 	    		if(magicXp > 1){
 	    			//If a value was found for players magic xp, update the div
 						document.getElementById('magicXpDisplay').innerText = magicXp + "xp";
 	    		}
 	    		//if you want to show the full json line
-	    		console.log(field);
+	    		//console.log(field);
 	    	//Woodcutting
 	    		wcXp = field['9'].xp;
-	    		console.log(wcXp);
+	    		console.log("Wc XP Downloaded in Json, Value: " +wcXp);
 	    		if(wcXp > 1){
 	    			//If a value was found for players magic xp, update the div
 						document.getElementById('wcXpDisplay').innerText = wcXp + "xp";
