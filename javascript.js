@@ -1,15 +1,15 @@
 
 //Set variables
 var ninetyNine = 13034431;
-var user = urlParams.get('user');
+var user = "";
 var magicXp = 0;
 var wcXP = 0;
 var maHoursTotal = 0;
 var maXpPerHour = 0;
-var maval = urlParams.get('maval');
+var maval ="";
 var WcHoursTotal = 0;
 var wcXpPerHour = 0;
-var wcval = urlParams.get('wcval');
+var wcval = "";
 maxHoursTotal = 0;
 
 PullURLVariables();
@@ -30,7 +30,9 @@ function PullURLVariables(){
 	const queryString = window.location.search;
 	console.log("Url Parameters: " + queryString);
 	const urlParams = new URLSearchParams(queryString);
-
+	user = urlParams.get('user');
+	maval =  urlParams.get('maval');
+	wcval =  urlParams.get('wcval');
 	console.log("username is " + user)
 	console.log("Magic dropdown selection is " + maval);
 	console.log("Woodcutting dropdown selection is " + wcval);
