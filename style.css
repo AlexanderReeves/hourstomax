@@ -1,5 +1,6 @@
 		* {
 			   font-family: myFirstFont;
+			   font-size: 16px;
 		}
 
 		h1 {text-align: center; background-image: "logo.png"}	
@@ -16,13 +17,14 @@
 		    padding: 10px;
 			 	}
 
-		.searcharea {
+		.searcharea{
 				background-color: #0000;
 				max-width: 600px;
 				margin-left: auto;
 				margin-right: auto;
 		    border-radius: 1px;
 		    padding: 10px;
+		    text-align: center
 			 	}
 
 		.center {text-align: center}
@@ -153,4 +155,37 @@ footer{
   width: 100%;
   text-align:center;
   margin:0 auto;
+}
+
+
+/*MOBILE CSS*/
+/* its a copy of the above where changes are needed only*/
+
+@media (max-width: 1000px) {
+
+			* {
+			   font-size: 30px;
+		}
+
+
+    		.searcharea{
+				max-width: 100%;
+				margin-left: auto;
+				margin-right: auto;
+		    border-radius: 1px;
+		    padding: 10px;
+		    text-align: center
+		  }
+
+
+
+				.sand {
+				background-color: #222527;
+				max-width: 100%;
+				margin-left: auto;
+				margin-right: auto;
+		    border-radius: 1px;
+		    padding: 10px;
+			 	}
+
 }
