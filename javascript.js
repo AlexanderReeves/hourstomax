@@ -15,6 +15,10 @@ console.log("username is " + user)
 console.log("Magic dropdown selection is " + maval);
 console.log("Woodcutting dropdown selection is " + wcval);
 
+
+var magicXp = 0;
+var wcXP = 0;
+
 var maHoursTotal = 0;
 var maXpPerHour = 0;
 
@@ -77,9 +81,10 @@ function UpdateWC(){
 	}
 	console.log(wcXpPerHour);
 
-	WcHoursTotal = ninetyNine/wcXpPerHour;
-	WcHoursTotal = Math.floor(WcHoursTotal);
-	console.log('Wc val updated' + WcHoursTotal);
+	var remXP = ninetyNine - wcXP;
+	if(remXP < 1){remXP = 0};
+	wcHoursTotal = remXP/wcXpPerHour;
+	wcHoursTotal = Math.floor(wcHoursTotal);
 
 	document.getElementById('wcFinal').innerText = WcHoursTotal + " hours remain"
 
@@ -120,7 +125,9 @@ function UpdateMa(){
 	}
 	console.log("New magic xp set to "+  maXpPerHour);
 
-	maHoursTotal = ninetyNine/maXpPerHour;
+	var remXP = ninetyNine - magicXp;
+	if(remXP < 1){remXP = 0};
+	maHoursTotal = remXP/maXpPerHour;
 	maHoursTotal = Math.floor(maHoursTotal);
 
 	document.getElementById('maFinal').innerText = maHoursTotal + " hours remain"
@@ -161,8 +168,8 @@ function UpdateURL(){
 function RefreshPlayer(){
 
 	//set user xp levels to 0 as default
-	var magicXp = 0;
-	var wcXP = 0;
+	magicXp = 0;
+	wcXP = 0;
 
 	if(user != null){
 		console.log("Loading user " + user);

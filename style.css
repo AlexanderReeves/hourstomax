@@ -164,7 +164,12 @@ footer{
 @media (max-width: 1000px) {
 
 			* {
-			   font-size: 30px;
+			   font-size: 36px;
+		}
+
+
+		.smalltext{
+			font-size: 30px;
 		}
 
 
@@ -187,5 +192,10 @@ footer{
 		    border-radius: 1px;
 		    padding: 10px;
 			 	}
+
+			 	.logoarea {
+		  text-align: center; /* Horizontally center the image */
+		  height: 220px;
+		}
 
 }
