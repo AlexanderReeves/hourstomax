@@ -8,7 +8,7 @@ $.ajaxSetup({
 var ninetyNine = 13034431;
 var user = "";
 var magicXp = 0;
-var wcXP = 0;
+var wcXp = 0;
 var maHoursTotal = 0;
 var maXpPerHour = 0;
 var maval ="";
@@ -24,9 +24,9 @@ selectElement('wcdrop', wcval);
 selectElement('madrop', maval);
 
 RefreshPlayer(); //Refresh the players data from the hiscores website
-
-UpdateWC();
 UpdateMa();
+UpdateWC();
+
 
 
 UpdateMax();
@@ -56,15 +56,11 @@ function selectElement(id, valueToSelect) {
   	}
 }
 
-
-
-
-
 function UpdateWC(){
+	console.log("***Start WC Update***");
 	var wcDrop = document.getElementById("wcdrop");
 	var wcDropVal = wcDrop.value;
 	wcval = wcDropVal;
-	console.log(wcDropVal)
 	switch(wcDropVal) {
 	  case "1":
 	    //blisterwood trees
@@ -93,7 +89,7 @@ function UpdateWC(){
 	}
 	console.log("WC xp per hour = " + wcXpPerHour);
 
-	var remXP = ninetyNine - wcXP;
+	var remXP = ninetyNine - wcXp;
 	console.log("remaining Wc XP = " + remXP);
 	if(remXP < 0){remXP = 0};
 	console.log("remaining Wc XP = " + remXP);
@@ -101,12 +97,13 @@ function UpdateWC(){
 	wcHoursTotal = Math.floor(wcHoursTotal);
 
 	document.getElementById('wcFinal').innerText = WcHoursTotal + " hours remain"
-
+	console.log("***End WC Update***");
 	//UpdateURL();
 	//UpdateMax();
 }
 
 function UpdateMa(){
+	console.log("***Start Magic Update***");
 	var maDrop = document.getElementById("madrop");
 	var maDropVal = maDrop.value;
 	maval = maDropVal;
@@ -148,6 +145,7 @@ function UpdateMa(){
 	maHoursTotal = Math.floor(maHoursTotal);
 
 	document.getElementById('maFinal').innerText = maHoursTotal + " hours remain"
+	console.log("***End Magic Update***");
 	//UpdateURL();
 	//UpdateMax();
 }
@@ -193,7 +191,7 @@ function RefreshPlayer(){
 
 	//set user xp levels to 0 as default
 	magicXp = 0;
-	wcXP = 0;
+	wcXp = 0;
 
 	if(user != null){
 		console.log("Loading user " + user);
