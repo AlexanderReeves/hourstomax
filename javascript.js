@@ -20,8 +20,7 @@ selectElement('madrop', maval);
 
 RefreshPlayer(); //Refresh the players data from the hiscores website
 
-UpdateWC();
-UpdateMa();
+
 UpdateMax();
 
 function PullURLVariables(){
@@ -95,8 +94,8 @@ function UpdateWC(){
 
 	document.getElementById('wcFinal').innerText = WcHoursTotal + " hours remain"
 
-	UpdateURL();
-	UpdateMax();
+	//UpdateURL();
+	//UpdateMax();
 }
 
 function UpdateMa(){
@@ -141,8 +140,8 @@ function UpdateMa(){
 	maHoursTotal = Math.floor(maHoursTotal);
 
 	document.getElementById('maFinal').innerText = maHoursTotal + " hours remain"
-	UpdateURL();
-	UpdateMax();
+	//UpdateURL();
+	//UpdateMax();
 }
 
 function SubmitUsername(){
@@ -228,6 +227,8 @@ function RefreshPlayer(){
 	    		//console.log(field);
 	    });
 	  });
+	  UpdateWC();
+	  UpdateMa();
 	  console.log("***RefreshPlayer Is Ending.***")
 }
 
