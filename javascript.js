@@ -95,8 +95,7 @@ function UpdateWC(){
 	console.log("remaining Wc XP = " + remXP);
 	wcHoursTotal = remXP/wcXpPerHour;
 	wcHoursTotal = Math.floor(wcHoursTotal);
-	
-	document.getElementById('wcFinal').innerText = WcHoursTotal + " hours remain"
+	document.getElementById('wcFinal').innerText = wcHoursTotal + " hours remain"
 	console.log("***End WC Update***");
 	UpdateURL();
 	
