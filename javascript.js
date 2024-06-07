@@ -25,7 +25,7 @@ UpdateMa();
 UpdateMax();
 
 function PullURLVariables(){
-
+	console.log("***PullURLVariables is starting.***")
 	//Get user name and dropdown selections from the URL parameters
 	const queryString = window.location.search;
 	console.log("Url Parameters: " + queryString);
@@ -36,6 +36,7 @@ function PullURLVariables(){
 	console.log("username is " + user)
 	console.log("Magic dropdown selection is " + maval);
 	console.log("Woodcutting dropdown selection is " + wcval);
+	console.log("***PullURLVariables is ending.***")
 }
 
 
@@ -83,7 +84,7 @@ function UpdateWC(){
 	    wcXpPerHour = 50000;
 	    break;
 	}
-	console.log("WC xp per hours = " + wcXpPerHour);
+	console.log("WC xp per hour = " + wcXpPerHour);
 
 	var remXP = ninetyNine - wcXP;
 	console.log("remaining Wc XP = " + remXP);
@@ -181,6 +182,7 @@ function UpdateURL(){
 }
 
 function RefreshPlayer(){
+	console.log("***RefreshPlayer is starting.***")
 
 	//set user xp levels to 0 as default
 	magicXp = 0;
@@ -226,7 +228,7 @@ function RefreshPlayer(){
 	    		//console.log(field);
 	    });
 	  });
-	UpdateMax();
+	  console.log("***RefreshPlayer Is Ending.***")
 }
 
 function UpdateMax(){
