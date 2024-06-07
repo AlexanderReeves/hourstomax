@@ -25,6 +25,9 @@ selectElement('madrop', maval);
 
 RefreshPlayer(); //Refresh the players data from the hiscores website
 
+UpdateWC();
+UpdateMa();
+
 
 UpdateMax();
 
@@ -232,8 +235,7 @@ function RefreshPlayer(){
 	    		//console.log(field);
 	    });
 	  });
-	  UpdateWC();
-	  UpdateMa();
+
 	  console.log("***RefreshPlayer Is Ending.***")
 }
 
