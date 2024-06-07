@@ -12,7 +12,7 @@ var wcXp = 0;
 var maHoursTotal = 0;
 var maXpPerHour = 0;
 var maval ="";
-var WcHoursTotal = 0;
+var wcHoursTotal = 0;
 var wcXpPerHour = 0;
 var wcval = "";
 maxHoursTotal = 0;
@@ -95,11 +95,11 @@ function UpdateWC(){
 	console.log("remaining Wc XP = " + remXP);
 	wcHoursTotal = remXP/wcXpPerHour;
 	wcHoursTotal = Math.floor(wcHoursTotal);
-
+	
 	document.getElementById('wcFinal').innerText = WcHoursTotal + " hours remain"
 	console.log("***End WC Update***");
-	//UpdateURL();
-	//UpdateMax();
+	UpdateURL();
+	
 }
 
 function UpdateMa(){
@@ -146,8 +146,8 @@ function UpdateMa(){
 
 	document.getElementById('maFinal').innerText = maHoursTotal + " hours remain"
 	console.log("***End Magic Update***");
-	//UpdateURL();
-	//UpdateMax();
+	UpdateURL();
+
 }
 
 function SubmitUsername(){
