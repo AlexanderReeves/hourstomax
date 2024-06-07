@@ -216,21 +216,24 @@ function RefreshPlayer(){
 	    	//get keys of json object
 	    	//	console.log(Object.keys(field));
 	    	//find xp value of field 7, the brackets are needed if a key is a number... its weird
-	    	magicXp = field['7'].xp;
+			if(field['7'].xp != null){
+				magicXp = field['7'].xp;
 	    		console.log("Magic XP Downloaded in Json, Value: " + magicXp)
 	    		if(magicXp > 1){
 	    			//If a value was found for players magic xp, update the div
 						document.getElementById('magicXpDisplay').innerText = magicXp + "xp";
 	    		}
-	    		//if you want to show the full json line
-	    		//console.log(field);
-	    	//Woodcutting
-	    		wcXp = field['9'].xp;
-	    		console.log("Wc XP Downloaded in Json, Value: " +wcXp);
-	    		if(wcXp > 1){
-	    			//If a value was found for players magic xp, update the div
-						document.getElementById('wcXpDisplay').innerText = wcXp + "xp";
-	    		}
+			}
+			if(field['9'].xp != null){
+	    		//Woodcutting
+				wcXp = field['9'].xp;
+				console.log("Wc XP Downloaded in Json, Value: " +wcXp);
+				if(wcXp > 1){
+				//If a value was found for players magic xp, update the div
+					document.getElementById('wcXpDisplay').innerText = wcXp + "xp";
+				}
+			}
+
 	    		//if you want to show the full json line
 	    		//console.log(field);
 	    });
