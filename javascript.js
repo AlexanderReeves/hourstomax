@@ -177,7 +177,7 @@ function UpdateURL(){
 				queryParams.set("maval", maval);
 			}
 			if(wcval!=null){
-				queryParams.set("user", user);
+				queryParams.set("wcval", user);
 			}
 			 
 			// Replace current querystring with the new one.
