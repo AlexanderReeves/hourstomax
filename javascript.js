@@ -7,14 +7,23 @@ $.ajaxSetup({
 //Set variables
 var ninetyNine = 13034431;
 var user = "";
+
 var magicXp = 0;
 var wcXp = 0;
+var raXp = 0;
+
 var maHoursTotal = 0;
 var maXpPerHour = 0;
 var maval ="";
+
 var wcHoursTotal = 0;
 var wcXpPerHour = 0;
 var wcval = "";
+
+var raHoursTotal = 0
+var raXpPerHour = 0;
+var raval = 0;
+
 maxHoursTotal = 0;
 
 PullURLVariables();
@@ -22,10 +31,12 @@ PullURLVariables();
 //Apply the wcval from url to wcdropdown
 selectElement('wcdrop', wcval);
 selectElement('madrop', maval);
+selectElement('radrop', raval);
 
 RefreshPlayer(); //Refresh the players data from the hiscores website
 UpdateMa();
 UpdateWC();
+UpdateRa();
 
 
 
@@ -40,9 +51,11 @@ function PullURLVariables(){
 	user = urlParams.get('user');
 	maval =  urlParams.get('maval');
 	wcval =  urlParams.get('wcval');
+	raval =  urlParams.get('raval');
 	console.log("username is " + user)
 	console.log("Magic dropdown selection is " + maval);
 	console.log("Woodcutting dropdown selection is " + wcval);
+	console.log("Ranged dropdown selection is " + raval);
 	console.log("***PullURLVariables is ending.***")
 }
 
@@ -55,6 +68,71 @@ function selectElement(id, valueToSelect) {
     	element.value = valueToSelect;
   	}
 }
+
+function WcDropdownUpdate(){
+	UpdateWC();
+	UpdateMax();
+}
+
+function MaDropdownUpdate(){
+	UpdateMa();
+	UpdateMax();
+}
+
+function RaDropdownUpdate(){
+	UpdateRa();
+	UpdateMax();
+}
+
+function UpdateRa(){
+	console.log("***Start Ra Update***");
+	var raDrop = document.getElementById("radrop");
+	var raDropVal = raDrop.value;
+	raval = raDropVal;
+	switch(raDropVal) {
+	  case "1":
+	    //
+	    raXpPerHour = 90000;
+	    break;
+	  case "2":
+	    // Forrestey at yews
+	    raXpPerHour = 130000;
+	    break;
+	  case "3":
+	    // Teaks
+	    raXpPerHour = 140000;
+	    break;
+	  case "4":
+	    // Sculliceps
+	    raXpPerHour = 675000;
+	    break;
+	  case "5":
+	    // Redwoods
+	    raXpPerHour = 710000;
+	    break;
+	  case "6":
+	    // Redwoods
+	    raXpPerHour = 850000;
+	    break;
+	  default:
+	    // code block
+	    raXpPerHour = 50000;
+	    break;
+	}
+	console.log("Ra xp per hour = " + raXpPerHour);
+
+	var remXP = ninetyNine - raXp;
+	console.log("remaining Ra XP = " + remXP);
+	if(remXP < 0){remXP = 0};
+	console.log("remaining Ra XP = " + remXP);
+	raHoursTotal = remXP/raXpPerHour;
+	raHoursTotal = Math.floor(raHoursTotal);
+	document.getElementById('raFinal').innerText = raHoursTotal + " hours remain"
+	console.log("***End Ra Update***");
+	UpdateURL();
+	
+}
+
 
 function UpdateWC(){
 	console.log("***Start WC Update***");
@@ -161,11 +239,15 @@ function SubmitUsername(){
 			UpdateURL();
 			//Refresh player scores with new username
 			RefreshPlayer();
+			UpdateWC();
+			UpdateMa();
+			UpdateRa();
+			UpdateMax();
 		}
 }
 
 function UpdateURL(){
-			console.log("Updating URL. user: " + user + ". magic: " + maval);
+			console.log("Updating URL. user: " + user);
 			// Construct URLSearchParams object instance from current URL querystring.
 			var queryParams = new URLSearchParams(window.location.search);
 			 
@@ -179,7 +261,9 @@ function UpdateURL(){
 			if(wcval!=null){
 				queryParams.set("wcval", wcval);
 			}
-			 
+			if(raval!=null){
+				queryParams.set("raval", raval);
+			}
 			// Replace current querystring with the new one.
 			history.replaceState(null, null, "?"+queryParams.toString());
 
@@ -191,6 +275,7 @@ function RefreshPlayer(){
 	//set user xp levels to 0 as default
 	magicXp = 0;
 	wcXp = 0;
+	raXp = 0;
 
 	if(user != null){
 		console.log("Loading user " + user);
@@ -230,9 +315,18 @@ function RefreshPlayer(){
 					document.getElementById('wcXpDisplay').innerText = wcXp + "xp";
 				}
 			}
+			if(field['5'].xp != null){
+	    		//Woodcutting
+				raXp = field['5'].xp;
+				console.log("Ra XP Downloaded in Json, Value: " +raXp);
+				if(raXp > 1){
+				//If a value was found for players magic xp, update the div
+					document.getElementById('rangedXpDisplay').innerText = raXp + "xp";
+				}
+			}
 
 	    		//if you want to show the full json line
-	    		//console.log(field);
+	    		console.log(field);
 	    });
 	  });
 
@@ -240,8 +334,12 @@ function RefreshPlayer(){
 }
 
 function UpdateMax(){
-	maxHoursTotal = wcHoursTotal + maHoursTotal;
-	document.getElementById('maxHoursDisplay').innerText = user + " is " + maxHoursTotal+ " from max!";
+	maxHoursTotal = wcHoursTotal + maHoursTotal + raHoursTotal;
+	if(user!=null){
+		document.getElementById('maxHoursDisplay').innerText = user + " is " + maxHoursTotal+ " from max!";
+	}else{
+		document.getElementById('maxHoursDisplay').innerText = "You are " + maxHoursTotal+ " from max!";
+	}
 }
 
 function SaveAll(){

@@ -22,15 +22,35 @@
 
 <div class="sand">
 	<p class="center">Find many hours until you max in Old School Runescape</p>
-	<p class="center">In Development. Can not yet handle usernames with spaces.</p>
+	<p class="center">In Development.</p>
 
 	<p id ="displayUsername" class="center"></p>
+
+	<div class="row">
+		<div class="columnA">Renged<p id="rangedXpDisplay">0Xp</p></div>
+		<div class="columnB">
+				<form >
+				    <select  class="fullw minimal" name="radrop" id="radrop" onchange="RaDropdownUpdate()">
+				      <option value="1" selected="selected">(90kph) Cannon Ice Trolls</option>
+				      <option value="2">(130kph) Pest Control</option>
+				      <option value="3">(140kph) NMZ Venator Bow</option>
+				      <option value="4">(675kph) Chinning Monkeys</option>
+				      <option value="5">(710kph) Chinning Monkeys (red)</option>
+				      <option value="6">(850kph) Chinning Monkeys (black)</option>
+				    </select>
+				  
+				</form>
+		</div>
+		<div class="columnC center" id="raFinal" >0Xp</div>
+	</div>
+<br><br><br><br>
+
 
 	<div class="row">
 		<div class="columnA">Magic<p id="magicXpDisplay">Level</p></div>
 		<div class="columnB">
 				<form >
-				    <select  class="fullw minimal" name="madrop" id="madrop" onchange="UpdateMa()">
+				    <select  class="fullw minimal" name="madrop" id="madrop" onchange="MaDropdownUpdate()">
 				      <option value="1" selected="selected">(78kph) Cast High Level Alchemy</option>
 				      <option value="2" >(150kph) Cast Plank Make</option>
 				      <option value="3">(150kph) Casting String Jewellery</option>
@@ -40,7 +60,7 @@
 				  
 				</form>
 		</div>
-		<div class="columnC center" id="maFinal" >XP</div>
+		<div class="columnC center" id="maFinal" >0Xp</div>
 	</div>
 <br><br><br><br>
 
@@ -48,7 +68,7 @@
 		<div class="columnA">Woodcutting<p id="wcXpDisplay">Level</p></div>
 		<div class="columnB">
 				<form >
-				    <select  class="fullw minimal" name="wcdrop" id="wcdrop" onchange="UpdateWC()">
+				    <select  class="fullw minimal" name="wcdrop" id="wcdrop" onchange="WcDropdownUpdate()">
 				      <option value="1" selected="selected">(75kph) Cutting Blisterwood Trees</option>
 				      <option value="2" >(90kph) Forrestry at Yews</option>
 				      <option value="3">(90kph) Cutting Teak Trees</option>
