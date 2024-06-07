@@ -1,4 +1,9 @@
 
+$.ajaxSetup({
+    async: false
+});
+
+
 //Set variables
 var ninetyNine = 13034431;
 var user = "";
