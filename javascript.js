@@ -240,7 +240,7 @@ function RefreshPlayer(){
 }
 
 function UpdateMax(){
-	maxHoursTotal = WcHoursTotal + maHoursTotal;
+	maxHoursTotal = wcHoursTotal + maHoursTotal;
 	document.getElementById('maxHoursDisplay').innerText = user + " is " + maxHoursTotal+ " from max!";
 }
 
