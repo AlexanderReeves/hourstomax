@@ -9,21 +9,50 @@ var ninetyNine = 13034431;
 var user = "";
 
 var magicXp = 0;
-var wcXp = 0;
-var raXp = 0;
-
 var maHoursTotal = 0;
 var maXpPerHour = 0;
 var maval ="";
 
+var prXp = 0;
+var prHoursTotal = 0
+var prXpPerHour = 0;
+var prval = 0;
+
+var wcXp = 0;
 var wcHoursTotal = 0;
 var wcXpPerHour = 0;
 var wcval = "";
 
+var raXp = 0;
 var raHoursTotal = 0
 var raXpPerHour = 0;
 var raval = 0;
 
+var ruXp = 0;
+var ruHoursTotal = 0
+var ruXpPerHour = 0;
+var ruval = 0;
+
+
+var coXp = 0;
+var coHoursTotal = 0
+var coXpPerHour = 0;
+var coval = 0;
+
+var agXp = 0;
+var agHoursTotal = 0;
+var agXpPerHour = 0;
+var agval = "";
+
+var heXp = 0;
+var heHoursTotal = 0;
+var heXpPerHour = 0;
+var heval = "";
+
+var thXp = 0;
+var thHoursTotal = 0;
+var thXpPerHour = 0;
+var thval = "";
 maxHoursTotal = 0;
 
 PullURLVariables();
@@ -32,31 +61,44 @@ PullURLVariables();
 selectElement('wcdrop', wcval);
 selectElement('madrop', maval);
 selectElement('radrop', raval);
+selectElement('prdrop', raval);
+selectElement('rudrop', raval);
+selectElement('codrop', raval);
+selectElement('agdrop', raval);
+selectElement('hedrop', raval);
+selectElement('thdrop', raval);
+
 
 RefreshPlayer(); //Refresh the players data from the hiscores website
 UpdateMa();
 UpdateWC();
 UpdateRa();
+UpdatePr();
+UpdateRu();
+UpdateCo();
+UpdateAg();
+UpdateHe();
+UpdateTh();
 
 
 
 UpdateMax();
 
 function PullURLVariables(){
-	console.log("***PullURLVariables is starting.***")
 	//Get user name and dropdown selections from the URL parameters
 	const queryString = window.location.search;
-	console.log("Url Parameters: " + queryString);
+	/*console.log("Url Parameters: " + queryString);*/
 	const urlParams = new URLSearchParams(queryString);
 	user = urlParams.get('user');
 	maval =  urlParams.get('maval');
+	prval =  urlParams.get('paval');
 	wcval =  urlParams.get('wcval');
 	raval =  urlParams.get('raval');
-	console.log("username is " + user)
-	console.log("Magic dropdown selection is " + maval);
-	console.log("Woodcutting dropdown selection is " + wcval);
-	console.log("Ranged dropdown selection is " + raval);
-	console.log("***PullURLVariables is ending.***")
+	ruval =  urlParams.get('ruval');
+	coval =  urlParams.get('coval');
+	agval =  urlParams.get('agval');
+	heval =  urlParams.get('heval');
+	thval =  urlParams.get('thval');
 }
 
 
@@ -84,8 +126,33 @@ function RaDropdownUpdate(){
 	UpdateMax();
 }
 
+function PrDropdownUpdate(){
+	UpdatePr();
+	UpdateMax();
+}
+function RuDropdownUpdate(){
+	UpdateRu();
+	UpdateMax();
+}
+
+function CoDropdownUpdate(){
+	UpdateCo();
+	UpdateMax();
+}
+function AgDropdownUpdate(){
+	UpdateAg();
+	UpdateMax();
+}
+function HeDropdownUpdate(){
+	UpdateHe();
+	UpdateMax();
+}
+function ThDropdownUpdate(){
+	UpdateTh();
+	UpdateMax();
+}
+
 function UpdateRa(){
-	console.log("***Start Ra Update***");
 	var raDrop = document.getElementById("radrop");
 	var raDropVal = raDrop.value;
 	raval = raDropVal;
@@ -119,23 +186,18 @@ function UpdateRa(){
 	    raXpPerHour = 50000;
 	    break;
 	}
-	console.log("Ra xp per hour = " + raXpPerHour);
 
 	var remXP = ninetyNine - raXp;
-	console.log("remaining Ra XP = " + remXP);
 	if(remXP < 0){remXP = 0};
-	console.log("remaining Ra XP = " + remXP);
 	raHoursTotal = remXP/raXpPerHour;
 	raHoursTotal = Math.floor(raHoursTotal);
 	document.getElementById('raFinal').innerText = raHoursTotal + " hours remain"
-	console.log("***End Ra Update***");
 	UpdateURL();
 	
 }
 
 
 function UpdateWC(){
-	console.log("***Start WC Update***");
 	var wcDrop = document.getElementById("wcdrop");
 	var wcDropVal = wcDrop.value;
 	wcval = wcDropVal;
@@ -165,12 +227,8 @@ function UpdateWC(){
 	    wcXpPerHour = 50000;
 	    break;
 	}
-	console.log("WC xp per hour = " + wcXpPerHour);
-
 	var remXP = ninetyNine - wcXp;
-	console.log("remaining Wc XP = " + remXP);
 	if(remXP < 0){remXP = 0};
-	console.log("remaining Wc XP = " + remXP);
 	wcHoursTotal = remXP/wcXpPerHour;
 	wcHoursTotal = Math.floor(wcHoursTotal);
 	document.getElementById('wcFinal').innerText = wcHoursTotal + " hours remain"
@@ -180,11 +238,9 @@ function UpdateWC(){
 }
 
 function UpdateMa(){
-	console.log("***Start Magic Update***");
 	var maDrop = document.getElementById("madrop");
 	var maDropVal = maDrop.value;
 	maval = maDropVal;
-	console.log(maDropVal)
 	switch(maDropVal) {
 	  case "1":
 	    //blisterwood trees
@@ -211,21 +267,287 @@ function UpdateMa(){
 	    maXpPerHour = 100000;
 	    break;
 	}
-	console.log("New magic xp set to "+  maXpPerHour);
-
 	var remXP = ninetyNine - magicXp;
-	console.log("remaining magic xp" + remXP);
 	if(remXP < 1){remXP = 0};
-	console.log("remaining magic xp" + remXP);
 	maHoursTotal = remXP/maXpPerHour;
-	console.log("remaining magic hours" + maHoursTotal);
 	maHoursTotal = Math.floor(maHoursTotal);
 
 	document.getElementById('maFinal').innerText = maHoursTotal + " hours remain"
-	console.log("***End Magic Update***");
 	UpdateURL();
 
 }
+
+function UpdatePr(){
+	var prDrop = document.getElementById("prdrop");
+	var prDropVal = prDrop.value;
+	prval = prDropVal;
+	switch(prDropVal) {
+	  case "1":
+	    //blisterwood trees
+	    prXpPerHour = 50000;
+	    break;
+	  case "2":
+	    // Forrestey at yews
+	    prXpPerHour = 250000;
+	    break;
+	  case "3":
+	    // Teaks
+	    prXpPerHour = 437000;
+	    break;
+	  case "4":
+	    // Sculliceps
+	    prXpPerHour = 600000;
+	    break;
+	  case "5":
+	    // Redwoods
+	    prXpPerHour = 800000;
+	    break;
+	  case "6":
+	    // Redwoods
+	    prXpPerHour = 1250000;
+	    break;
+	  default:
+	    // code block
+	    prXpPerHour = 100000;
+	    break;
+	}
+
+	var remXP = ninetyNine - prXp;
+	if(remXP < 1){remXP = 0};
+	prHoursTotal = remXP/prXpPerHour;
+	prHoursTotal = Math.floor(prHoursTotal);
+
+	document.getElementById('prFinal').innerText = prHoursTotal + " hours remain"
+	UpdateURL();
+
+}
+
+function UpdateRu(){
+	var ruDrop = document.getElementById("rudrop");
+	var ruDropVal = ruDrop.value;
+	ruval = ruDropVal;
+	switch(ruDropVal) {
+	  case "1":
+	    //blisterwood trees
+	    ruXpPerHour = 35000;
+	    break;
+	  case "2":
+	    // Forrestey at yews
+	    ruXpPerHour = 60000;
+	    break;
+	  case "3":
+	    // Teaks
+	    ruXpPerHour = 65000;
+	    break;
+	  case "4":
+	    // Sculliceps
+	    ruXpPerHour = 70000;
+	    break;
+	  case "5":
+	    // Redwoods
+	    ruXpPerHour = 80000;
+	    break;
+	  case "6":
+	    // Redwoods
+	    ruXpPerHour = 100000;
+	    break;
+	  default:
+	    // code block
+	    ruXpPerHour = 100000;
+	    break;
+	}
+
+	var remXP = ninetyNine - ruXp;
+	if(remXP < 1){remXP = 0};
+	ruHoursTotal = remXP/ruXpPerHour;
+	ruHoursTotal = Math.floor(ruHoursTotal);
+	document.getElementById('ruFinal').innerText = ruHoursTotal + " hours remain"
+	UpdateURL();
+
+}
+
+
+function UpdateCo(){
+	var coDrop = document.getElementById("codrop");
+	var coDropVal = coDrop.value;
+	coval = coDropVal;
+	switch(coDropVal) {
+	  case "1":
+	    //blisterwood trees
+	    coXpPerHour = 190000;
+	    break;
+	  case "2":
+	    // Forrestey at yews
+	    coXpPerHour =400000;
+	    break;
+	  case "3":
+	    // Teaks
+	    coXpPerHour = 450000;
+	    break;
+	  case "4":
+	    // Sculliceps
+	    coXpPerHour = 500000;
+	    break;
+	  case "5":
+	    // Redwoods
+	    coXpPerHour = 580000;
+	    break;
+	  case "6":
+	    // Redwoods
+	    coXpPerHour = 850000;
+	    break;
+	  case "7":
+	    // Redwoods
+	    coXpPerHour = 1000000;
+	    break;
+	  default:
+	    // code block
+	    coXpPerHour = 100000;
+	    break;
+	}
+
+	var remXP = ninetyNine - coXp;
+	if(remXP < 1){remXP = 0};
+	coHoursTotal = remXP/coXpPerHour;
+	coHoursTotal = Math.floor(coHoursTotal);
+
+	document.getElementById('coFinal').innerText = coHoursTotal + " hours remain"
+	UpdateURL();
+
+}
+
+function UpdateAg(){
+	var agDrop = document.getElementById("agdrop");
+	var agDropVal = agDrop.value;
+	agval = agDropVal;
+	switch(agDropVal) {
+	  case "1":
+	    //blisterwood trees
+	    agXpPerHour = 45000;
+	    break;
+	  case "2":
+	    // Forrestey at yews
+	    agXpPerHour =50000;
+	    break;
+	  case "3":
+	    // Teaks
+	    agXpPerHour = 50000;
+	    break;
+	  case "4":
+	    // Sculliceps
+	    agXpPerHour = 55000;
+	    break;
+	  case "5":
+	    // Redwoods
+	    agXpPerHour = 65000;
+	    break;
+	  case "6":
+	    // Redwoods
+	    agXpPerHour = 65000;
+	    break;
+	  case "7":
+	    // Redwoods
+	    agXpPerHour = 90000;
+	    break;
+	  default:
+	    // code block
+	    agXpPerHour = 1;
+	    break;
+	}
+
+	var remXP = ninetyNine - agXp;
+	if(remXP < 1){remXP = 0};
+	agHoursTotal = remXP/agXpPerHour;
+	agHoursTotal = Math.floor(agHoursTotal);
+
+	document.getElementById('agFinal').innerText = agHoursTotal + " hours remain"
+	UpdateURL();
+
+}
+
+
+function UpdateHe(){
+	var heDrop = document.getElementById("hedrop");
+	var heDropVal = heDrop.value;
+	heval = heDropVal;
+	switch(heDropVal) {
+	  case "1":
+	    //blisterwood trees
+	    heXpPerHour = 110000;
+	    break;
+	  case "2":
+	    // Forrestey at yews
+	    heXpPerHour =170000;
+	    break;
+	  case "3":
+	    // Teaks
+	    heXpPerHour = 210000;
+	    break;
+	  case "4":
+	    // Sculliceps
+	    heXpPerHour = 400000;
+	    break;
+	  case "5":
+	    // Redwoods
+	    heXpPerHour = 500000;
+	    break;
+	  default:
+	    // code block
+	    heXpPerHour = 1;
+	    break;
+	}
+
+	var remXP = ninetyNine - heXp;
+	if(remXP < 1){remXP = 0};
+	heHoursTotal = remXP/heXpPerHour;
+	heHoursTotal = Math.floor(heHoursTotal);
+
+	document.getElementById('heFinal').innerText = heHoursTotal + " hours remain"
+	UpdateURL();
+
+}
+
+
+function UpdateTh(){
+	var thDrop = document.getElementById("thdrop");
+	var thDropVal = thDrop.value;
+	thval = thDropVal;
+	switch(thDropVal) {
+	  case "1":
+	    thXpPerHour = 110000;
+	    break;
+	  case "2":
+	    thXpPerHour =140000;
+	    break;
+	  case "3":
+	    thXpPerHour = 150000;
+	    break;
+	  case "4":
+	    thXpPerHour = 210000;
+	    break;
+	  case "5":
+	    thXpPerHour = 240000;
+	    break;
+	  case "6":
+	    thXpPerHour = 260000;
+	    break;
+	  case "7":
+	    thXpPerHour = 265000;
+	    break;
+	  default:
+	    coXpPerHour = 1;
+	    break;
+	}
+
+	var remXP = ninetyNine - thXp;
+	if(remXP < 1){remXP = 0};
+	thHoursTotal = remXP/thXpPerHour;
+	thHoursTotal = Math.floor(thHoursTotal);
+	document.getElementById('thFinal').innerText = thHoursTotal + " hours remain"
+	UpdateURL();
+
+}
+
 
 function SubmitUsername(){
 		//the submit button was pressed!
@@ -242,6 +564,12 @@ function SubmitUsername(){
 			UpdateWC();
 			UpdateMa();
 			UpdateRa();
+			UpdateRu();
+			UpdatePr();
+			UpdateCo();
+			UpdateAg();
+			UpdateHe();
+			UpdateTh();
 			UpdateMax();
 		}
 }
@@ -264,6 +592,25 @@ function UpdateURL(){
 			if(raval!=null){
 				queryParams.set("raval", raval);
 			}
+			if(prval!=null){
+				queryParams.set("prval", prval);
+			}
+			if(ruval!=null){
+				queryParams.set("ruval", ruval);
+			}
+			if(coval!=null){
+				queryParams.set("coval", coval);
+			}
+			if(agval!=null){
+				queryParams.set("agval", agval);
+			}
+			if(heval!=null){
+				queryParams.set("heval", heval);
+			}
+			if(thval!=null){
+				queryParams.set("thval", thval);
+			}
+
 			// Replace current querystring with the new one.
 			history.replaceState(null, null, "?"+queryParams.toString());
 
@@ -276,17 +623,24 @@ function RefreshPlayer(){
 	magicXp = 0;
 	wcXp = 0;
 	raXp = 0;
+	ruXp = 0;
+	prXp = 0;
+	coXp = 0;
+	agXp = 0;
+	heXp = 0;
+	thXp = 0;
+
 
 	if(user != null){
 		console.log("Loading user " + user);
 		document.getElementById('displayUsername').innerText = user;
 	}else{
 		 console.log("no user to load");
-		 document.getElementById('magicXpDisplay').innerText = 0+"xp";
+		 //document.getElementById('magicXpDisplay').innerText = 0+"xp";
 
 		 return;
 	}
-	//This code runs on page load, or submit hsername button.
+	//This code runs on page load, or submit username button.
 
 
 	$.getJSON("https://corsproxy.io/?https://secure.runescape.com/m=hiscore_oldschool/index_lite.json?player="+user, function(result){
@@ -324,6 +678,62 @@ function RefreshPlayer(){
 					document.getElementById('rangedXpDisplay').innerText = raXp + "xp";
 				}
 			}
+						if(field['6'].xp != null){
+	    		//Prayer
+				prXp = field['6'].xp;
+				console.log("Pr XP Downloaded in Json, Value: " +prXp);
+				if(prXp > 1){
+				//If a value was found for players magic xp, update the div
+					document.getElementById('prayerXpDisplay').innerText = prXp + "xp";
+				}
+			}
+			if(field['21'].xp != null){
+	    		//Runecraft
+				ruXp = field['21'].xp;
+				console.log("Rr XP Downloaded in Json, Value: " +ruXp);
+				if(ruXp > 1){
+				//If a value was found for players magic xp, update the div
+					document.getElementById('runecraftXpDisplay').innerText = ruXp + "xp";
+				}
+			}
+
+			if(field['23'].xp != null){
+	    		//Runecraft
+				coXp = field['23'].xp;
+				console.log("Co XP Downloaded in Json, Value: " +coXp);
+				if(coXp > 1){
+				//If a value was found for players magic xp, update the div
+					document.getElementById('constructionXpDisplay').innerText = coXp + "xp";
+				}
+			}
+
+			if(field['17'].xp != null){
+	    		//Agility
+				agXp = field['17'].xp;
+				console.log("Ag XP Downloaded in Json, Value: " +agXp);
+				if(agXp > 1){
+				//If a value was found for players magic xp, update the div
+					document.getElementById('agilityXpDisplay').innerText = agXp + "xp";
+				}
+			}
+			if(field['16'].xp != null){
+	    		//Herblore
+				heXp = field['16'].xp;
+				console.log("He XP Downloaded in Json, Value: " +heXp);
+				if(heXp > 1){
+				//If a value was found for players magic xp, update the div
+					document.getElementById('herbloreXpDisplay').innerText = heXp + "xp";
+				}
+			}
+			if(field['18'].xp != null){
+	    		//Herblore
+				thXp = field['18'].xp;
+				console.log("Thie XP Downloaded in Json, Value: " +thXp);
+				if(thXp > 1){
+				//If a value was found for players magic xp, update the div
+					document.getElementById('thievingXpDisplay').innerText = thXp + "xp";
+				}
+			}
 
 	    		//if you want to show the full json line
 	    		console.log(field);
@@ -334,7 +744,8 @@ function RefreshPlayer(){
 }
 
 function UpdateMax(){
-	maxHoursTotal = wcHoursTotal + maHoursTotal + raHoursTotal;
+	maxHoursTotal = wcHoursTotal + maHoursTotal + raHoursTotal + ruHoursTotal + prHoursTotal
+	+ coHoursTotal + thHoursTotal + heHoursTotal + agHoursTotal;
 	if(user!=null){
 		document.getElementById('maxHoursDisplay').innerText = user + " is " + maxHoursTotal+ " from max!";
 	}else{
