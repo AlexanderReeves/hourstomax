@@ -4,15 +4,15 @@ $.ajaxSetup({ //Prevent future code loading before previous code finishes.
 
 //Set variables
 //Array of XP values
-var maXpArray = [50000, 250000, 437000, 600000, 800000, 1250000];
-var wcXpArray = [50000, 250000, 437000, 600000, 800000, 1250000];
-var raXpArray = [50000, 250000, 437000, 600000, 800000, 1250000];
+var raXpArray = [90000, 130000, 140000, 675000, 710000, 850000];
 var prXpArray = [50000, 250000, 437000, 600000, 800000, 1250000];
-var ruXpArray = [50000, 250000, 437000, 600000, 800000, 1250000];
-var coXpArray = [50000, 250000, 437000, 600000, 800000, 1250000];
-var agXpArray = [50000, 250000, 437000, 600000, 800000, 1250000];
-var heXpArray = [50000, 250000, 437000, 600000, 800000, 1250000];
-var thXpArray = [50000, 250000, 437000, 600000, 800000, 1250000];
+var maXpArray = [78000, 150000, 150000, 175000, 380000];
+var wcXpArray = [68000, 75000, 90000, 90000, 100000];
+var ruXpArray = [35000, 60000, 65000, 70000, 80000, 100000];
+var coXpArray = [190000, 400000, 450000, 500000, 580000, 850000, 1000000];
+var agXpArray = [45000, 50000, 50000, 55000, 65000, 65000, 90000];
+var heXpArray = [110000, 170000, 210000, 400000, 500000];
+var thXpArray = [110000, 140000, 150000, 210000, 240000, 260000, 265000];
 
 var ninetyNine = 13034431;
 var user = "";
@@ -69,15 +69,15 @@ maxHoursTotal = 0;
 PullURLVariables();
 RefreshPlayer(); //Refresh the players data from the hiscores website
 //Update Hours To 99 for each skill
-UpdateXPAndHours("ma", wcval);
+UpdateXPAndHours("ma", maval);
 UpdateXPAndHours("wc", wcval);
-UpdateXPAndHours("ra", wcval);
-UpdateXPAndHours("pr", wcval);
-UpdateXPAndHours("ru", wcval);
-UpdateXPAndHours("co", wcval);
-UpdateXPAndHours("ag", wcval);
-UpdateXPAndHours("he", wcval);
-UpdateXPAndHours("th", wcval);
+UpdateXPAndHours("ra", raval);
+UpdateXPAndHours("pr", prval);
+UpdateXPAndHours("ru", ruval);
+UpdateXPAndHours("co", coval);
+UpdateXPAndHours("ag", agval);
+UpdateXPAndHours("he", heval);
+UpdateXPAndHours("th", thval);
 //Update hours to max
 UpdateMax();
 
@@ -88,7 +88,7 @@ function PullURLVariables() {
     const urlParams = new URLSearchParams(queryString);
     user = urlParams.get('user');
     maval = urlParams.get('maval');
-    prval = urlParams.get('paval');
+    prval = urlParams.get('prval');
     wcval = urlParams.get('wcval');
     raval = urlParams.get('raval');
     ruval = urlParams.get('ruval');
@@ -98,16 +98,17 @@ function PullURLVariables() {
     thval = urlParams.get('thval');
     console.log("pulled thieving Url Value: " + thval)
     //Update the dropdowns to the correct values here?
-    //Apply the wcval from url to wcdropdown
-    selectElement('wcdrop', wcval);
-    selectElement('madrop', maval);
-    selectElement('radrop', raval);
-    selectElement('prdrop', prval);
-    selectElement('rudrop', ruval);
-    selectElement('codrop', coval);
-    selectElement('agdrop', agval);
-    selectElement('hedrop', heval);
-    selectElement('thdrop', thval);
+    //Apply the wcval from url to wcdropdown unless it was null
+    if(raval != null){selectElement('radrop', raval);}else{raval = 1}
+    if(wcval != null){selectElement('wcdrop', wcval);}else{wcval = 1}
+    if(maval != null){selectElement('madrop', maval);}else{maval = 1}
+    if(prval != null){selectElement('prdrop', prval);}else{prval = 1}
+    if(ruval != null){selectElement('rudrop', ruval);}else{ruval = 1}
+    if(coval != null){selectElement('codrop', coval);}else{coval = 1}
+    if(agval != null){selectElement('agdrop', agval);}else{agval = 1}
+    if(heval != null){selectElement('hedrop', heval);}else{heval = 1}
+    if(thval != null){selectElement('thdrop', thval);}else{thval = 1}
+    
 }
 
 
@@ -202,6 +203,7 @@ function ThDropdownUpdate() {
 //******End manual dropdown update code*****
 
 function UpdateXPAndHours(shortHand) {
+	console.log("Updating Xp and Hours for " + shortHand);
     //Find how much XP is selected per hour from the dropdown
     var newXpPerHour = 0;
     //Current XP of that skill
@@ -210,51 +212,52 @@ function UpdateXPAndHours(shortHand) {
     switch (shortHand) {
         //If Woodcutting drop was altered, check the xp in the array
         case "wc":
-            newXpPerHour = wcXpArray[wcval];
+            newXpPerHour = wcXpArray[wcval-1];
             currentXp = wcXp;
             break;
         case "ma":
-            newXpPerHour = maXpArray[maval];
+            newXpPerHour = maXpArray[maval-1];
             currentXp = maXp;
             break;
 
         case "ra":
-            newXpPerHour = raXpArray[raval];
+            newXpPerHour = raXpArray[raval-1];
             currentXp = raXp;
             break;
 
         case "pr":
-            newXpPerHour = prXpArray[prval];
+            newXpPerHour = prXpArray[prval-1];
             currentXp = prXp;
             break;
 
         case "ru":
-            newXpPerHour = ruXpArray[ruval];
+            newXpPerHour = ruXpArray[ruval-1];
             currentXp = ruXp;
             break;
 
         case "co":
-            newXpPerHour = coXpArray[coval];
+            newXpPerHour = coXpArray[coval-1];
             currentXp = coXp;
             break;
 
         case "ag":
-            newXpPerHour = agXpArray[agval];
+            newXpPerHour = agXpArray[agval-1];
             currentXp = agXp;
             break;
 
         case "he":
-            newXpPerHour = heXpArray[heval];
+            newXpPerHour = heXpArray[heval-1];
             currentXp = heXp;
             break;
         case "th":
-            newXpPerHour = thXpArray[thval];
+            newXpPerHour = thXpArray[thval-1];
             currentXp = thXp;
             break;
         default:
             console.log("Error updating XP in switch")
             break;
     }
+    console.log("Current xp for " + shortHand + " is " + currentXp + ". Xp per hour is " + newXpPerHour + "from drop val ");
     //Remaining XP = 
     var remXP = ninetyNine - currentXp;
     if (remXP < 0) {
@@ -290,7 +293,11 @@ function UpdateXPAndHours(shortHand) {
     if (shortHand == "co") {
         coHoursTotal = remainingHours;
     }
-    document.getElementById(shortHand + 'Final').innerText = remainingHours + " hours remain"
+    if(!isNaN(remainingHours) && remainingHours != 0){
+    	document.getElementById(shortHand + 'Final').innerText = remainingHours + " hours remain";
+    }else{
+    	document.getElementById(shortHand + 'Final').innerText = "99 Achieved!";
+    }
 }
 
 function SubmitUsername() {
@@ -364,7 +371,7 @@ function RefreshPlayer() {
     console.log("***RefreshPlayer from Jagex is starting.***")
 
     //set user xp levels to 0 as default
-    magicXp = 0;
+    maXp = 0;
     wcXp = 0;
     raXp = 0;
     ruXp = 0;
@@ -396,11 +403,11 @@ function RefreshPlayer() {
             //	console.log(Object.keys(field));
             //find xp value of field 7, the brackets are needed if a key is a number... its weird
             if (field['7'].xp != null) {
-                magicXp = field['7'].xp;
-                console.log("Mg XP dwnld:" + magicXp)
-                if (magicXp > 1) {
+                maXp = field['7'].xp;
+                console.log("Mg XP dwnld:" + maXp)
+                if (maXp > 1) {
                     //If a value was found for players magic xp, update the div
-                    document.getElementById('magicXpDisplay').innerText = magicXp + "xp";
+                    document.getElementById('magicXpDisplay').innerText = maXp + "xp";
                 }
             }
             if (field['9'].xp != null) {
