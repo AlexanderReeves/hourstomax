@@ -13,6 +13,12 @@ var coXpArray = [190000, 400000, 450000, 500000, 580000, 850000, 1000000];
 var agXpArray = [45000, 50000, 50000, 55000, 65000, 65000, 90000];
 var heXpArray = [110000, 170000, 210000, 400000, 500000];
 var thXpArray = [110000, 140000, 150000, 210000, 240000, 260000, 265000];
+var crXpArray = [150000,220000,270000,360000,415000];
+var flXpArray = [1900000,2250000,2500000,3000000,4000000];
+var huXpArray = [80000,115000,125000,150000,160000,175000];
+var miXpArray = [25000,50000,60000,69000,70000,75000,78000,85000];
+var smXpArray = [200000,250000,350000];
+var fiXpArray = [40000,50000,75000,80000];
 
 var ninetyNine = 13034431;
 var user = "";
@@ -63,6 +69,42 @@ var thHoursTotal = 0;
 var thXpPerHour = 0;
 var thval = "";
 
+var crXp = 0;
+var crHoursTotal = 0;
+var crXpPerHour = 0;
+var crval = "";
+
+var flXp = 0;
+var flHoursTotal = 0;
+var flXpPerHour = 0;
+var flval = "";
+
+var huXp = 0;
+var huHoursTotal = 0;
+var huXpPerHour = 0;
+var huval = "";
+
+
+var miXp = 0;
+var miHoursTotal = 0;
+var miXpPerHour = 0;
+var mival = "";
+
+var smXp = 0;
+var smHoursTotal = 0;
+var smXpPerHour = 0;
+var smval = "";
+
+var fiXp = 0;
+var fiHoursTotal = 0;
+var fiXpPerHour = 0;
+var fival = "";
+
+
+//Slayer xp per hour on average
+var slXpPerHour = 0;
+var slXp = 0;
+var slHoursTotal = 0;
 maxHoursTotal = 0;
 
 //Pull the values from the URL into the global values
@@ -78,6 +120,13 @@ UpdateXPAndHours("co", coval);
 UpdateXPAndHours("ag", agval);
 UpdateXPAndHours("he", heval);
 UpdateXPAndHours("th", thval);
+UpdateXPAndHours("cr", crval);
+UpdateXPAndHours("fl", flval);
+UpdateXPAndHours("sl", slXpPerHour);
+UpdateXPAndHours("hu", huval);
+UpdateXPAndHours("mi", mival);
+UpdateXPAndHours("sm", smval);
+UpdateXPAndHours("fi", fival);
 //Update hours to max
 UpdateMax();
 
@@ -96,7 +145,14 @@ function PullURLVariables() {
     agval = urlParams.get('agval');
     heval = urlParams.get('heval');
     thval = urlParams.get('thval');
-    console.log("pulled thieving Url Value: " + thval)
+    crval = urlParams.get('crval');
+    flval = urlParams.get('flval');
+    huval = urlParams.get('huval');
+    mival = urlParams.get('mival');
+    smval = urlParams.get('smval');
+    fival = urlParams.get('fival');
+    //We can get slval to determine slayer xp per hour
+    slXpPerHour = urlParams.get('slval');
     //Update the dropdowns to the correct values here?
     //Apply the wcval from url to wcdropdown unless it was null
     if(raval != null){selectElement('radrop', raval);}else{raval = 1}
@@ -108,6 +164,16 @@ function PullURLVariables() {
     if(agval != null){selectElement('agdrop', agval);}else{agval = 1}
     if(heval != null){selectElement('hedrop', heval);}else{heval = 1}
     if(thval != null){selectElement('thdrop', thval);}else{thval = 1}
+    if(crval != null){selectElement('crdrop', crval);}else{crval = 1}
+    if(flval != null){selectElement('fldrop', flval);}else{flval = 1}
+    if(huval != null){selectElement('hudrop', huval);}else{huval = 1}
+    if(mival != null){selectElement('midrop', mival);}else{mival = 1}
+    if(smval != null){selectElement('smdrop', smval);}else{smval = 1}
+    if(fival != null){selectElement('fidrop', fival);}else{fival = 1}
+    //If there is no slayer XP in URL, set slayer XP to 40 000
+    if(slXpPerHour == null){ 	slXpPerHour = 40000; }
+    //Set the slayer input to reflect our slayer xp average
+	selectElement('slayerAverage', slXpPerHour);
     
 }
 
@@ -199,6 +265,59 @@ function ThDropdownUpdate() {
     UpdateMax();
     UpdateURL();
 }
+function CrDropdownUpdate() {
+    var crDrop = document.getElementById("crdrop");
+    crval = crDrop.value;
+    UpdateXPAndHours("cr", crval);
+    UpdateMax();
+    UpdateURL();
+}
+function FlDropdownUpdate() {
+    var flDrop = document.getElementById("fldrop");
+    flval = flDrop.value;
+    UpdateXPAndHours("fl", flval);
+    UpdateMax();
+    UpdateURL();
+}
+
+function HuDropdownUpdate() {
+    var huDrop = document.getElementById("hudrop");
+    huval = huDrop.value;
+    UpdateXPAndHours("hu", huval);
+    UpdateMax();
+    UpdateURL();
+}
+function MiDropdownUpdate() {
+	console.log("test");
+    var miDrop = document.getElementById("midrop");
+    mival = miDrop.value;
+    UpdateXPAndHours("mi", mival);
+    UpdateMax();
+    UpdateURL();
+}
+function SmDropdownUpdate() {
+    var smDrop = document.getElementById("smdrop");
+    smval = smDrop.value;
+    UpdateXPAndHours("sm", smval);
+    UpdateMax();
+    UpdateURL();
+}
+function FiDropdownUpdate() {
+    var fiDrop = document.getElementById("fidrop");
+    fival = fiDrop.value;
+    UpdateXPAndHours("fi", fival);
+    UpdateMax();
+    UpdateURL();
+}
+
+
+function SlTextUpdate(){
+	var slayerInput = document.getElementById("slayerAverage");
+	slXpPerHour = slayerInput.value;
+	UpdateXPAndHours("sl",slXpPerHour)
+	UpdateMax();
+	UpdateURL();
+}
 
 //******End manual dropdown update code*****
 
@@ -253,6 +372,33 @@ function UpdateXPAndHours(shortHand) {
             newXpPerHour = thXpArray[thval-1];
             currentXp = thXp;
             break;
+        case "cr":
+            newXpPerHour = crXpArray[crval-1];
+            currentXp = crXp;
+            break;
+        case "fl":
+            newXpPerHour = flXpArray[flval-1];
+            currentXp = flXp;
+            break;
+        case "hu":
+            newXpPerHour = huXpArray[huval-1];
+            currentXp = huXp;
+            break;
+        case "mi":
+            newXpPerHour = miXpArray[mival-1];
+            currentXp = miXp;
+            break;
+        case "sm":
+            newXpPerHour = smXpArray[smval-1];
+            currentXp = smXp;
+            break;
+        case "fi":
+            newXpPerHour = fiXpArray[fival-1];
+            currentXp = fiXp;
+            break;
+        case "sl":
+        	newXpPerHour = slXpPerHour;
+        	currentXp = slXp;
         default:
             console.log("Error updating XP in switch")
             break;
@@ -293,6 +439,28 @@ function UpdateXPAndHours(shortHand) {
     if (shortHand == "co") {
         coHoursTotal = remainingHours;
     }
+    if (shortHand == "cr") {
+        crHoursTotal = remainingHours;
+    }
+    if (shortHand == "fl") {
+        flHoursTotal = remainingHours;
+    }
+    if (shortHand == "hu") {
+        huHoursTotal = remainingHours;
+    }
+    if (shortHand == "mi") {
+        miHoursTotal = remainingHours;
+    }
+    if (shortHand == "sm") {
+        smHoursTotal = remainingHours;
+    }
+    if (shortHand == "fi") {
+        fiHoursTotal = remainingHours;
+    }
+    if (shortHand == "sl") {
+        slHoursTotal = remainingHours;
+    }
+
     if(!isNaN(remainingHours) && remainingHours != 0){
     	document.getElementById(shortHand + 'Final').innerText = remainingHours + " hours remain";
     }else{
@@ -312,7 +480,7 @@ function SubmitUsername() {
         UpdateURL();
         //Refresh player scores with new username
         RefreshPlayer();
-        UpdateWC();
+        UpdateWc();
         UpdateMa();
         UpdateRa();
         UpdateRu();
@@ -321,6 +489,8 @@ function SubmitUsername() {
         UpdateAg();
         UpdateHe();
         UpdateTh();
+        UpdateCr();
+        UpdateFl();
         UpdateMax();
     }
 }
@@ -361,6 +531,25 @@ function UpdateURL() {
     if (thval != null) {
         queryParams.set("thval", thval);
     }
+    if (crval != null) {
+        queryParams.set("crval", crval);
+    }
+    if (flval != null) {
+        queryParams.set("flval", flval);
+    }
+    if (huval != null) {
+        queryParams.set("huval", huval);
+    }
+    if (mival != null) {
+        queryParams.set("mival", mival);
+    }
+    if (smval != null) {
+        queryParams.set("smval", smval);
+    }
+    if (fival != null) {
+        queryParams.set("fival", fival);
+    }
+
 
     // Replace current querystring with the new one.
     history.replaceState(null, null, "?" + queryParams.toString());
@@ -380,6 +569,12 @@ function RefreshPlayer() {
     agXp = 0;
     heXp = 0;
     thXp = 0;
+    crXp = 0;
+    flXp = 0;
+    huXp = 0;
+    miXp = 0;
+    smXp = 0;
+    fiXp = 0;
 
 
     if (user != null) {
@@ -483,6 +678,76 @@ function RefreshPlayer() {
                     document.getElementById('thievingXpDisplay').innerText = thXp + "xp";
                 }
             }
+            if (field['13'].xp != null) {
+                //Crafting
+                crXp = field['13'].xp;
+                console.log("Cra XP dwnld: " + crXp);
+                if (crXp > 1) {
+                    //If a value was found for players magic xp, update the div
+                    document.getElementById('craftingXpDisplay').innerText = crXp + "xp";
+                }
+            }
+            if (field['10'].xp != null) {
+                //Crafting
+                flXp = field['10'].xp;
+                console.log("Fle XP dwnld: " + flXp);
+                if (flXp > 1) {
+                    //If a value was found for players magic xp, update the div
+                    document.getElementById('fletchingXpDisplay').innerText = flXp + "xp";
+                }
+            }
+
+            if (field['19'].xp != null) {
+                //Slayer
+                slXp = field['19'].xp;
+                console.log("Sla XP dwnld: " + slXp);
+                if (slXp > 1) {
+                    //If a value was found for players magic xp, update the div
+                    document.getElementById('slayerXpDisplay').innerText = slXp + "xp";
+                }
+            }
+
+            if (field['22'].xp != null) {
+                //Hunter
+                huXp = field['22'].xp;
+                console.log("Hunter XP dwnld: " + huXp);
+                if (huXp > 1) {
+                    //If a value was found for players magic xp, update the div
+                    document.getElementById('hunterXpDisplay').innerText = huXp + "xp";
+                }
+            }
+
+            if (field['15'].xp != null) {
+                //Mining
+                miXp = field['15'].xp;
+                console.log("Mining XP dwnld: " + miXp);
+                if (miXp > 1) {
+                    //If a value was found for players magic xp, update the div
+                    document.getElementById('miningXpDisplay').innerText = miXp + "xp";
+                }
+            }
+
+            if (field['14'].xp != null) {
+                //Smithing
+                smXp = field['14'].xp;
+                console.log("Smithing XP dwnld: " + smXp);
+                if (smXp > 1) {
+                    //If a value was found for players magic xp, update the div
+                    document.getElementById('smithingXpDisplay').innerText = smXp + "xp";
+                }
+            }
+
+
+            if (field['11'].xp != null) {
+                //Fishing
+                fiXp = field['14'].xp;
+                console.log("Fishing XP dwnld: " + fiXp);
+                if (fiXp > 1) {
+                    //If a value was found for players magic xp, update the div
+                    document.getElementById('fishingXpDisplay').innerText = fiXp + "xp";
+                }
+            }
+
             //if you want to show the full json line
             console.log(field);
         });
@@ -493,7 +758,8 @@ function RefreshPlayer() {
 
 function UpdateMax() {
     maxHoursTotal = wcHoursTotal + maHoursTotal + raHoursTotal + ruHoursTotal + prHoursTotal +
-        coHoursTotal + thHoursTotal + heHoursTotal + agHoursTotal;
+        coHoursTotal + thHoursTotal + heHoursTotal + agHoursTotal + crHoursTotal + flHoursTotal + huHoursTotal
+        + miHoursTotal + smHoursTotal + fiHoursTotal;
     if (user != null) {
         document.getElementById('maxHoursDisplay').innerText = user + " is " + maxHoursTotal + " from max!";
     } else {

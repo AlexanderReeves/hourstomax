@@ -193,6 +193,127 @@
 	</div>
 <br><br><br><br>
 
+	<div class="row">
+		<div class="columnA">Crafting<p id="craftingXpDisplay">Level</p></div>
+		<div class="columnB">
+				<form >
+				    <select  class="fullw minimal" name="crdrop" id="crdrop" onchange="CrDropdownUpdate()">
+				    	<option value="1" selected="selected">(150kph) Dragonstone Bracelets</option>
+				    	<option value="2" >(220kph) Cutting Rubies</option>
+				    	<option value="3" >(270kph) Cutting Diamonds</option>
+				    	<option value="4" >(360kph) Cutting Dragonstones</option>
+				    	<option value="5" >(415kph) Crafting Black D'hide Bodies</option>
+				    </select>
+				</form>
+		</div>
+		<div class="columnC center" id="crFinal">XP</div>
+	</div>
+<br><br><br><br>
+
+	<div class="row">
+		<div class="columnA">Fletching<p id="fletchingXpDisplay">Level</p></div>
+		<div class="columnB">
+				<form >
+				    <select  class="fullw minimal" name="fldrop" id="fldrop" onchange="FlDropdownUpdate()">
+				    	<option value="1" selected="selected">(1900kph) Mithril Darts</option>
+				    	<option value="2" >(2250kph) Adamant Darts</option>
+				    	<option value="3" >(2500kph) Rune Darts</option>
+				    	<option value="4" >(3000kph) Amethyst Darts</option>
+				    	<option value="5" >(4000kph) Dragon Darts</option>
+				    </select>
+				</form>
+		</div>
+		<div class="columnC center" id="flFinal">XP</div>
+	</div>
+<br><br><br><br>
+
+
+	<div class="row">
+		<div class="columnA">Slayer<p id="slayerXpDisplay" >Level</p></div>
+		<div class="columnB">
+				
+				    <input type="text" id="slayerAverage" name="slayerAverage" onchange="SlTextUpdate()" placeholder="Enter your average Slayer XP per hour...">
+				
+		</div>
+		<div class="columnC center" id="slFinal">XP</div>
+	</div>
+<br><br><br><br>
+
+
+	<div class="row">
+		<div class="columnA">Hunter<p id="hunterXpDisplay">Level</p></div>
+		<div class="columnB">
+				<form >
+				    <select  class="fullw minimal" name="hudrop" id="hudrop" onchange="HuDropdownUpdate()">
+				    	<option value="1" selected="selected">(80kph) Kebbits</option>
+				    	<option value="2" >(115kph) Red Chinchompas</option>
+				    	<option value="3" >(125kph) Black Salamanders</option>				    	
+				    	<option value="4" >(150kph) Herbiboar</option>
+				    	<option value="5" >(160kph) Black Chinchompas</option>
+				    	<option value="6" >(175kph) Hunters Rumors</option>
+				    </select>
+				</form>
+		</div>
+		<div class="columnC center" id="huFinal">XP</div>
+	</div>
+<br><br><br><br>
+
+	<div class="row">
+		<div class="columnA">Mining<p id="miningXpDisplay">Level</p></div>
+		<div class="columnB">
+				<form >
+				    <select  class="fullw minimal" name="midrop" id="midrop" onchange="MiDropdownUpdate()">
+				    	<option value="1" selected="selected">(25kph) Crashed Stars</option>
+				    	<option value="2" >(50kph) Iron Ore</option>
+				    	<option value="3" >(60kph) Motherlode Mine</option>				    	
+				    	<option value="4" >(69kph) Blast Mine</option>
+				    	<option value="5" >(70kph) Gem Rocks</option>
+				    	<option value="6" >(75kph) Zalcano</option>			
+				    	<option value="7" >(78kph) Solo Volcanic Mine</option>	    	
+				    	<option value="8" >(85kph) Volcanic Mine</option>
+				    </select>
+				</form>
+		</div>
+		<div class="columnC center" id="miFinal">XP</div>
+	</div>
+<br><br><br><br>
+
+			
+	<div class="row">
+		<div class="columnA">Smithing<p id="smithingXpDisplay">Level</p></div>
+		<div class="columnB">
+				<form >
+				    <select  class="fullw minimal" name="smdrop" id="smdrop" onchange="SmDropdownUpdate()">
+				    	<option value="1"  selected="selected">(200kph) Giants Foundry</option>							    		    	
+				    	<option value="2" >(250kph) Anvil Smithing</option>				    	
+				    	<option value="3">(350kph) Blast Furnace</option>
+				    </select>
+				</form>
+		</div>
+		<div class="columnC center" id="smFinal">XP</div>
+	</div>
+<br><br><br><br>
+
+			
+	<div class="row">
+		<div class="columnA">Fishing<p id="fishingXpDisplay">Level</p></div>
+		<div class="columnB">
+				<form >
+				    <select  class="fullw minimal" name="fidrop" id="fidrop" onchange="FiDropdownUpdate()">
+				    	<option value="1"  selected="selected">(40kph) Fly Fishing</option>						    		    		    	
+				    	<option value="2" >(50kph) Barbarian Fishing</option>						    		    		    		    	
+				    	<option value="3" >(75kph) Tempoross</option>
+				    	<option value="4" >(80kph) Drift Net Fishing</option>
+				    </select>
+				</form>
+		</div>
+		<div class="columnC center" id="fiFinal">XP</div>
+	</div>
+<br><br><br><br>
+
+
+			
+
 
 	<p id="maxHoursDisplay" class="center">Time To Max: 1500 hours</p>
   <input type="button" value="Save!" onClick="SaveAll()">

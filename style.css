@@ -1,6 +1,7 @@
 		* {
 			   font-family: myFirstFont;
 			   font-size: 16px;
+			   margin-top:0px;line-height: 17px;
 		}
 
 		h1 {text-align: center; background-image: "logo.png"}	
@@ -109,23 +110,18 @@ select:-moz-focusring {
 }
 
 select {
-
   /* styling */
   background-color: white;
   border: thin solid blue;
   border-radius: 4px;
-  display: inline-block;
+  /*display: inline-block;*/
   font: inherit;
-  line-height: 1.5em;
-  padding: 0.5em 3.5em 0.5em 1em;
-
-  /* reset */
-
-  margin: 0;      
+  /*line-height: 1.5em;*/
+  /*padding: 0.5em 3.5em 0.5em 1em;*/
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-appearance: none;
+  /*box-sizing: border-box;*/
+ -webkit-appearance: none;
   -moz-appearance: none;
 }
 
