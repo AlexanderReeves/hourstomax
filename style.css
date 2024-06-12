@@ -46,7 +46,6 @@
 		.columnA {
 		  float: left;
 		  width: 20%;
-		  line-height: 20px;
 		}
 		.columnB {
 		  float: left;
@@ -55,8 +54,7 @@
 		}
 		.columnC {
 		  float: left;
-		  width: 15%;
-		  line-height: 20px;
+		  width: 14%;
 		}
 
 
