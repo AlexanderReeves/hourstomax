@@ -21,8 +21,11 @@
 
 
 <div class="sand">
+	<p class="center">PREVIEW VERSION</p>
 	<p class="center">Find many hours until you max in Old School Runescape</p>
-	<p class="center">In Development.</p>
+	<p class="center">99 melee is assumed to be completed via Slayer</p>
+	<p class="center">See bottom of page for planned features</p>
+	
 
 	<p id ="displayUsername" class="center"></p>
 
@@ -83,22 +86,7 @@
 	</div>
 <br><br><br><br>
 
-	<div class="row">
-		<div class="columnA">Woodcutting<p id="wcXpDisplay">Level</p></div>
-		<div class="columnB">
-				<form >
-				    <select  class="fullw minimal" name="wcdrop" id="wcdrop" onchange="WcDropdownUpdate()">
-				    	<option value="1" selected="selected">(68kph) Cutting Redwood Trees</option>
-				      <option value="2" >(75kph) Cutting Blisterwood Trees</option>
-				      <option value="3" >(90kph) Forrestry at Yews</option>
-				      <option value="4">(90kph) Cutting Teak Trees</option>
-				      <option value="5">(100kph) Cutting Scullicep Trees</option>
-				    </select>
-				</form>
-		</div>
-		<div class="columnC center" id="wcFinal">XP</div>
-	</div>
-<br><br><br><br>
+
 
 	<div class="row">
 		<div class="columnA">Runecraft<p id="runecraftXpDisplay">Level</p></div>
@@ -227,7 +215,6 @@
 	</div>
 <br><br><br><br>
 
-
 	<div class="row">
 		<div class="columnA">Slayer<p id="slayerXpDisplay" >Level</p></div>
 		<div class="columnB">
@@ -311,19 +298,118 @@
 	</div>
 <br><br><br><br>
 
+<div class="row">
+		<div class="columnA">Cooking<p id="cookingXpDisplay">Level</p></div>
+		<div class="columnB">
+				<form >
+				    <select  class="fullw minimal" name="ckdrop" id="ckdrop" onchange="CkDropdownUpdate()">
+				    	<option value="1"  selected="selected">(150kph) Lobster</option>					    		    		    	
+				    	<option value="2" >(250kph) Karambwans</option>				
+				    	<option value="3" >(300kph) Angler Fish</option>			    		    		    		    	
+				    	<option value="4" >(450kph) Bake Summer Pie Spell</option>
+				    	<option value="5" >(900kph) 1t Karambawans</option>
+				    </select>
+				</form>
+		</div>
+		<div class="columnC center" id="ckFinal">XP</div>
+	</div>
+<br><br><br><br>
+
+<div class="row">
+		<div class="columnA">Firemaking<p id="firemakingXpDisplay">Level</p></div>
+		<div class="columnB">
+				<form >
+				    <select  class="fullw minimal" name="fmdrop" id="fmdrop" onchange="FmDropdownUpdate()">
+				    	<option value="1"  selected="selected">(250kph) Mahogany Logs</option>				    		    		    	
+				    	<option value="2" >(275kph) Yew Logs</option>			
+				    	<option value="3" >(290kph) Wintertodt</option>		
+				    	<option value="4" >(400kph) Magic Logs</option>			    		    		    		    	
+				    	<option value="5" >(450kph) Redwood logs</option>
+				    </select>
+				</form>
+		</div>
+		<div class="columnC center" id="fmFinal">XP</div>
+	</div>
+<br><br><br><br>
+
+	<div class="row">
+		<div class="columnA">Woodcutting<p id="wcXpDisplay">Level</p></div>
+		<div class="columnB">
+				<form >
+				    <select  class="fullw minimal" name="wcdrop" id="wcdrop" onchange="WcDropdownUpdate()">
+				    	<option value="1" selected="selected">(68kph) Cutting Redwood Trees</option>
+				      <option value="2" >(75kph) Cutting Blisterwood Trees</option>
+				      <option value="3" >(90kph) Forrestry at Yews</option>
+				      <option value="4">(90kph) Cutting Teak Trees</option>
+				      <option value="5">(100kph) Cutting Scullicep Trees</option>
+				    </select>
+				</form>
+		</div>
+		<div class="columnC center" id="wcFinal">XP</div>
+	</div>
+<br><br><br><br>
+
+	<div class="row">
+		<div class="columnA">Farming<p id="farmingXpDisplay">Level</p></div>
+		<div class="columnB">
+				<form >
+				    <select  class="fullw minimal" name="seeddrop" id="seeddrop" onchange="FaDropdownUpdate()">
+				    	<option value="1" selected="selected">(3403xp) Maple Seed</option>
+				      <option value="2" >(7070xp) Yew Seed</option>
+				      <option value="3" >(13768xp) Magic Seed</option>
+				    </select>
+				</form>
+				<form >
+
+				</form>
+
+		</div>
+		<div class="columnC center" id="faFinal">Farm Runs</div>
+	</div>
+<br><br><br><br>
+
+	<div class="row">
+		<div class="columnA"><p id=""></p></div>
+		<div class="columnB">
+				<form >
+				    	<select  class="fullw minimal" name="patchesdrop" id="patchesdrop" onchange="FaDropdownUpdate()">
+				    	<option value="1" selected="selected">1 patch</option>
+				      <option value="2" >2 patches</option>
+				      <option value="3" >3 patches</option>
+				      <option value="4">4 patches</option>
+				      <option value="5">5 patches</option>
+				    </select>
+				</form>
+				<form >
+
+				</form>
+
+		</div>
+		<div class="columnC center" id=""></div>
+	</div>
+<br><br><br><br>
+
 
 			
 
 
 	<p id="maxHoursDisplay" class="center">Time To Max: 1500 hours</p>
   <input type="button" value="Save!" onClick="SaveAll()">
-	<p id="hours" class="center smalltext">Bookmark this page to save your choices and automatically update your xp!</p>
+	<p id="hours" class="center">Bookmark this page to save your choices and automatically update your xp!</p>
 
 </div>
 
 <footer>
   <div>
+  	<br><br><br><br>
     <p id="footer" >2024 Arrgs (Mapex Games contact: reevesgamedev@gmail.com)</p>
+    <p id="footer" >Planned features:</p>
+    <p id="footer" >Website Security Certificate to prevent warning messages</p>
+    <p id="footer" >Hours to Achievement Diary Cape</p>
+    <p id="footer" >Hours to Quest Cape</p>
+    <p id="footer" >GP Profit and Loss via selected methods</p>
+    <p id="footer" >More Farming Selections</p>
+    <p id="footer" >More Training Methods and More Accurate XP Per hour</p>
   </div>
 </footer>
 

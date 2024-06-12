@@ -60,7 +60,9 @@
 		.fullw{
 			width: 100%;
 		}
-
+		.halfw{
+			width: 49%;
+		}
 		.tenpad{
 			padding: 10px;
 		}

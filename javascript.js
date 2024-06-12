@@ -19,6 +19,11 @@ var huXpArray = [80000,115000,125000,150000,160000,175000];
 var miXpArray = [25000,50000,60000,69000,70000,75000,78000,85000];
 var smXpArray = [200000,250000,350000];
 var fiXpArray = [40000,50000,75000,80000];
+var ckXpArray = [150000,250000,300000,450000,900000];
+var fmXpArray = [250000,275000,290000,400000,450000];
+var treePatchesArray = [1,2,3,4,5];
+var seXpArray = [3043,7070,13768];
+
 
 var ninetyNine = 13034431;
 var user = "";
@@ -100,6 +105,22 @@ var fiHoursTotal = 0;
 var fiXpPerHour = 0;
 var fival = "";
 
+var ckXp = 0;
+var ckHoursTotal = 0;
+var ckXpPerHour = 0;
+var ckval = "";
+
+var fmXp = 0;
+var fmHoursTotal = 0;
+var fmXpPerHour = 0;
+var fmval = "";
+
+var faXp = 0;
+var faRemainingRuns = 0;
+var faXpPerRun = 0;
+var treeval = "";
+var seedval = "";
+
 
 //Slayer xp per hour on average
 var slXpPerHour = 0;
@@ -127,6 +148,9 @@ UpdateXPAndHours("hu", huval);
 UpdateXPAndHours("mi", mival);
 UpdateXPAndHours("sm", smval);
 UpdateXPAndHours("fi", fival);
+UpdateXPAndHours("ck", ckval);
+UpdateXPAndHours("fm", fmval);
+UpdateFarmingXpAndHours();
 //Update hours to max
 UpdateMax();
 
@@ -151,6 +175,10 @@ function PullURLVariables() {
     mival = urlParams.get('mival');
     smval = urlParams.get('smval');
     fival = urlParams.get('fival');
+    ckval = urlParams.get('ckval');
+    fmval = urlParams.get('fmval');
+    treeval = urlParams.get('trval');
+    seedval = urlParams.get('seval');
     //We can get slval to determine slayer xp per hour
     slXpPerHour = urlParams.get('slval');
     //Update the dropdowns to the correct values here?
@@ -170,6 +198,11 @@ function PullURLVariables() {
     if(mival != null){selectElement('midrop', mival);}else{mival = 1}
     if(smval != null){selectElement('smdrop', smval);}else{smval = 1}
     if(fival != null){selectElement('fidrop', fival);}else{fival = 1}
+    if(ckval != null){selectElement('ckdrop', ckval);}else{fival = 1}
+    if(fmval != null){selectElement('fmdrop', fmval);}else{fmval = 1}
+    if(treeval != null){selectElement('patchesdrop', treeval);}else{treeval = 1}
+    if(seedval != null){selectElement('seeddrop', seedval);}else{seedval = 1}
+    console.log(treeval + ":t   s:" +seedval)
     //If there is no slayer XP in URL, set slayer XP to 40 000
     if(slXpPerHour == null){ 	slXpPerHour = 40000; }
     //Set the slayer input to reflect our slayer xp average
@@ -309,6 +342,27 @@ function FiDropdownUpdate() {
     UpdateMax();
     UpdateURL();
 }
+function CkDropdownUpdate() {
+    var ckDrop = document.getElementById("ckdrop");
+    ckval = ckDrop.value;
+    UpdateXPAndHours("ck", ckval);
+    UpdateMax();
+    UpdateURL();
+}
+function FmDropdownUpdate() {
+    var fmDrop = document.getElementById("fmdrop");
+    fmval = fmDrop.value;
+    UpdateXPAndHours("fm", fmval);
+    UpdateMax();
+    UpdateURL();
+}
+
+
+function FaDropdownUpdate() {
+    UpdateFarmingXpAndHours();
+    UpdateMax();
+    UpdateURL();
+}
 
 
 function SlTextUpdate(){
@@ -320,6 +374,29 @@ function SlTextUpdate(){
 }
 
 //******End manual dropdown update code*****
+
+function UpdateFarmingXpAndHours(){
+	console.log("Updating Numer Of Farm Runs");
+	treeval = document.getElementById("patchesdrop").value;
+	seedval = document.getElementById("seeddrop").value;
+	console.log("Tree drop: " + treeval + ". " + "Seed drop: " + seedval + ".");
+	var patches = treePatchesArray[treeval - 1];
+	var seedXp = seXpArray[seedval - 1];
+	console.log("Tree patches: " + patches + ". " + "Xp per seed: " + seedXp + ".");
+	var xpPerRun = patches * seedXp;
+	var remainingFarmingXp = ninetyNine - faXp;
+	if(remainingFarmingXp <= 0 ||  isNaN(remainingFarmingXp)){
+		remainingFarmingXp = 0;
+	}
+	faRemainingRuns = remainingFarmingXp/xpPerRun;
+	faRemainingRuns = Math.floor(faRemainingRuns);
+	console.log("Remaining Farm Runs: " + faRemainingRuns);
+	if(faRemainingRuns > 0){
+    	document.getElementById('faFinal').innerText = faRemainingRuns + " farm runs remain.";
+    }else{
+    	document.getElementById('faFinal').innerText = "99 Achieved!";
+    }
+}
 
 function UpdateXPAndHours(shortHand) {
 	console.log("Updating Xp and Hours for " + shortHand);
@@ -396,9 +473,18 @@ function UpdateXPAndHours(shortHand) {
             newXpPerHour = fiXpArray[fival-1];
             currentXp = fiXp;
             break;
+        case "ck":
+            newXpPerHour = ckXpArray[ckval-1];
+            currentXp = ckXp;
+            break;
+        case "fm":
+            newXpPerHour = fmXpArray[fmval-1];
+            currentXp = fmXp;
+            break;
         case "sl":
         	newXpPerHour = slXpPerHour;
         	currentXp = slXp;
+        	break;
         default:
             console.log("Error updating XP in switch")
             break;
@@ -457,6 +543,12 @@ function UpdateXPAndHours(shortHand) {
     if (shortHand == "fi") {
         fiHoursTotal = remainingHours;
     }
+    if (shortHand == "ck") {
+        ckHoursTotal = remainingHours;
+    }
+    if (shortHand == "fm") {
+        fmHoursTotal = remainingHours;
+    }
     if (shortHand == "sl") {
         slHoursTotal = remainingHours;
     }
@@ -478,20 +570,29 @@ function SubmitUsername() {
         console.log("username submitted:" + newName);
         user = newName;
         UpdateURL();
-        //Refresh player scores with new username
-        RefreshPlayer();
-        UpdateWc();
-        UpdateMa();
-        UpdateRa();
-        UpdateRu();
-        UpdatePr();
-        UpdateCo();
-        UpdateAg();
-        UpdateHe();
-        UpdateTh();
-        UpdateCr();
-        UpdateFl();
-        UpdateMax();
+		RefreshPlayer(); //Refresh the players data from the hiscores website
+		//Update Hours To 99 for each skill
+		UpdateXPAndHours("ma", maval);
+		UpdateXPAndHours("wc", wcval);
+		UpdateXPAndHours("ra", raval);
+		UpdateXPAndHours("pr", prval);
+		UpdateXPAndHours("ru", ruval);
+		UpdateXPAndHours("co", coval);
+		UpdateXPAndHours("ag", agval);
+		UpdateXPAndHours("he", heval);
+		UpdateXPAndHours("th", thval);
+		UpdateXPAndHours("cr", crval);
+		UpdateXPAndHours("fl", flval);
+		UpdateXPAndHours("sl", slXpPerHour);
+		UpdateXPAndHours("hu", huval);
+		UpdateXPAndHours("mi", mival);
+		UpdateXPAndHours("sm", smval);
+		UpdateXPAndHours("fi", fival);
+		UpdateXPAndHours("ck", ckval);
+		UpdateXPAndHours("fm", fmval);
+		UpdateFarmingXpAndHours();
+		//Update hours to max
+		UpdateMax();
     }
 }
 
@@ -549,6 +650,18 @@ function UpdateURL() {
     if (fival != null) {
         queryParams.set("fival", fival);
     }
+    if (ckval != null) {
+        queryParams.set("ckval", ckval);
+    }
+    if (fmval != null) {
+        queryParams.set("fmval", fmval);
+    }
+    if (treeval != null) {
+        queryParams.set("trval", treeval);
+    }
+    if (seedval != null) {
+        queryParams.set("seval", seedval);
+    }
 
 
     // Replace current querystring with the new one.
@@ -575,6 +688,8 @@ function RefreshPlayer() {
     miXp = 0;
     smXp = 0;
     fiXp = 0;
+    ckXp = 0;
+    fmXp = 0;
 
 
     if (user != null) {
@@ -748,6 +863,35 @@ function RefreshPlayer() {
                 }
             }
 
+            if (field['8'].xp != null) {
+                //Cooking
+                ckXp = field['8'].xp;
+                console.log("Cooking XP dwnld: " + ckXp);
+                if (ckXp > 1) {
+                    //If a value was found for players magic xp, update the div
+                    document.getElementById('cookingXpDisplay').innerText = ckXp + "xp";
+                }
+            }
+            if (field['12'].xp != null) {
+                //Firemaking
+                fmXp = field['12'].xp;
+                console.log("Firemaking XP dwnld: " + fmXp);
+                if (fmXp > 1) {
+                    //If a value was found for players magic xp, update the div
+                    document.getElementById('firemakingXpDisplay').innerText = fmXp + "xp";
+                }
+            }
+            if (field['20'].xp != null) {
+                //farming
+                faXp = field['20'].xp;
+                console.log("Farming XP dwnld: " + faXp);
+                if (faXp > 1) {
+                    //If a value was found for players magic xp, update the div
+                    document.getElementById('farmingXpDisplay').innerText = faXp + "xp";
+                }
+            }
+
+
             //if you want to show the full json line
             console.log(field);
         });
@@ -759,12 +903,35 @@ function RefreshPlayer() {
 function UpdateMax() {
     maxHoursTotal = wcHoursTotal + maHoursTotal + raHoursTotal + ruHoursTotal + prHoursTotal +
         coHoursTotal + thHoursTotal + heHoursTotal + agHoursTotal + crHoursTotal + flHoursTotal + huHoursTotal
-        + miHoursTotal + smHoursTotal + fiHoursTotal;
-    if (user != null) {
-        document.getElementById('maxHoursDisplay').innerText = user + " is " + maxHoursTotal + " from max!";
-    } else {
-        document.getElementById('maxHoursDisplay').innerText = "You are " + maxHoursTotal + " from max!";
-    }
+        + miHoursTotal + smHoursTotal + fiHoursTotal + ckHoursTotal + fmHoursTotal;
+    if(faRemainingRuns <= 0 ){
+	    if (user != null && maxHoursTotal > 0) {
+	        document.getElementById('maxHoursDisplay').innerText = user + " is " + maxHoursTotal + " hours from max!";
+	    } 
+	    if (user == null && maxHoursTotal > 0) {
+	        document.getElementById('maxHoursDisplay').innerText = "You are " + maxHoursTotal + " hours from max!";
+	    } 
+	    if (user != null && maxHoursTotal <= 0) {
+	        document.getElementById('maxHoursDisplay').innerText = user + " is max level!";
+	    }     
+	    if (user == null && maxHoursTotal <= 0) {
+	        document.getElementById('maxHoursDisplay').innerText = "You are max level!";
+	    } 
+	}else{
+		if (user != null && maxHoursTotal > 0) {
+	        document.getElementById('maxHoursDisplay').innerText = user + " is " + maxHoursTotal + " hours and " + faRemainingRuns + " tree runs from max!";
+	    } 
+	    if (user == null && maxHoursTotal > 0) {
+	        document.getElementById('maxHoursDisplay').innerText = "You are " + maxHoursTotal + " hours and " + faRemainingRuns + " tree runs from max!";
+	    } 
+	    if (user != null && maxHoursTotal <= 0) {
+	        document.getElementById('maxHoursDisplay').innerText = user + "  is " + faRemainingRuns + " tree runs from max!";
+	    }     
+	    if (user == null && maxHoursTotal <= 0) {
+	        document.getElementById('maxHoursDisplay').innerText = "You are " + faRemainingRuns + " tree runs from max!";
+	    } 
+	}
+
 }
 
 function SaveAll() {
