@@ -198,7 +198,7 @@ function PullURLVariables() {
     if(mival != null){selectElement('midrop', mival);}else{mival = 1}
     if(smval != null){selectElement('smdrop', smval);}else{smval = 1}
     if(fival != null){selectElement('fidrop', fival);}else{fival = 1}
-    if(ckval != null){selectElement('ckdrop', ckval);}else{fival = 1}
+    if(ckval != null){selectElement('ckdrop', ckval);}else{ckval = 1}
     if(fmval != null){selectElement('fmdrop', fmval);}else{fmval = 1}
     if(treeval != null){selectElement('patchesdrop', treeval);}else{treeval = 1}
     if(seedval != null){selectElement('seeddrop', seedval);}else{seedval = 1}
