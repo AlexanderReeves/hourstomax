@@ -1,7 +1,7 @@
 		* {
 			   font-family: myFirstFont;
 			   font-size: 16px;
-			   margin-top:0px;line-height: 17px;
+			   margin-top:0px;
 		}
 
 		h1 {text-align: center; background-image: "logo.png"}	
@@ -46,14 +46,17 @@
 		.columnA {
 		  float: left;
 		  width: 20%;
+		  line-height: 20px;
 		}
 		.columnB {
 		  float: left;
 		  width: 65%;
+
 		}
 		.columnC {
 		  float: left;
 		  width: 15%;
+		  line-height: 20px;
 		}
 
 
@@ -72,7 +75,7 @@
 		}
 
 
-		select.minimal {
+	select.minimal {
   background-image:
     linear-gradient(45deg, transparent 50%, gray 50%),
     linear-gradient(135deg, gray 50%, transparent 50%),
@@ -116,13 +119,13 @@ select {
   background-color: white;
   border: thin solid blue;
   border-radius: 4px;
-  /*display: inline-block;*/
+  display: inline-block;
   font: inherit;
-  /*line-height: 1.5em;*/
-  /*padding: 0.5em 3.5em 0.5em 1em;*/
+  line-height: 1.5em;
+  padding: 0.5em 3.5em 0.5em 1em;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
-  /*box-sizing: border-box;*/
+  box-sizing: border-box;
  -webkit-appearance: none;
   -moz-appearance: none;
 }
@@ -163,6 +166,7 @@ footer{
 
 			* {
 			   font-size: 36px;
+			   line-height: 50px;
 		}
 
 
