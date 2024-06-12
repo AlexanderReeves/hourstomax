@@ -904,8 +904,10 @@ function UpdateMax() {
     maxHoursTotal = wcHoursTotal + maHoursTotal + raHoursTotal + ruHoursTotal + prHoursTotal +
         coHoursTotal + thHoursTotal + heHoursTotal + agHoursTotal + crHoursTotal + flHoursTotal + huHoursTotal
         + miHoursTotal + smHoursTotal + fiHoursTotal + ckHoursTotal + fmHoursTotal;
+        console.log("updating hours to max total");
     if(faRemainingRuns <= 0 ){
 	    if (user != null && maxHoursTotal > 0) {
+	    	console.log("no farm runs, user not null, max total = " +maxHoursTotal);
 	        document.getElementById('maxHoursDisplay').innerText = user + " is " + maxHoursTotal + " hours from max!";
 	    } 
 	    if (user == null && maxHoursTotal > 0) {
@@ -919,6 +921,7 @@ function UpdateMax() {
 	    } 
 	}else{
 		if (user != null && maxHoursTotal > 0) {
+			console.log("farm rune exist, user not null, max total = " +maxHoursTotal);
 	        document.getElementById('maxHoursDisplay').innerText = user + " is " + maxHoursTotal + " hours and " + faRemainingRuns + " tree runs from max!";
 	    } 
 	    if (user == null && maxHoursTotal > 0) {
