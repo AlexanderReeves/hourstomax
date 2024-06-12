@@ -901,6 +901,7 @@ function RefreshPlayer() {
 }
 
 function UpdateMax() {
+	console.log("updating hours to max total");
     maxHoursTotal = wcHoursTotal + maHoursTotal + raHoursTotal + ruHoursTotal + prHoursTotal +
         coHoursTotal + thHoursTotal + heHoursTotal + agHoursTotal + crHoursTotal + flHoursTotal + huHoursTotal
         + miHoursTotal + smHoursTotal + fiHoursTotal + ckHoursTotal + fmHoursTotal;
