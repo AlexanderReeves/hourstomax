@@ -3,13 +3,24 @@
 
 <head>
 <link href="./style.css" rel="stylesheet" type="text/css">
+<link href="./colours.css" rel="stylesheet" type="text/css">
 </head>
 
-<body>
+<body id="wholescreen" class="blackbg">
+	<!-- Rounded switch -->
+<div style="margin:10px;" class="rightalign">
+	
+<label class="switch">
+  <input onchange="Lightswitch();" type="checkbox" id="lightinput">
+  <div class="slider round whitefont" id="lightslider"></div>
+</label>
+
+</div>
 
 <div class="logoarea">
   <img height="90" src="logo.png" alt="My logo">
 </div>
+
 
 
 <div class="searcharea">
@@ -20,7 +31,7 @@
 </div>
 
 
-<div class="sand">
+<div class="sand dark-background" id="maincontent">
 	<p class="center">PREVIEW VERSION</p>
 	<p class="center">Find many hours until you max in Old School Runescape</p>
 	<p class="center">99 melee is assumed to be completed via Slayer</p>
@@ -30,7 +41,7 @@
 	<p id ="displayUsername" class="center"></p>
 
 	<div class="row">
-		<div class="columnA">Ranged<p id="rangedXpDisplay">0Xp</p></div>
+		<div class="columnA">Ranged<p id="raXpDisplay">0Xp</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="radrop" id="radrop" onchange="RaDropdownUpdate()">
@@ -49,7 +60,7 @@
 <br><br><br><br>
 
 	<div class="row">
-		<div class="columnA">Prayer<p id="prayerXpDisplay">0Xp</p></div>
+		<div class="columnA">Prayer<p id="prXpDisplay">0Xp</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="prdrop" id="prdrop" onchange="PrDropdownUpdate()">
@@ -69,7 +80,7 @@
 
 
 	<div class="row">
-		<div class="columnA">Magic<p id="magicXpDisplay">Level</p></div>
+		<div class="columnA">Magic<p id="maXpDisplay">Level</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="madrop" id="madrop" onchange="MaDropdownUpdate()">
@@ -89,7 +100,7 @@
 
 
 	<div class="row">
-		<div class="columnA">Runecraft<p id="runecraftXpDisplay">Level</p></div>
+		<div class="columnA">Runecraft<p id="ruXpDisplay">Level</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="rudrop" id="rudrop" onchange="RuDropdownUpdate()">
@@ -107,7 +118,7 @@
 <br><br><br><br>
 
 	<div class="row">
-		<div class="columnA">Construction<p id="constructionXpDisplay">Level</p></div>
+		<div class="columnA">Construction<p id="coXpDisplay">Level</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="codrop" id="codrop" onchange="CoDropdownUpdate()">
@@ -126,7 +137,7 @@
 <br><br><br><br>
 
 	<div class="row">
-		<div class="columnA">Agility<p id="agilityXpDisplay">Level</p></div>
+		<div class="columnA">Agility<p id="agXpDisplay">Level</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="agdrop" id="agdrop" onchange="AgDropdownUpdate()">
@@ -146,7 +157,7 @@
 <br><br><br><br>
 
 	<div class="row">
-		<div class="columnA">Herblore<p id="herbloreXpDisplay">Level</p></div>
+		<div class="columnA">Herblore<p id="heXpDisplay">Level</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="hedrop" id="hedrop" onchange="HeDropdownUpdate()">
@@ -163,7 +174,7 @@
 <br><br><br><br>
 
 	<div class="row">
-		<div class="columnA">Thieving<p id="thievingXpDisplay">Level</p></div>
+		<div class="columnA">Thieving<p id="thXpDisplay">Level</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="thdrop" id="thdrop" onchange="ThDropdownUpdate()">
@@ -182,7 +193,7 @@
 <br><br><br><br>
 
 	<div class="row">
-		<div class="columnA">Crafting<p id="craftingXpDisplay">Level</p></div>
+		<div class="columnA">Crafting<p id="crXpDisplay">Level</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="crdrop" id="crdrop" onchange="CrDropdownUpdate()">
@@ -199,7 +210,7 @@
 <br><br><br><br>
 
 	<div class="row">
-		<div class="columnA">Fletching<p id="fletchingXpDisplay">Level</p></div>
+		<div class="columnA">Fletching<p id="flXpDisplay">Level</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="fldrop" id="fldrop" onchange="FlDropdownUpdate()">
@@ -216,7 +227,7 @@
 <br><br><br><br>
 
 	<div class="row">
-		<div class="columnA">Slayer<p id="slayerXpDisplay" >Level</p></div>
+		<div class="columnA">Slayer<p id="slXpDisplay" >Level</p></div>
 		<div class="columnB">
 				
 				    <input type="text" id="slayerAverage" name="slayerAverage" onchange="SlTextUpdate()" placeholder="Enter your average Slayer XP per hour...">
@@ -228,7 +239,7 @@
 
 
 	<div class="row">
-		<div class="columnA">Hunter<p id="hunterXpDisplay">Level</p></div>
+		<div class="columnA">Hunter<p id="huXpDisplay">Level</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="hudrop" id="hudrop" onchange="HuDropdownUpdate()">
@@ -246,7 +257,7 @@
 <br><br><br><br>
 
 	<div class="row">
-		<div class="columnA">Mining<p id="miningXpDisplay">Level</p></div>
+		<div class="columnA">Mining<p id="miXpDisplay">Level</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="midrop" id="midrop" onchange="MiDropdownUpdate()">
@@ -267,7 +278,7 @@
 
 			
 	<div class="row">
-		<div class="columnA">Smithing<p id="smithingXpDisplay">Level</p></div>
+		<div class="columnA">Smithing<p id="smXpDisplay">Level</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="smdrop" id="smdrop" onchange="SmDropdownUpdate()">
@@ -283,7 +294,7 @@
 
 			
 	<div class="row">
-		<div class="columnA">Fishing<p id="fishingXpDisplay">Level</p></div>
+		<div class="columnA">Fishing<p id="fiXpDisplay">Level</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="fidrop" id="fidrop" onchange="FiDropdownUpdate()">
@@ -299,7 +310,7 @@
 <br><br><br><br>
 
 <div class="row">
-		<div class="columnA">Cooking<p id="cookingXpDisplay">Level</p></div>
+		<div class="columnA">Cooking<p id="ckXpDisplay">Level</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="ckdrop" id="ckdrop" onchange="CkDropdownUpdate()">
@@ -316,7 +327,7 @@
 <br><br><br><br>
 
 <div class="row">
-		<div class="columnA">Firemaking<p id="firemakingXpDisplay">Level</p></div>
+		<div class="columnA">Firemaking<p id="fmXpDisplay">Level</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="fmdrop" id="fmdrop" onchange="FmDropdownUpdate()">

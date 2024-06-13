@@ -2,6 +2,8 @@ $.ajaxSetup({ //Prevent future code loading before previous code finishes.
     async: false
 });
 
+var lights = false;
+
 //Set variables
 //Array of XP values
 var raXpArray = [90000, 130000, 140000, 675000, 710000, 850000];
@@ -24,6 +26,10 @@ var fmXpArray = [250000,275000,290000,400000,450000];
 var treePatchesArray = [1,2,3,4,5];
 var seXpArray = [3043,7070,13768];
 
+var shorthandArray = ["ov","at","de","st","hi","ra","pr","ma","ck","wc"
+	,"fl","fi","fm","cr","sm","mi","he","ag","th","sl","fa","ru","hu"
+	,"co"];
+var lvlArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
 var ninetyNine = 13034431;
 var user = "";
@@ -179,6 +185,7 @@ function PullURLVariables() {
     fmval = urlParams.get('fmval');
     treeval = urlParams.get('trval');
     seedval = urlParams.get('seval');
+    lights = urlParams.get('l');
     //We can get slval to determine slayer xp per hour
     slXpPerHour = urlParams.get('slval');
     //Update the dropdowns to the correct values here?
@@ -202,6 +209,9 @@ function PullURLVariables() {
     if(fmval != null){selectElement('fmdrop', fmval);}else{fmval = 1}
     if(treeval != null){selectElement('patchesdrop', treeval);}else{treeval = 1}
     if(seedval != null){selectElement('seeddrop', seedval);}else{seedval = 1}
+    if(lights == "true"){lights = true;}else{lights=false}
+    console.log(lights);
+    ApplyLightClass();
     console.log(treeval + ":t   s:" +seedval)
     //If there is no slayer XP in URL, set slayer XP to 40 000
     if(slXpPerHour == null){ 	slXpPerHour = 40000; }
@@ -213,7 +223,7 @@ function PullURLVariables() {
 
 
 function selectElement(id, valueToSelect) {
-    //Apply saved dropdown values from URL to page 
+    //Apply saved dropdown values to from URL to page to the actual dropdown on page
     let element = document.getElementById(id);
     if (valueToSelect != null) {
         element.value = valueToSelect;
@@ -399,7 +409,7 @@ function UpdateFarmingXpAndHours(){
 }
 
 function UpdateXPAndHours(shortHand) {
-	console.log("Updating Xp and Hours for " + shortHand);
+	//console.log("Updating Xp and Hours for " + shortHand);
     //Find how much XP is selected per hour from the dropdown
     var newXpPerHour = 0;
     //Current XP of that skill
@@ -489,7 +499,7 @@ function UpdateXPAndHours(shortHand) {
             console.log("Error updating XP in switch")
             break;
     }
-    console.log("Current xp for " + shortHand + " is " + currentXp + ". Xp per hour is " + newXpPerHour + "from drop val ");
+    //console.log("Current xp for " + shortHand + " is " + currentXp + ". Xp per hour is " + newXpPerHour + "from drop val ");
     //Remaining XP = 
     var remXP = ninetyNine - currentXp;
     if (remXP < 0) {
@@ -706,6 +716,24 @@ function RefreshPlayer() {
 
     $.getJSON("https://corsproxy.io/?https://secure.runescape.com/m=hiscore_oldschool/index_lite.json?player=" + user, function(result) {
         $.each(result, function(i, field) {
+
+        	var i = 1;
+        	while(i<24){
+        		console.log(i);
+        		if (field[i].xp != null) {
+        			var dlxp = field[i].xp;
+        			var dllvl = field[i].level
+        			if (dlxp > 0){
+        				//console.log("found " + shorthandArray[i] + " xp = " + field[i].xp);
+        				lvlArray[i] = dllvl;
+                    	var myEle = document.getElementById(shorthandArray[i] + 'XpDisplay');
+                    	if(myEle){
+                    		myEle.innerText = "lvl " + lvlArray[i];
+                    	}
+                	}
+        		}
+        		i++;
+        	}
             //json player data is returned one line at a time
             //the key aka outer value is a number
             //key 7 contains all magic values for example
@@ -715,141 +743,83 @@ function RefreshPlayer() {
             if (field['7'].xp != null) {
                 maXp = field['7'].xp;
                 console.log("Mg XP dwnld:" + maXp)
-                if (maXp > 1) {
-                    //If a value was found for players magic xp, update the div
-                    document.getElementById('magicXpDisplay').innerText = maXp + "xp";
-                }
+                
             }
             if (field['9'].xp != null) {
                 //Woodcutting
                 wcXp = field['9'].xp;
                 console.log("Wc XP dwnld: " + wcXp);
-                if (wcXp > 1) {
-                    //If a value was found for players magic xp, update the div
-                    document.getElementById('wcXpDisplay').innerText = wcXp + "xp";
-                }
+               
             }
             if (field['5'].xp != null) {
                 //Woodcutting
                 raXp = field['5'].xp;
                 console.log("Ra XP dwnld: " + raXp);
-                if (raXp > 1) {
-                    //If a value was found for players magic xp, update the div
-                    document.getElementById('rangedXpDisplay').innerText = raXp + "xp";
-                }
             }
             if (field['6'].xp != null) {
                 //Prayer
                 prXp = field['6'].xp;
                 console.log("Pr XP dwnld: " + prXp);
-                if (prXp > 1) {
-                    //If a value was found for players magic xp, update the div
-                    document.getElementById('prayerXpDisplay').innerText = prXp + "xp";
-                }
             }
             if (field['21'].xp != null) {
                 //Runecraft
                 ruXp = field['21'].xp;
                 console.log("Rr XP dwnld: " + ruXp);
-                if (ruXp > 1) {
-                    //If a value was found for players magic xp, update the div
-                    document.getElementById('runecraftXpDisplay').innerText = ruXp + "xp";
-                }
             }
 
             if (field['23'].xp != null) {
                 //Runecraft
                 coXp = field['23'].xp;
                 console.log("Co XP dwnld: " + coXp);
-                if (coXp > 1) {
-                    //If a value was found for players magic xp, update the div
-                    document.getElementById('constructionXpDisplay').innerText = coXp + "xp";
-                }
             }
             if (field['17'].xp != null) {
                 //Agility
                 agXp = field['17'].xp;
                 console.log("Ag XP dwnld: " + agXp);
-                if (agXp > 1) {
-                    //If a value was found for players magic xp, update the div
-                    document.getElementById('agilityXpDisplay').innerText = agXp + "xp";
-                }
             }
             if (field['16'].xp != null) {
                 //Herblore
                 heXp = field['16'].xp;
                 console.log("He XP dwnld: " + heXp);
-                if (heXp > 1) {
-                    //If a value was found for players magic xp, update the div
-                    document.getElementById('herbloreXpDisplay').innerText = heXp + "xp";
-                }
             }
             if (field['18'].xp != null) {
                 //Herblore
                 thXp = field['18'].xp;
                 console.log("Thie XP dwnld: " + thXp);
-                if (thXp > 1) {
-                    //If a value was found for players magic xp, update the div
-                    document.getElementById('thievingXpDisplay').innerText = thXp + "xp";
-                }
             }
             if (field['13'].xp != null) {
                 //Crafting
                 crXp = field['13'].xp;
                 console.log("Cra XP dwnld: " + crXp);
-                if (crXp > 1) {
-                    //If a value was found for players magic xp, update the div
-                    document.getElementById('craftingXpDisplay').innerText = crXp + "xp";
-                }
             }
             if (field['10'].xp != null) {
                 //Crafting
                 flXp = field['10'].xp;
                 console.log("Fle XP dwnld: " + flXp);
-                if (flXp > 1) {
-                    //If a value was found for players magic xp, update the div
-                    document.getElementById('fletchingXpDisplay').innerText = flXp + "xp";
-                }
             }
 
             if (field['19'].xp != null) {
                 //Slayer
                 slXp = field['19'].xp;
                 console.log("Sla XP dwnld: " + slXp);
-                if (slXp > 1) {
-                    //If a value was found for players magic xp, update the div
-                    document.getElementById('slayerXpDisplay').innerText = slXp + "xp";
-                }
             }
 
             if (field['22'].xp != null) {
                 //Hunter
                 huXp = field['22'].xp;
                 console.log("Hunter XP dwnld: " + huXp);
-                if (huXp > 1) {
-                    //If a value was found for players magic xp, update the div
-                    document.getElementById('hunterXpDisplay').innerText = huXp + "xp";
-                }
             }
 
             if (field['15'].xp != null) {
                 //Mining
                 miXp = field['15'].xp;
                 console.log("Mining XP dwnld: " + miXp);
-                if (miXp > 1) {
-                    //If a value was found for players magic xp, update the div
-                    document.getElementById('miningXpDisplay').innerText = miXp + "xp";
-                }
             }
 
             if (field['14'].xp != null) {
                 //Smithing
                 smXp = field['14'].xp;
                 console.log("Smithing XP dwnld: " + smXp);
-                if (smXp > 1) {
-                    //If a value was found for players magic xp, update the div
-                    document.getElementById('smithingXpDisplay').innerText = smXp + "xp";
-                }
             }
 
 
@@ -857,38 +827,22 @@ function RefreshPlayer() {
                 //Fishing
                 fiXp = field['14'].xp;
                 console.log("Fishing XP dwnld: " + fiXp);
-                if (fiXp > 1) {
-                    //If a value was found for players magic xp, update the div
-                    document.getElementById('fishingXpDisplay').innerText = fiXp + "xp";
-                }
             }
 
             if (field['8'].xp != null) {
                 //Cooking
                 ckXp = field['8'].xp;
                 console.log("Cooking XP dwnld: " + ckXp);
-                if (ckXp > 1) {
-                    //If a value was found for players magic xp, update the div
-                    document.getElementById('cookingXpDisplay').innerText = ckXp + "xp";
-                }
             }
             if (field['12'].xp != null) {
                 //Firemaking
                 fmXp = field['12'].xp;
                 console.log("Firemaking XP dwnld: " + fmXp);
-                if (fmXp > 1) {
-                    //If a value was found for players magic xp, update the div
-                    document.getElementById('firemakingXpDisplay').innerText = fmXp + "xp";
-                }
             }
             if (field['20'].xp != null) {
                 //farming
                 faXp = field['20'].xp;
                 console.log("Farming XP dwnld: " + faXp);
-                if (faXp > 1) {
-                    //If a value was found for players magic xp, update the div
-                    document.getElementById('farmingXpDisplay').innerText = faXp + "xp";
-                }
             }
 
 
@@ -940,4 +894,33 @@ function UpdateMax() {
 
 function SaveAll() {
     alert("Bookmark this page to save your selections, and automatically update your xp next time you visit!");
+}
+
+function Lightswitch(){
+	//Turn the lights on or off
+	lights = !lights;
+	console.log("Turning lights");
+	ApplyLightClass();
+}
+
+function ApplyLightClass() {
+	console.log("Setting ligts " + lights);
+	if(lights){
+			console.log("Lights on");
+			document.getElementById('maincontent').setAttribute('class', 'light-background sand')
+			document.getElementById('wholescreen').setAttribute('class', 'whitebg');
+			document.getElementById('lightslider').setAttribute('class', 'slider round bluefont');
+			$("#lightinput").prop('checked', true);
+	}
+	if(lights === false){
+
+			document.getElementById('maincontent').setAttribute('class', 'dark-background sand');
+			document.getElementById('wholescreen').setAttribute('class', 'blackbg');
+			document.getElementById('lightslider').setAttribute('class', 'slider round whitefont');
+			$("#lightinput").prop('checked', false);
+	}
+	
+	var queryParams = new URLSearchParams(window.location.search);
+	queryParams.set("l", lights);
+    history.replaceState(null, null, "?" + queryParams.toString());
 }
