@@ -23,7 +23,7 @@
 
 
 
-<div class="searcharea">
+<div class="searcharea maxw">
   <form >
     <input type="text" id="fname" name="firstname" placeholder="Enter your username">
     <input type="button" value="Submit" onClick="SubmitUsername()">
@@ -31,7 +31,7 @@
 </div>
 
 
-<div class="sand dark-background" id="maincontent">
+<div class="maxw dark-background" id="maincontent">
 	<p class="center">PREVIEW VERSION</p>
 	<p class="center">Find many hours until you max in Old School Runescape</p>
 	<p class="center">99 melee is assumed to be completed via Slayer</p>
@@ -40,8 +40,11 @@
 
 	<p id ="displayUsername" class="center"></p>
 
+<br>
+
 	<div class="row">
-		<div class="columnA">Ranged<p id="raXpDisplay">0Xp</p></div>
+		<div class="columnA"><img style="margin-top:10px" height="30" src="Ranged_icon.webp" alt="Ranged"><p id="raXpDisplay">0Xp</p></div>
+
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="radrop" id="radrop" onchange="RaDropdownUpdate()">
@@ -55,12 +58,16 @@
 				  
 				</form>
 		</div>
-		<div class="columnC center" id="raFinal" >0Xp</div>
+		<div class="columnC righttext" id="finalcolumn">
+			 <nobr> <div id="raCost" class="righttext">? Gp</div></nobr><nobr><div id="raFinal" class="righttext" style="text-align:right;" >? Hours</div></nobr>
+		</div>
+
 	</div>
-<br><br><br><br>
+
+
 
 	<div class="row">
-		<div class="columnA">Prayer<p id="prXpDisplay">0Xp</p></div>
+		<div class="columnA"><img style="margin-top:10px" height="30" src="Prayer_icon.webp" alt="Prayer"><p id="prXpDisplay">0Xp</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="prdrop" id="prdrop" onchange="PrDropdownUpdate()">
@@ -74,13 +81,17 @@
 				  
 				</form>
 		</div>
-		<div class="columnC center" id="prFinal" >0Xp</div>
+
+		<div class="columnC righttext" id="finalcolumn">
+			<nobr> <div id="prCost" class="righttext">? Gp</div></nobr><nobr><div id="prFinal" class="righttext" style="text-align:right;" >? hours</div></nobr>
+		</div>
+
 	</div>
-<br><br><br><br>
+
 
 
 	<div class="row">
-		<div class="columnA">Magic<p id="maXpDisplay">Level</p></div>
+		<div class="columnA"><img style="margin-top:10px" height="30" src="Magic_icon.webp" alt="Magic"><p id="maXpDisplay">0Xp</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="madrop" id="madrop" onchange="MaDropdownUpdate()">
@@ -93,14 +104,18 @@
 				  
 				</form>
 		</div>
-		<div class="columnC center" id="maFinal" >0Xp</div>
+
+		<div class="columnC righttext" id="finalcolumn">
+			<nobr> <div id="maCost" class="righttext">? Gp</div></nobr><nobr><div id="maFinal" class="righttext" style="text-align:right;" >? hours</div></nobr>
+		</div>
+
 	</div>
-<br><br><br><br>
+
 
 
 
 	<div class="row">
-		<div class="columnA">Runecraft<p id="ruXpDisplay">Level</p></div>
+		<div class="columnA"><img style="margin-top:10px" height="30" src="Runecrafting_icon.webp" alt="Runecraft"><p id="ruXpDisplay">0Xp</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="rudrop" id="rudrop" onchange="RuDropdownUpdate()">
@@ -113,12 +128,17 @@
 				    </select>
 				</form>
 		</div>
-		<div class="columnC center" id="ruFinal">XP</div>
+
+		<div class="columnC righttext" id="finalcolumn">
+			<nobr> <div id="ruCost" class="righttext">? Gp</div></nobr><nobr><div id="ruFinal" class="righttext" style="text-align:right;" >? hours</div></nobr>
+		</div>
+
 	</div>
-<br><br><br><br>
+
+
 
 	<div class="row">
-		<div class="columnA">Construction<p id="coXpDisplay">Level</p></div>
+		<div class="columnA"><img style="margin-top:10px" height="30" src="Construction_icon.webp" alt="Construction"><p id="coXpDisplay">0Xp</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="codrop" id="codrop" onchange="CoDropdownUpdate()">
@@ -132,12 +152,17 @@
 				    </select>
 				</form>
 		</div>
-		<div class="columnC center" id="coFinal">XP</div>
+		
+		<div class="columnC righttext" id="finalcolumn">
+			<nobr> <div id="coCost" class="righttext">? Gp</div></nobr><nobr><div id="coFinal" class="righttext" style="text-align:right;" >? hours</div></nobr>
+		</div>
+
+
 	</div>
-<br><br><br><br>
+
 
 	<div class="row">
-		<div class="columnA">Agility<p id="agXpDisplay">Level</p></div>
+		<div class="columnA"><img style="margin-top:10px" height="30" src="Agility_icon.webp" alt="Agility"><p id="agXpDisplay">0Xp</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="agdrop" id="agdrop" onchange="AgDropdownUpdate()">
@@ -152,12 +177,17 @@
 				    </select>
 				</form>
 		</div>
-		<div class="columnC center" id="agFinal">XP</div>
+		
+		<div class="columnC righttext" id="finalcolumn">
+			<nobr> <div id="agCost" class="righttext">? Gp</div></nobr><nobr><div id="agFinal" class="righttext" style="text-align:right;" >? hours</div></nobr>
+		</div>
+
+
 	</div>
-<br><br><br><br>
+
 
 	<div class="row">
-		<div class="columnA">Herblore<p id="heXpDisplay">Level</p></div>
+		<div class="columnA"><img style="margin-top:10px" height="25" src="Herblore_icon.webp" alt="Herblore"><p id="heXpDisplay">0Xp</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="hedrop" id="hedrop" onchange="HeDropdownUpdate()">
@@ -169,12 +199,16 @@
 				    </select>
 				</form>
 		</div>
-		<div class="columnC center" id="heFinal">XP</div>
+
+		<div class="columnC righttext" id="finalcolumn">
+			<nobr> <div id="heCost" class="righttext">? Gp</div></nobr><nobr><div id="heFinal" class="righttext" style="text-align:right;" >? hours</div></nobr>
+		</div>
+
 	</div>
-<br><br><br><br>
+
 
 	<div class="row">
-		<div class="columnA">Thieving<p id="thXpDisplay">Level</p></div>
+		<div class="columnA"><img style="margin-top:10px" height="30" src="Thieving_icon.webp" alt="Thieving"><p id="thXpDisplay">0Xp</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="thdrop" id="thdrop" onchange="ThDropdownUpdate()">
@@ -188,12 +222,16 @@
 				    </select>
 				</form>
 		</div>
-		<div class="columnC center" id="thFinal">XP</div>
+
+		<div class="columnC righttext" id="finalcolumn">
+			<nobr> <div id="thCost" class="righttext">? Gp</div></nobr><nobr><div id="thFinal" class="righttext" style="text-align:right;" >? hours</div></nobr>
+		</div>
+
 	</div>
-<br><br><br><br>
+
 
 	<div class="row">
-		<div class="columnA">Crafting<p id="crXpDisplay">Level</p></div>
+		<div class="columnA"><img style="margin-top:10px" height="30" src="Crafting_icon.webp" alt="Crafting"><p id="crXpDisplay">0Xp</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="crdrop" id="crdrop" onchange="CrDropdownUpdate()">
@@ -205,12 +243,14 @@
 				    </select>
 				</form>
 		</div>
-		<div class="columnC center" id="crFinal">XP</div>
+		<div class="columnC righttext" id="finalcolumn">
+			<nobr> <div id="crCost" class="righttext">? Gp</div></nobr><nobr><div id="crFinal" class="righttext" style="text-align:right;" >? hours</div></nobr>
+		</div>
 	</div>
-<br><br><br><br>
+
 
 	<div class="row">
-		<div class="columnA">Fletching<p id="flXpDisplay">Level</p></div>
+		<div class="columnA"><img style="margin-top:10px" height="30" src="Fletching_icon.webp" alt="Fletching"><p id="flXpDisplay">0Xp</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="fldrop" id="fldrop" onchange="FlDropdownUpdate()">
@@ -222,24 +262,32 @@
 				    </select>
 				</form>
 		</div>
-		<div class="columnC center" id="flFinal">XP</div>
+
+		<div class="columnC righttext" id="finalcolumn">
+			<nobr> <div id="flCost" class="righttext">? Gp</div></nobr><nobr><div id="flFinal" class="righttext" style="text-align:right;" >? hours</div></nobr>
+		</div>
+
 	</div>
-<br><br><br><br>
+
 
 	<div class="row">
-		<div class="columnA">Slayer<p id="slXpDisplay" >Level</p></div>
+		<div class="columnA"><img style="margin-top:10px" height="30" src="Slayer_icon.webp" alt="Slayer"><p id="slXpDisplay">0Xp</p></div>
 		<div class="columnB">
 				
 				    <input type="text" id="slayerAverage" name="slayerAverage" onchange="SlTextUpdate()" placeholder="Enter your average Slayer XP per hour...">
 				
 		</div>
-		<div class="columnC center" id="slFinal">XP</div>
+
+		<div class="columnC righttext" id="finalcolumn">
+			<nobr> <div id="slCost" class="righttext">? Gp</div></nobr><nobr><div id="slFinal" class="righttext" style="text-align:right;" >? hours</div></nobr>
+		</div>
+
 	</div>
-<br><br><br><br>
+
 
 
 	<div class="row">
-		<div class="columnA">Hunter<p id="huXpDisplay">Level</p></div>
+		<div class="columnA"><img style="margin-top:10px" height="30" src="Hunter_icon.webp" alt="Hunter"><p id="huXpDisplay">0Xp</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="hudrop" id="hudrop" onchange="HuDropdownUpdate()">
@@ -252,12 +300,16 @@
 				    </select>
 				</form>
 		</div>
-		<div class="columnC center" id="huFinal">XP</div>
+
+		<div class="columnC righttext" id="finalcolumn">
+			<nobr> <div id="huCost" class="righttext">? Gp</div></nobr><nobr><div id="huFinal" class="righttext" style="text-align:right;" >? hours</div></nobr>
+		</div>
+
 	</div>
-<br><br><br><br>
+
 
 	<div class="row">
-		<div class="columnA">Mining<p id="miXpDisplay">Level</p></div>
+		<div class="columnA"><img style="margin-top:10px" height="30" src="Mining_icon.webp" alt="Mining"><p id="miXpDisplay">0Xp</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="midrop" id="midrop" onchange="MiDropdownUpdate()">
@@ -272,13 +324,17 @@
 				    </select>
 				</form>
 		</div>
-		<div class="columnC center" id="miFinal">XP</div>
+
+		<div class="columnC righttext" id="finalcolumn">
+			<nobr> <div id="miCost" class="righttext">? Gp</div></nobr><nobr><div id="miFinal" class="righttext" style="text-align:right;" >? hours</div></nobr>
+		</div>
+
 	</div>
-<br><br><br><br>
+
 
 			
 	<div class="row">
-		<div class="columnA">Smithing<p id="smXpDisplay">Level</p></div>
+		<div class="columnA"><img style="margin-top:10px" height="30" src="Smithing_icon.webp" alt="Smithing"><p id="smXpDisplay">0Xp</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="smdrop" id="smdrop" onchange="SmDropdownUpdate()">
@@ -288,13 +344,17 @@
 				    </select>
 				</form>
 		</div>
-		<div class="columnC center" id="smFinal">XP</div>
+
+		<div class="columnC righttext" id="finalcolumn">
+			<nobr> <div id="smCost" class="righttext">? Gp</div></nobr><nobr><div id="smFinal" class="righttext" style="text-align:right;" >? hours</div></nobr>
+		</div>
+
 	</div>
-<br><br><br><br>
+
 
 			
 	<div class="row">
-		<div class="columnA">Fishing<p id="fiXpDisplay">Level</p></div>
+		<div class="columnA"><img style="margin-top:10px" height="30" src="Fishing_icon.webp" alt="Fishing"><p id="fiXpDisplay">0Xp</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="fidrop" id="fidrop" onchange="FiDropdownUpdate()">
@@ -305,12 +365,16 @@
 				    </select>
 				</form>
 		</div>
-		<div class="columnC center" id="fiFinal">XP</div>
+
+		<div class="columnC righttext" id="finalcolumn">
+			<nobr> <div id="fiCost" class="righttext">? Gp</div></nobr><nobr><div id="fiFinal" class="righttext" style="text-align:right;" >? hours</div></nobr>
+		</div>
+
 	</div>
-<br><br><br><br>
+
 
 <div class="row">
-		<div class="columnA">Cooking<p id="ckXpDisplay">Level</p></div>
+		<div class="columnA"><img style="margin-top:10px" height="30" src="Cooking_icon.webp" alt="Cooking"><p id="ckXpDisplay">0Xp</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="ckdrop" id="ckdrop" onchange="CkDropdownUpdate()">
@@ -322,12 +386,14 @@
 				    </select>
 				</form>
 		</div>
-		<div class="columnC center" id="ckFinal">XP</div>
+		<div class="columnC righttext" id="finalcolumn">
+			<nobr> <div id="ckCost" class="righttext">? Gp</div></nobr><nobr><div id="ckFinal" class="righttext" style="text-align:right;" >? hours</div></nobr>
+		</div>
 	</div>
-<br><br><br><br>
+
 
 <div class="row">
-		<div class="columnA">Firemaking<p id="fmXpDisplay">Level</p></div>
+		<div class="columnA"><img style="margin-top:10px" height="30" src="Firemaking_icon.webp" alt="Firemaking"><p id="fmXpDisplay">0Xp</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="fmdrop" id="fmdrop" onchange="FmDropdownUpdate()">
@@ -339,12 +405,16 @@
 				    </select>
 				</form>
 		</div>
-		<div class="columnC center" id="fmFinal">XP</div>
+
+		<div class="columnC righttext" id="finalcolumn">
+			<nobr> <div id="fmCost" class="righttext">? Gp</div></nobr><nobr><div id="fmFinal" class="righttext" style="text-align:right;" >? hours</div></nobr>
+		</div>
+
 	</div>
-<br><br><br><br>
+
 
 	<div class="row">
-		<div class="columnA">Woodcutting<p id="wcXpDisplay">Level</p></div>
+		<div class="columnA"><img style="margin-top:10px" height="30" src="Woodcutting_icon.webp" alt="Woodcutting"><p id="wcXpDisplay">0Xp</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="wcdrop" id="wcdrop" onchange="WcDropdownUpdate()">
@@ -356,12 +426,14 @@
 				    </select>
 				</form>
 		</div>
-		<div class="columnC center" id="wcFinal">XP</div>
+		<div class="columnC righttext" id="finalcolumn">
+			<nobr> <div id="wcCost" class="righttext">? Gp</div></nobr><nobr><div id="wcFinal" class="righttext" style="text-align:right;" >? hours</div></nobr>
+		</div>
 	</div>
-<br><br><br><br>
+
 
 	<div class="row">
-		<div class="columnA">Farming<p id="farmingXpDisplay">Level</p></div>
+		<div class="columnA"><img style="margin-top:10px" height="30" src="Farming_icon.webp" alt="Farming"><p id="fmXpDisplay">0Xp</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="seeddrop" id="seeddrop" onchange="FaDropdownUpdate()">
@@ -375,9 +447,13 @@
 				</form>
 
 		</div>
-		<div class="columnC center" id="faFinal">Farm Runs</div>
+
+		<div class="columnC righttext" id="finalcolumn">
+			<nobr> <div id="faCost" class="righttext">? Gp</div></nobr><nobr><div id="faFinal" class="righttext" style="text-align:right;" >? hours</div></nobr>
+		</div>
+
 	</div>
-<br><br><br><br>
+
 
 	<div class="row">
 		<div class="columnA"><p id=""></p></div>
@@ -398,7 +474,7 @@
 		</div>
 		<div class="columnC center" id=""></div>
 	</div>
-<br><br><br><br>
+
 
 
 			
@@ -412,7 +488,7 @@
 
 <footer>
   <div>
-  	<br><br><br><br>
+  	
     <p id="footer" >2024 Arrgs (Mapex Games contact: reevesgamedev@gmail.com)</p>
     <p id="footer" >Planned features:</p>
     <p id="footer" >Website Security Certificate to prevent warning messages</p>

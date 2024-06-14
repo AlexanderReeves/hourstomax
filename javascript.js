@@ -5,8 +5,12 @@ $.ajaxSetup({ //Prevent future code loading before previous code finishes.
 var lights = false;
 
 //Set variables
-//Array of XP values
+//XP Per Hour based on training method
 var raXpArray = [90000, 130000, 140000, 675000, 710000, 850000];
+//Cost per XP
+var raGpArray = [0,0,0,0,0,0];
+
+
 var prXpArray = [50000, 250000, 437000, 600000, 800000, 1250000];
 var maXpArray = [78000, 150000, 150000, 175000, 380000];
 var wcXpArray = [68000, 75000, 90000, 90000, 100000];
@@ -26,10 +30,12 @@ var fmXpArray = [250000,275000,290000,400000,450000];
 var treePatchesArray = [1,2,3,4,5];
 var seXpArray = [3043,7070,13768];
 
+//Dynamic multi layer array variables... I guess they are objects?
 var shorthandArray = ["ov","at","de","st","hi","ra","pr","ma","ck","wc"
 	,"fl","fi","fm","cr","sm","mi","he","ag","th","sl","fa","ru","hu"
 	,"co"];
 var lvlArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+
 
 var ninetyNine = 13034431;
 var user = "";
@@ -53,6 +59,7 @@ var raXp = 0;
 var raHoursTotal = 0
 var raXpPerHour = 0;
 var raval = "";
+var racost = 0;
 
 var ruXp = 0;
 var ruHoursTotal = 0
@@ -157,6 +164,8 @@ UpdateXPAndHours("fi", fival);
 UpdateXPAndHours("ck", ckval);
 UpdateXPAndHours("fm", fmval);
 UpdateFarmingXpAndHours();
+//Find cost of each method
+FindCost();
 //Update hours to max
 UpdateMax();
 
@@ -257,6 +266,7 @@ function RaDropdownUpdate() {
     var raDrop = document.getElementById("radrop");
     raval = raDrop.value;
     UpdateXPAndHours("ra", raval);
+    FindCost();
     UpdateMax();
     UpdateURL();
 }
@@ -564,7 +574,7 @@ function UpdateXPAndHours(shortHand) {
     }
 
     if(!isNaN(remainingHours) && remainingHours != 0){
-    	document.getElementById(shortHand + 'Final').innerText = remainingHours + " hours remain";
+    	document.getElementById(shortHand + 'Final').innerText = remainingHours + " hours";
     }else{
     	document.getElementById(shortHand + 'Final').innerText = "99 Achieved!";
     }
@@ -601,6 +611,8 @@ function SubmitUsername() {
 		UpdateXPAndHours("ck", ckval);
 		UpdateXPAndHours("fm", fmval);
 		UpdateFarmingXpAndHours();
+        //Update cost
+        FindCost();
 		//Update hours to max
 		UpdateMax();
     }
@@ -752,7 +764,7 @@ function RefreshPlayer() {
                
             }
             if (field['5'].xp != null) {
-                //Woodcutting
+                //Ranges
                 raXp = field['5'].xp;
                 console.log("Ra XP dwnld: " + raXp);
             }
@@ -854,6 +866,34 @@ function RefreshPlayer() {
     console.log("***RefreshPlayer Is Ending.***")
 }
 
+function FindCost(){
+    console.log("Finding cost of selected methods")
+    //raGpArray shows the cost per XP point
+    //Cannoning ice trolls is free
+    raGpArray[0] = 0;
+    //Pest control is 1 gp per XP? where a rune arrow has 20% chance to break, at 75 coins value
+    raGpArray[1] = 0.1; 
+    //Venator bow 9 coins per attack, attack is maybe 40 xp each? 9/40 
+    raGpArray[2] = 0.2; 
+    //Gp/Xp according to wiki
+    raGpArray[3] = 3.2;
+    raGpArray[4] = 4.7;
+    raGpArray[5] = 8.4;
+
+
+    //Calculate the total final cost
+    var remaningRangedXp = ninetyNine - raXp;
+    if (remaningRangedXp < 0){remaningRangedXp = 0;}
+    racost = raGpArray[raval-1] * remaningRangedXp;    
+    if(racost >= 1000000){
+        racost = (racost/1000000);
+        racost = Math.floor(racost);
+        racost = "" + racost + "m"
+    }
+    document.getElementById('raCost').innerText = racost + " GP";
+    
+}
+
 function UpdateMax() {
 	console.log("updating hours to max total");
     maxHoursTotal = wcHoursTotal + maHoursTotal + raHoursTotal + ruHoursTotal + prHoursTotal +
@@ -907,14 +947,14 @@ function ApplyLightClass() {
 	console.log("Setting ligts " + lights);
 	if(lights){
 			console.log("Lights on");
-			document.getElementById('maincontent').setAttribute('class', 'light-background sand')
+			document.getElementById('maincontent').setAttribute('class', 'light-background maxw')
 			document.getElementById('wholescreen').setAttribute('class', 'whitebg');
 			document.getElementById('lightslider').setAttribute('class', 'slider round bluefont');
 			$("#lightinput").prop('checked', true);
 	}
 	if(lights === false){
 
-			document.getElementById('maincontent').setAttribute('class', 'dark-background sand');
+			document.getElementById('maincontent').setAttribute('class', 'dark-background maxw');
 			document.getElementById('wholescreen').setAttribute('class', 'blackbg');
 			document.getElementById('lightslider').setAttribute('class', 'slider round whitefont');
 			$("#lightinput").prop('checked', false);

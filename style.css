@@ -7,20 +7,16 @@
 		h1 {text-align: center; background-image: "logo.png"}	
 
 		body {background-color: black;color: white; }
+
+		.row{
+			overflow: hidden;
+		}
 			
 
-		.sand {
-				/*background-color: #222527;*/
-				max-width: 600px;
-				margin-left: auto;
-				margin-right: auto;
-		    border-radius: 8px;
-		    padding: 10px;
-			 	}
 
 
-		.max600 {
-				max-width: 600px;
+	  .maxw {
+				max-width: 800px;
 				margin-left: auto;
 				margin-right: auto;
 		    padding: 10px;
@@ -54,16 +50,17 @@
 
 		.columnA {
 		  float: left;
-		  width: 20%;
+		  width: 12%;
+		  text-align: left;
 		}
 		.columnB {
 		  float: left;
-		  width: 65%;
+		  width: 64%;
 
 		}
 		.columnC {
 		  float: left;
-		  width: 14%;
+		  width: 24%;
 		}
 
 
@@ -266,8 +263,7 @@ input:checked + .slider:before {
 
 
 
-				.sand {
-				background-color: #222527;
+				.maxw {
 				max-width: 100%;
 				margin-left: auto;
 				margin-right: auto;
