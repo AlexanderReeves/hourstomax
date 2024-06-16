@@ -716,7 +716,7 @@ function RefreshPlayer() {
 
     if (user != null) {
         console.log("Loading user " + user);
-        document.getElementById('displayUsername').innerText = user;
+        document.getElementById('fname').value= user;
     } else {
         console.log("no user to load");
         //document.getElementById('magicXpDisplay').innerText = 0+"xp";
@@ -740,7 +740,7 @@ function RefreshPlayer() {
         				lvlArray[i] = dllvl;
                     	var myEle = document.getElementById(shorthandArray[i] + 'XpDisplay');
                     	if(myEle){
-                    		myEle.innerText = "lvl " + lvlArray[i];
+                    		myEle.innerText = "" + lvlArray[i];
                     	}
                 	}
         		}

@@ -7,43 +7,64 @@
 </head>
 
 <body id="wholescreen" class="blackbg">
-	<!-- Rounded switch -->
-<div style="margin:10px;" class="rightalign">
+
+
+<!-- **********HEADER******* -->
+<header style="background-color: #FB0B50; height:60px">
+
+	<div class="verticle-center">
 	
-<label class="switch">
-  <input onchange="Lightswitch();" type="checkbox" id="lightinput">
-  <div class="slider round whitefont" id="lightslider"></div>
-</label>
+		<img height="56" src="logo.png" alt="My logo">
 
+		<label class="switch" style="margin-top:20px;margin-right:10px;float:right">
+	  	<input onchange="Lightswitch();" type="checkbox" id="lightinput">
+	  	<div class="slider round whitefont" id="lightslider"></div>
+		</label>
+
+	</div>
+</header>
+<!-- *************header******-->
+
+
+<br><br>
+
+<!-- ************* MAIN CONTENT *************-->
+<div class="maxw dark-background" id="maincontent" style="border-top-left-radius: 15px;border-top-right-radius: 15px;">
+
+<div class="w3-bar w3-black" style="height:60px;font-size:0px">
+  <button class="typebutton quest active" id="quest" style="color: white;width:33%;height:60px;border-top-left-radius: 15px;" onclick="setTab('quest')">Max</button>
+  <button  class="typebutton achievement" id ="max" style="color: white;width:34%;height:60px;" onclick="setTab('max')">Achievement</button>
+  <button  class="typebutton quest" id="achievement" style="color: white;width:33%;height:60px;border-top-right-radius: 15px;" onclick="setTab('achievement')">Quest</button>
 </div>
 
-<div class="logoarea">
-  <img height="90" src="logo.png" alt="My logo">
-</div>
-
-
-
-<div class="searcharea maxw">
-  <form >
-    <input type="text" id="fname" name="firstname" placeholder="Enter your username">
-    <input type="button" value="Submit" onClick="SubmitUsername()">
-  </form>
-</div>
-
-
-<div class="maxw dark-background" id="maincontent">
+		
+	<br><br>
 	<p class="center">PREVIEW VERSION</p>
 	<p class="center">Find many hours until you max in Old School Runescape</p>
 	<p class="center">99 melee is assumed to be completed via Slayer</p>
 	<p class="center">See bottom of page for planned features</p>
 	
+	<br>
+
+<!-- *************SEARCH  *************-->
+<div class="searcharea maxw">
+  <form >
+    <input type="text" id="fname" name="firstname" style="text-align:center" placeholder="Enter your username">
+    <input type="button" value="Submit" onClick="SubmitUsername()">
+  </form>
+</div>
+<!-- ************* SEARCH *************-->
+
+
+
+
 
 	<p id ="displayUsername" class="center"></p>
 
-<br>
-
+	<br>
+										<!-- *************RANGED *************-->
 	<div class="row">
-		<div class="columnA"><img style="margin-top:10px" height="30" src="Ranged_icon.webp" alt="Ranged"><p id="raXpDisplay">0Xp</p></div>
+		<div class="columnA center"><img style="margin-top:10px" height="30" class="ico" class="ico" src="Ranged_icon.webp" alt="Ranged" ><p id="raXpDisplay" class="center">0Xp</p></div>
 
 		<div class="columnB">
 				<form >
@@ -63,11 +84,12 @@
 		</div>
 
 	</div>
+	<!-- *************RANGED *************-->
 
 
-
+	<!-- *************Prayer *************-->
 	<div class="row">
-		<div class="columnA"><img style="margin-top:10px" height="30" src="Prayer_icon.webp" alt="Prayer"><p id="prXpDisplay">0Xp</p></div>
+		<div class="columnA"><img style="margin-top:10px" height="30" class="ico" src="Prayer_icon.webp" alt="Prayer"><p id="prXpDisplay" class="center">0Xp</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="prdrop" id="prdrop" onchange="PrDropdownUpdate()">
@@ -87,11 +109,12 @@
 		</div>
 
 	</div>
+	<!-- ************* PRAYER *************-->
 
 
-
+	<!-- *************MAGIC *************-->
 	<div class="row">
-		<div class="columnA"><img style="margin-top:10px" height="30" src="Magic_icon.webp" alt="Magic"><p id="maXpDisplay">0Xp</p></div>
+		<div class="columnA"><img style="margin-top:10px" height="30" class="ico" src="Magic_icon.webp" alt="Magic"><p id="maXpDisplay" class="center">0Xp</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="madrop" id="madrop" onchange="MaDropdownUpdate()">
@@ -110,12 +133,13 @@
 		</div>
 
 	</div>
+	<!-- ************* MAGIC *************-->
 
 
 
-
+	<!-- *************Runecraft *************-->
 	<div class="row">
-		<div class="columnA"><img style="margin-top:10px" height="30" src="Runecrafting_icon.webp" alt="Runecraft"><p id="ruXpDisplay">0Xp</p></div>
+		<div class="columnA"><img style="margin-top:10px" height="30" class="ico" src="Runecrafting_icon.webp" alt="Runecraft"><p id="ruXpDisplay" class="center">0Xp</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="rudrop" id="rudrop" onchange="RuDropdownUpdate()">
@@ -134,11 +158,12 @@
 		</div>
 
 	</div>
+	<!-- ************* Runecraft*************-->
 
 
-
+	<!-- *************Construnction *************-->
 	<div class="row">
-		<div class="columnA"><img style="margin-top:10px" height="30" src="Construction_icon.webp" alt="Construction"><p id="coXpDisplay">0Xp</p></div>
+		<div class="columnA"><img style="margin-top:10px" height="30" class="ico" src="Construction_icon.webp" alt="Construction"><p id="coXpDisplay" class="center">0Xp</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="codrop" id="codrop" onchange="CoDropdownUpdate()">
@@ -159,10 +184,11 @@
 
 
 	</div>
+	<!-- *************Construction *************-->
 
-
+	<!-- ************* AGILITY*************-->
 	<div class="row">
-		<div class="columnA"><img style="margin-top:10px" height="30" src="Agility_icon.webp" alt="Agility"><p id="agXpDisplay">0Xp</p></div>
+		<div class="columnA"><img style="margin-top:10px" height="30" class="ico" src="Agility_icon.webp" alt="Agility"><p id="agXpDisplay" class="center">0Xp</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="agdrop" id="agdrop" onchange="AgDropdownUpdate()">
@@ -181,13 +207,13 @@
 		<div class="columnC righttext" id="finalcolumn">
 			<nobr> <div id="agCost" class="righttext">? Gp</div></nobr><nobr><div id="agFinal" class="righttext" style="text-align:right;" >? hours</div></nobr>
 		</div>
-
-
 	</div>
+	<!-- *************Agility *************-->
 
 
+	<!-- ************* HERBLORE*************-->
 	<div class="row">
-		<div class="columnA"><img style="margin-top:10px" height="25" src="Herblore_icon.webp" alt="Herblore"><p id="heXpDisplay">0Xp</p></div>
+		<div class="columnA"><img style="margin-top:10px" height="25" class="ico" src="Herblore_icon.webp" alt="Herblore"><p id="heXpDisplay" class="center">0Xp</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="hedrop" id="hedrop" onchange="HeDropdownUpdate()">
@@ -205,10 +231,12 @@
 		</div>
 
 	</div>
+	<!-- *************Herblore *************-->
 
 
+	<!-- *************THIEVING *************-->
 	<div class="row">
-		<div class="columnA"><img style="margin-top:10px" height="30" src="Thieving_icon.webp" alt="Thieving"><p id="thXpDisplay">0Xp</p></div>
+		<div class="columnA"><img style="margin-top:10px" height="30" class="ico" src="Thieving_icon.webp" alt="Thieving"><p id="thXpDisplay" class="center">0Xp</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="thdrop" id="thdrop" onchange="ThDropdownUpdate()">
@@ -228,10 +256,11 @@
 		</div>
 
 	</div>
+	<!-- *************Thieving *************-->
 
-
+	<!-- *************CRAFTING *************-->
 	<div class="row">
-		<div class="columnA"><img style="margin-top:10px" height="30" src="Crafting_icon.webp" alt="Crafting"><p id="crXpDisplay">0Xp</p></div>
+		<div class="columnA"><img style="margin-top:10px" height="30" class="ico" src="Crafting_icon.webp" alt="Crafting"><p id="crXpDisplay" class="center">0Xp</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="crdrop" id="crdrop" onchange="CrDropdownUpdate()">
@@ -247,10 +276,11 @@
 			<nobr> <div id="crCost" class="righttext">? Gp</div></nobr><nobr><div id="crFinal" class="righttext" style="text-align:right;" >? hours</div></nobr>
 		</div>
 	</div>
+	<!-- *************Crafting *************-->
 
-
+	<!-- *************FLETCHING *************-->
 	<div class="row">
-		<div class="columnA"><img style="margin-top:10px" height="30" src="Fletching_icon.webp" alt="Fletching"><p id="flXpDisplay">0Xp</p></div>
+		<div class="columnA"><img style="margin-top:10px" height="30" class="ico" src="Fletching_icon.webp" alt="Fletching"><p id="flXpDisplay" class="center">0Xp</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="fldrop" id="fldrop" onchange="FlDropdownUpdate()">
@@ -266,12 +296,12 @@
 		<div class="columnC righttext" id="finalcolumn">
 			<nobr> <div id="flCost" class="righttext">? Gp</div></nobr><nobr><div id="flFinal" class="righttext" style="text-align:right;" >? hours</div></nobr>
 		</div>
-
 	</div>
+	<!-- *************Fletching *************-->
 
-
+	<!-- *************SLAYER *************-->
 	<div class="row">
-		<div class="columnA"><img style="margin-top:10px" height="30" src="Slayer_icon.webp" alt="Slayer"><p id="slXpDisplay">0Xp</p></div>
+		<div class="columnA"><img style="margin-top:10px" height="30" class="ico" src="Slayer_icon.webp" alt="Slayer"><p id="slXpDisplay" class="center">0Xp</p></div>
 		<div class="columnB">
 				
 				    <input type="text" id="slayerAverage" name="slayerAverage" onchange="SlTextUpdate()" placeholder="Enter your average Slayer XP per hour...">
@@ -283,11 +313,12 @@
 		</div>
 
 	</div>
+	<!-- ************* Slayer*************-->
 
 
-
+	<!-- *************HUNTER *************-->
 	<div class="row">
-		<div class="columnA"><img style="margin-top:10px" height="30" src="Hunter_icon.webp" alt="Hunter"><p id="huXpDisplay">0Xp</p></div>
+		<div class="columnA"><img style="margin-top:10px" height="30" class="ico" src="Hunter_icon.webp" alt="Hunter"><p id="huXpDisplay" class="center">0Xp</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="hudrop" id="hudrop" onchange="HuDropdownUpdate()">
@@ -306,10 +337,11 @@
 		</div>
 
 	</div>
+	<!-- *************hunter *************-->
 
-
+	<!-- *************MINING *************-->
 	<div class="row">
-		<div class="columnA"><img style="margin-top:10px" height="30" src="Mining_icon.webp" alt="Mining"><p id="miXpDisplay">0Xp</p></div>
+		<div class="columnA"><img style="margin-top:10px" height="30" class="ico" src="Mining_icon.webp" alt="Mining"><p id="miXpDisplay" class="center">0Xp</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="midrop" id="midrop" onchange="MiDropdownUpdate()">
@@ -330,11 +362,12 @@
 		</div>
 
 	</div>
+	<!-- *************Mining *************-->
 
 
-			
+	<!-- *************SMITHING *************-->
 	<div class="row">
-		<div class="columnA"><img style="margin-top:10px" height="30" src="Smithing_icon.webp" alt="Smithing"><p id="smXpDisplay">0Xp</p></div>
+		<div class="columnA"><img style="margin-top:10px" height="30" class="ico" src="Smithing_icon.webp" alt="Smithing"><p id="smXpDisplay" class="center">0Xp</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="smdrop" id="smdrop" onchange="SmDropdownUpdate()">
@@ -350,11 +383,12 @@
 		</div>
 
 	</div>
+	<!-- *************Smithing *************-->
 
 
-			
+	<!-- *************FISHING *************-->
 	<div class="row">
-		<div class="columnA"><img style="margin-top:10px" height="30" src="Fishing_icon.webp" alt="Fishing"><p id="fiXpDisplay">0Xp</p></div>
+		<div class="columnA"><img style="margin-top:10px" height="30" class="ico" src="Fishing_icon.webp" alt="Fishing"><p id="fiXpDisplay" class="center">0Xp</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="fidrop" id="fidrop" onchange="FiDropdownUpdate()">
@@ -371,10 +405,11 @@
 		</div>
 
 	</div>
+	<!-- ************* fishing *************-->
 
-
-<div class="row">
-		<div class="columnA"><img style="margin-top:10px" height="30" src="Cooking_icon.webp" alt="Cooking"><p id="ckXpDisplay">0Xp</p></div>
+	<!-- *************COOKING *************-->
+	<div class="row">
+		<div class="columnA"><img style="margin-top:10px" height="30" class="ico" src="Cooking_icon.webp" alt="Cooking"><p id="ckXpDisplay" class="center">0Xp</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="ckdrop" id="ckdrop" onchange="CkDropdownUpdate()">
@@ -390,10 +425,11 @@
 			<nobr> <div id="ckCost" class="righttext">? Gp</div></nobr><nobr><div id="ckFinal" class="righttext" style="text-align:right;" >? hours</div></nobr>
 		</div>
 	</div>
+	<!-- ************* Cooking *************-->
 
-
-<div class="row">
-		<div class="columnA"><img style="margin-top:10px" height="30" src="Firemaking_icon.webp" alt="Firemaking"><p id="fmXpDisplay">0Xp</p></div>
+	<!-- *************FIREMAKING *************-->
+	<div class="row">
+		<div class="columnA"><img style="margin-top:10px" height="30" class="ico" src="Firemaking_icon.webp" alt="Firemaking"><p id="fmXpDisplay" class="center">0Xp</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="fmdrop" id="fmdrop" onchange="FmDropdownUpdate()">
@@ -411,10 +447,11 @@
 		</div>
 
 	</div>
+	<!-- *************Firemaking *************-->
 
-
+	<!-- *************WOODCUTTING *************-->
 	<div class="row">
-		<div class="columnA"><img style="margin-top:10px" height="30" src="Woodcutting_icon.webp" alt="Woodcutting"><p id="wcXpDisplay">0Xp</p></div>
+		<div class="columnA"><img style="margin-top:10px" height="30" class="ico" src="Woodcutting_icon.webp" alt="Woodcutting"><p id="wcXpDisplay" class="center">0Xp</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="wcdrop" id="wcdrop" onchange="WcDropdownUpdate()">
@@ -430,10 +467,11 @@
 			<nobr> <div id="wcCost" class="righttext">? Gp</div></nobr><nobr><div id="wcFinal" class="righttext" style="text-align:right;" >? hours</div></nobr>
 		</div>
 	</div>
+	<!-- *************Woodcutting *************-->
 
-
+	<!-- *************FARMING *************-->
 	<div class="row">
-		<div class="columnA"><img style="margin-top:10px" height="30" src="Farming_icon.webp" alt="Farming"><p id="fmXpDisplay">0Xp</p></div>
+		<div class="columnA"><img style="margin-top:10px" height="30" class="ico" src="Farming_icon.webp" alt="Farming"><p id="faXpDisplay" class="center">0Xp</p></div>
 		<div class="columnB">
 				<form >
 				    <select  class="fullw minimal" name="seeddrop" id="seeddrop" onchange="FaDropdownUpdate()">
@@ -453,10 +491,11 @@
 		</div>
 
 	</div>
+	<!-- *************farming *************-->
 
-
+	<!-- *************FARMINGPATCHES *************-->
 	<div class="row">
-		<div class="columnA"><p id=""></p></div>
+		<div class="columnA"><p id="">  &nbsp; </p></div>
 		<div class="columnB">
 				<form >
 				    	<select  class="fullw minimal" name="patchesdrop" id="patchesdrop" onchange="FaDropdownUpdate()">
@@ -472,22 +511,30 @@
 				</form>
 
 		</div>
-		<div class="columnC center" id=""></div>
+		<div class="columnC center" id=""> &nbsp;  </div>
 	</div>
+	<!-- *************Farming patches *************-->
 
 
 
 			
-
-
-	<p id="maxHoursDisplay" class="center">Time To Max: 1500 hours</p>
+<br><br>
+	<!-- ************* ENd Info *************-->
+	<p id="maxHoursDisplay" class="center" style="font-size: 35px;">Time To Max: 1500 hours</p>
+	<br><br>
   <input type="button" value="Save!" onClick="SaveAll()">
+  <br><br>
 	<p id="hours" class="center">Bookmark this page to save your choices and automatically update your xp!</p>
+	<!-- *************end info *************-->
 
+	<br><br>
 </div>
+
+
 
 <footer>
   <div>
+  	<br><br>
   	
     <p id="footer" >2024 Arrgs (Mapex Games contact: reevesgamedev@gmail.com)</p>
     <p id="footer" >Planned features:</p>
@@ -503,5 +550,6 @@
 </body>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	<script src="./javascript.js" type="text/javascript"></script>
+	<script src="./tabs.js" type="text/javascript"></script>
 </html>
 

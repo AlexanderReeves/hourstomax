@@ -1,7 +1,7 @@
 		* {
 			   font-family: myFirstFont;
 			   font-size: 16px;
-			   margin-top:0px;
+			   margin:0px;
 		}
 
 		h1 {text-align: center; background-image: "logo.png"}	
@@ -11,6 +11,7 @@
 		.row{
 			overflow: hidden;
 		}
+
 			
 
 
@@ -19,7 +20,7 @@
 				max-width: 800px;
 				margin-left: auto;
 				margin-right: auto;
-		    padding: 10px;
+		    /*padding: 10px;*/
 		    text-align: right;
 			 	}
 
@@ -41,7 +42,10 @@
 			   font-family: myFirstFont;
 			   src: url(Roboto-Regular.ttf);
 		}
-
+.ico{
+	display: block;
+	margin: 0 auto;
+}
 
 		.logoarea {
 		  text-align: center; /* Horizontally center the image */
@@ -59,8 +63,10 @@
 
 		}
 		.columnC {
-		  float: left;
-		  width: 24%;
+		  width: 21%;
+		  Padding-top:10px;
+		  padding-right:10px;
+		  float:right;
 		}
 
 
@@ -71,7 +77,7 @@
 			width: 49%;
 		}
 		.tenpad{
-			padding: 10px;
+			/*padding: 10px;*/
 		}
 
 		.smalltext{
@@ -150,7 +156,7 @@ input[type=button] {
   background-color: #FB0B50;
   color: white;
   padding: 14px 20px;
-  margin: 8px 0;
+  margin: 0px;
   border: none;
   border-radius: 0px;
   cursor: pointer;
@@ -219,13 +225,6 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
-.slider::after {
-  position:relative;
-  right:-55px;
-
-  content: "lights"
-}
-
 .whitefont {
 	color: white;
 }
@@ -252,6 +251,14 @@ input:checked + .slider:before {
 		}
 
 
+		.columnC {
+		  float: left;
+		  width: 24%;
+		  /*Padding-top:10px;*/
+		  padding-right:0px;
+		}
+
+
     		.searcharea{
 				max-width: 100%;
 				margin-left: auto;
@@ -267,8 +274,8 @@ input:checked + .slider:before {
 				max-width: 100%;
 				margin-left: auto;
 				margin-right: auto;
-		    border-radius: 1px;
-		    padding: 10px;
+		    border-radius: 0px;
+		    /*padding: 10px;*/
 			 	}
 
 			 	.logoarea {
