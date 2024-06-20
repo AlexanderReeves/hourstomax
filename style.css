@@ -6,11 +6,22 @@
 
 		h1 {text-align: center; background-image: "logo.png"}	
 
-		body {background: rgb(77,0,0);
-background: linear-gradient(90deg, rgba(77,0,0,1) 0%, rgba(0,0,0,1) 10%, rgba(14,0,0,1) 89%, rgba(74,0,0,1) 100%);
+		body {color: white; background-color:black}
 
+.redbody{
+background: rgb(159,0,0);
+background: linear-gradient(90deg, rgba(159,0,0,1) 0%, rgba(0,0,0,1) 6%, rgba(0,0,0,1) 94%, rgba(159,0,0,1) 100%);
+}
 
-color: white; }
+.greenbody{
+background: rgb(0,159,58);
+background: linear-gradient(90deg, rgba(0,159,58,1) 0%, rgba(0,0,0,1) 6%, rgba(0,0,0,1) 94%, rgba(0,159,58,1) 100%);
+}
+
+.bluebody{
+background: rgb(0,139,159);
+background: linear-gradient(90deg, rgba(0,139,159,1) 0%, rgba(0,0,0,1) 6%, rgba(0,0,0,1) 94%, rgba(0,139,159,1) 100%);
+}
 
 		.row{
 			overflow: hidden;
@@ -155,16 +166,7 @@ input[type=text], select {
   border-radius: 0px;
   box-sizing: border-box;
 }
-input[type=button] {
-  width: 100%;
-  background-color: #FB0B50;
-  color: white;
-  padding: 14px 20px;
-  margin: 0px;
-  border: none;
-  border-radius: 0px;
-  cursor: pointer;
-}
+
 footer{
   bottom: 0;
   width: 100%;

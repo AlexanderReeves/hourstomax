@@ -13,6 +13,31 @@
 	background-color: black;
 
 }
+
+.colorbutton{
+  width: 100%;
+  color: white;
+  padding: 14px 20px;
+  margin: 0px;
+  border: none;
+  border-radius: 0px;
+  cursor: pointer;
+}
+
+.themered{
+  background-color: #FB0B50;
+}
+
+
+.themegreen{
+  background-color: #00d659;
+}
+
+.themeblue{
+  background-color: #00d6c7;
+}
+
+
 .typebutton{
   border-top: 0px;
   border-bottom: 0px;
@@ -101,3 +126,25 @@ header {
   background-color: #222527;
 }
 
+.max{
+  background-image: url("Max_cape.webp");
+  background-repeat:no-repeat;
+  background-position: center center;
+  background-size: 10%;
+  line-height:11;
+}
+
+.quest{
+  background-image: url("quest_cape.webp");
+  background-repeat:no-repeat;
+  background-position: center center;
+  background-size: 10%;
+  line-height:11;
+}
+.achievement{
+  background-image: url("achievement_cape.webp");
+  background-repeat:no-repeat;
+  background-position: center center;
+  background-size: 10%;
+  line-height:11;
+}

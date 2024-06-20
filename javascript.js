@@ -955,7 +955,7 @@ function ApplyLightClass() {
 	if(lights === false){
 
 			document.getElementById('maincontent').setAttribute('class', 'dark-background maxw');
-			document.getElementById('wholescreen').setAttribute('class', 'blackbg');
+			//document.getElementById('wholescreen').setAttribute('class', 'blackbg');
 			document.getElementById('lightslider').setAttribute('class', 'slider round whitefont');
 			$("#lightinput").prop('checked', false);
 	}

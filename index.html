@@ -6,11 +6,11 @@
 <link href="./colours.css" rel="stylesheet" type="text/css">
 </head>
 
-<body id="wholescreen" class="blackbg">
+<body id="thebody" class="redbody">
 
 
 <!-- **********HEADER******* -->
-<header style="background-color: #FB0B50; height:60px">
+<header style="height:60px" class="theme themered">
 
 	<div class="verticle-center">
 	
@@ -31,10 +31,28 @@
 <!-- ************* MAIN CONTENT *************-->
 <div class="maxw dark-background" id="maincontent" style="border-top-left-radius: 15px;border-top-right-radius: 15px;">
 
-<div class="w3-bar w3-black" style="height:60px;font-size:0px">
-  <button class="typebutton quest active" id="quest" style="color: white;width:33%;height:60px;border-top-left-radius: 15px;" onclick="setTab('quest')">Max</button>
-  <button  class="typebutton achievement" id ="max" style="color: white;width:34%;height:60px;" onclick="setTab('max')">Achievement</button>
-  <button  class="typebutton quest" id="achievement" style="color: white;width:33%;height:60px;border-top-right-radius: 15px;" onclick="setTab('achievement')">Quest</button>
+<div class="w3-bar w3-black" style="height:100px;font-size:0px">
+
+
+  <button class="typebutton max active" id="max" style="color: white;width:33%;height:100px;border-top-left-radius: 15px;" onclick="setTab('max')">
+
+  	<!-- <img style="margin-top:10px" height="30" class="ico" src="Max_cape.webp" alt="Prayer"> -->
+  	Max
+
+  </button>
+
+
+
+  <button  class="typebutton achievement" id ="achievement" style="color: white;width:34%;height:100px;" onclick="setTab('achievement')">
+  	Achievement
+
+  	</button>
+
+
+  <button  class="typebutton max quest" id="quest" style="color: white;width:33%;height:100px;border-top-right-radius: 15px;" onclick="setTab('quest')">
+
+  	Quest
+  	</button>
 </div>
 
 		
@@ -50,7 +68,7 @@
 <div class="searcharea maxw">
   <form >
     <input type="text" id="fname" name="firstname" style="text-align:center" placeholder="Enter your username">
-    <input type="button" value="Submit" onClick="SubmitUsername()">
+    <input type="button" class="colorbutton theme themered" value="Submit" onClick="SubmitUsername()">
   </form>
 </div>
 <!-- ************* SEARCH *************-->
@@ -522,7 +540,9 @@
 	<!-- ************* ENd Info *************-->
 	<p id="maxHoursDisplay" class="center" style="font-size: 35px;">Time To Max: 1500 hours</p>
 	<br><br>
-  <input type="button" value="Save!" onClick="SaveAll()">
+	<div class="maxw searcharea">
+  	<input type="button" class="colorbutton theme themered" value="Save!" onClick="SaveAll()">
+  </div>
   <br><br>
 	<p id="hours" class="center">Bookmark this page to save your choices and automatically update your xp!</p>
 	<!-- *************end info *************-->
