@@ -25,16 +25,29 @@ var element = document.getElementById(tabname);
     if(tabname == "max"){
        themedElements[i].className = themedElements[i].className.replace("newtheme", "themered");
        //bodyDiv.classList.add("redbody");
+      document.getElementById('intro').innerText =
+       "PREVIEW VERSION\n Find how many hours until you Max in Old School Runescape";
+       document.getElementById('tabtext').innerText =
+       "Max Cape";
     }
 
     if(tabname == "quest"){
        themedElements[i].className = themedElements[i].className.replace("newtheme", "themeblue");
        //bodyDiv.classList.add("bluebody");
+      document.getElementById('intro').innerText =
+       "PREVIEW VERSION\n Find how many hours until you have all the levels for the Quest Cape";
+        document.getElementById('tabtext').innerText =
+       "Quest Cape";
     }
 
     if(tabname == "achievement"){
        themedElements[i].className = themedElements[i].className.replace("newtheme", "themegreen");
        //bodyDiv.classList.add("greenbody");
+      document.getElementById('intro').innerText =
+       "PREVIEW VERSION\n Find how many hours until you have all the levels for the Achievement Diary Cape";
+      document.getElementById('tabtext').innerText =
+       "Achievement Cape";
+
     }
   }
 

@@ -38,14 +38,6 @@
 }
 
 
-.typebutton{
-  border-top: 0px;
-  border-bottom: 0px;
-  border-left:2px;
-  border-right:2px;
-  border-color: white;
-  background-color: black;
-}
 header {   
 
     position: sticky;   
@@ -124,27 +116,4 @@ header {
 
 .active{
   background-color: #222527;
-}
-
-.max{
-  background-image: url("Max_cape.webp");
-  background-repeat:no-repeat;
-  background-position: center center;
-  background-size: 10%;
-  line-height:11;
-}
-
-.quest{
-  background-image: url("quest_cape.webp");
-  background-repeat:no-repeat;
-  background-position: center center;
-  background-size: 10%;
-  line-height:11;
-}
-.achievement{
-  background-image: url("achievement_cape.webp");
-  background-repeat:no-repeat;
-  background-position: center center;
-  background-size: 10%;
-  line-height:11;
 }
