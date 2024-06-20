@@ -14,15 +14,6 @@
 
 }
 
-.colorbutton{
-  width: 100%;
-  color: white;
-  padding: 14px 20px;
-  margin: 0px;
-  border: none;
-  border-radius: 0px;
-  cursor: pointer;
-}
 
 .themered{
   background-color: #FB0B50;

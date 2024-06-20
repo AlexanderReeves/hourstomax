@@ -55,7 +55,7 @@ background: linear-gradient(90deg, rgba(0,139,159,1) 0%, rgba(0,0,0,1) 6%, rgba(
 
 		.center {text-align: center}
 
-		.righttext{text-align: right;}
+		.righttext{text-align: right; padding-right: 10px;}
 
 		@font-face {
 			   font-family: myFirstFont;
@@ -105,10 +105,10 @@ background: linear-gradient(90deg, rgba(0,139,159,1) 0%, rgba(0,0,0,1) 6%, rgba(
 
 
 	select.minimal {
-  background-image:
+  /*background-image:
     linear-gradient(45deg, transparent 50%, gray 50%),
     linear-gradient(135deg, gray 50%, transparent 50%),
-    linear-gradient(to right, #ccc, #ccc);
+    linear-gradient(to right, #ccc, #ccc);*/
   background-position:
     calc(100% - 20px) calc(1em + 2px),
     calc(100% - 15px) calc(1em + 2px),
@@ -121,7 +121,7 @@ background: linear-gradient(90deg, rgba(0,139,159,1) 0%, rgba(0,0,0,1) 6%, rgba(
 }
 
 select.minimal:focus {
-  background-image:
+ background-image:
     linear-gradient(45deg, green 50%, transparent 50%),
     linear-gradient(135deg, transparent 50%, green 50%),
     linear-gradient(to right, #ccc, #ccc);
@@ -135,7 +135,7 @@ select.minimal:focus {
     1px 1.5em;
   background-repeat: no-repeat;
   border-color: green;
-  outline: 0;
+  outline: 0; 
 }
 
 select:-moz-focusring {
@@ -147,7 +147,7 @@ select {
   /* styling */
   background-color: white;
   border: thin solid blue;
-  border-radius: 4px;
+  border-radius: 0px;
   display: inline-block;
   font: inherit;
   line-height: 1.5em;
@@ -167,7 +167,6 @@ input[type=text], select {
   margin: 8px 0;
   display: inline-block;
   border: 1px solid #ccc;
-  border-radius: 0px;
   box-sizing: border-box;
 }
 
@@ -281,12 +280,34 @@ input:checked + .slider:before {
   border-right:2px;
   border-color: white;
   background-color: black;
+  
 }
 
 
 #maincontent{
 	border-top-left-radius: 15px;
 	border-top-right-radius: 15px;
+}
+
+.mobileonly{
+  display: none;
+}
+
+.textbox{
+  height:50px;
+  border-radius: 0px;;
+}
+
+.colorbutton{
+  width: 100%;
+  color: white;
+  padding: 14px 20px;
+  margin: 0px;
+  border: none;
+  border-radius: 0px;
+  cursor: pointer;
+  height:50px;
+  border-radius: 0px;;
 }
 
 /***********END SWITCH*******/
@@ -296,11 +317,35 @@ input:checked + .slider:before {
 /* its a copy of the above where changes are needed only*/
 
 @media (max-width: 1000px) {
+  
 
 			* {
 			   font-size: 36px;
 			   line-height: 50px;
 		}
+
+    .mobileonly{
+      display: inline;
+    }
+
+    select {
+      /* styling */
+      border-radius: 10px;
+    }
+
+    input[type=text], select {
+      padding: 20px 20px;
+    }
+
+    .textbox{
+      height:130px;
+      border-radius: 15px;;
+    }
+
+    .colorbutton{
+      height:130px;
+      border-radius: 15px;;
+    }
 
 
 		.smalltext{
@@ -308,10 +353,10 @@ input:checked + .slider:before {
 		}
 
 		header {
-			height:150px;
+			height:130px;
 		}
 
-		#logoimage {height:150px}	
+		#logoimage {height:130px}	
 
 		.columnC {
 		  float: left;
@@ -382,7 +427,7 @@ input:checked + .slider:before {
 
 
 .typebutton{
-  height: 175px;
+  height: 150px;
   border-top: 0px;
   border-bottom: 0px;
   border-left:2px;
