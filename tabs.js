@@ -11,10 +11,10 @@ var element = document.getElementById(tabname);
   element.classList.add("active");
 
 
-  var bodyDiv = document.getElementById("thebody");
-    bodyDiv.classList.remove("redbody");
-    bodyDiv.classList.remove("greenbody");
-    bodyDiv.classList.remove("bluebody");
+  //var bodyDiv = document.getElementById("thebody");
+    //bodyDiv.classList.remove("redbody");
+    //bodyDiv.classList.remove("greenbody");
+    //bodyDiv.classList.remove("bluebody");
   var themedElements = document.getElementsByClassName("theme");
   for (i = 0; i < themedElements.length; i++) {
     themedElements[i].className = themedElements[i].className.replace("themered", "newtheme");
@@ -24,17 +24,17 @@ var element = document.getElementById(tabname);
   for (i = 0; i < themedElements.length; i++) {
     if(tabname == "max"){
        themedElements[i].className = themedElements[i].className.replace("newtheme", "themered");
-       bodyDiv.classList.add("redbody");
+       //bodyDiv.classList.add("redbody");
     }
 
     if(tabname == "quest"){
        themedElements[i].className = themedElements[i].className.replace("newtheme", "themeblue");
-       bodyDiv.classList.add("bluebody");
+       //bodyDiv.classList.add("bluebody");
     }
 
     if(tabname == "achievement"){
        themedElements[i].className = themedElements[i].className.replace("newtheme", "themegreen");
-       bodyDiv.classList.add("greenbody");
+       //bodyDiv.classList.add("greenbody");
     }
   }
 
