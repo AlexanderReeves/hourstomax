@@ -279,7 +279,7 @@ input:checked + .slider:before {
   border-left:2px;
   border-right:2px;
   border-color: white;
-  background-color: black;
+  background-color: #1a1a1a;
   
 }
 
@@ -433,7 +433,6 @@ input:checked + .slider:before {
   border-left:2px;
   border-right:2px;
   border-color: white;
-  background-color: black;
 }
 
 
