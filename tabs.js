@@ -27,8 +27,8 @@ var element = document.getElementById(tabname);
        //bodyDiv.classList.add("redbody");
       document.getElementById('intro').innerText =
        "PREVIEW VERSION\n Find how many hours until you Max in Old School Runescape";
-       document.getElementById('tabtext').innerText =
-       "Max Cape";
+       //document.getElementById('tabtext').innerText =
+       //"Max Cape";
     }
 
     if(tabname == "quest"){
@@ -36,8 +36,8 @@ var element = document.getElementById(tabname);
        //bodyDiv.classList.add("bluebody");
       document.getElementById('intro').innerText =
        "PREVIEW VERSION\n Find how many hours until you have all the levels for the Quest Cape";
-        document.getElementById('tabtext').innerText =
-       "Quest Cape";
+       // document.getElementById('tabtext').innerText =
+       //"Quest Cape";
     }
 
     if(tabname == "achievement"){
@@ -45,8 +45,8 @@ var element = document.getElementById(tabname);
        //bodyDiv.classList.add("greenbody");
       document.getElementById('intro').innerText =
        "PREVIEW VERSION\n Find how many hours until you have all the levels for the Achievement Diary Cape";
-      document.getElementById('tabtext').innerText =
-       "Achievement Cape";
+      //document.getElementById('tabtext').innerText =
+      // "Achievement Cape";
 
     }
   }

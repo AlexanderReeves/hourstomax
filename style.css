@@ -36,7 +36,7 @@ background: linear-gradient(90deg, rgba(0,139,159,1) 0%, rgba(0,0,0,1) 6%, rgba(
 
 
 	  .maxw {
-				max-width: 800px;
+				max-width: 950px;
 				margin-left: auto;
 				margin-right: auto;
 		    /*padding: 10px;*/
@@ -78,14 +78,22 @@ background: linear-gradient(90deg, rgba(0,139,159,1) 0%, rgba(0,0,0,1) 6%, rgba(
 		}
 		.columnB {
 		  float: left;
-		  width: 64%;
+		  width: 73%;
 
 		}
 		.columnC {
-		  width: 21%;
+		  width: 12%;
 		  Padding-top:10px;
 		  padding-right:10px;
 		  float:right;
+		}
+
+    .columnCa {
+		  width: 45%;
+
+		}
+    .columnCb {
+		  width: 45%;
 		}
 
 
@@ -118,6 +126,7 @@ background: linear-gradient(90deg, rgba(0,139,159,1) 0%, rgba(0,0,0,1) 6%, rgba(
     5px 5px,
     1px 1.5em;
   background-repeat: no-repeat;
+  text-align: center;
 }
 
 select.minimal:focus {
@@ -292,6 +301,9 @@ input:checked + .slider:before {
 .mobileonly{
   display: none;
 }
+.desktoponly{
+  display:inline;
+}
 
 .textbox{
   height:50px;
@@ -327,6 +339,9 @@ input:checked + .slider:before {
     .mobileonly{
       display: inline;
     }
+    .desktoponly{
+      display:none;
+    }
 
     select {
       /* styling */
@@ -358,12 +373,24 @@ input:checked + .slider:before {
 
 		#logoimage {height:130px}	
 
+    .columnA {
+		  float: left;
+		  width: 12%;
+		  text-align: left;
+		}
+		.columnB {
+		  float: left;
+		  width: 64%;
+
+		}
 		.columnC {
 		  float: left;
 		  width: 24%;
 		  /*Padding-top:10px;*/
 		  padding-right:0px;
 		}
+
+
 
 
     		.searcharea{
