@@ -15,6 +15,7 @@ var maXpArray = [78000, 150000, 150000, 175000, 380000];
 var maGpArray = [0,0,0,0,0];
 var wcXpArray = [68000, 75000, 90000, 90000, 100000];
 var ruXpArray = [35000, 60000, 65000, 70000, 80000, 100000];
+var ruGpArray = [0,0,0,0,0,0];
 var coXpArray = [190000, 400000, 450000, 500000, 580000, 850000, 1000000];
 var agXpArray = [45000, 50000, 50000, 55000, 65000, 65000, 90000];
 var heXpArray = [110000, 170000, 210000, 400000, 500000];
@@ -143,33 +144,36 @@ var slXp = 0;
 var slHoursTotal = 0;
 maxHoursTotal = 0;
 
-//Pull the values from the URL into the global values
-PullURLVariables();
-RefreshPlayer(); //Refresh the players data from the hiscores website
-//Update Hours To 99 for each skill
-UpdateXPAndHours("ma", maval);
-UpdateXPAndHours("wc", wcval);
-UpdateXPAndHours("ra", raval);
-UpdateXPAndHours("pr", prval);
-UpdateXPAndHours("ru", ruval);
-UpdateXPAndHours("co", coval);
-UpdateXPAndHours("ag", agval);
-UpdateXPAndHours("he", heval);
-UpdateXPAndHours("th", thval);
-UpdateXPAndHours("cr", crval);
-UpdateXPAndHours("fl", flval);
-UpdateXPAndHours("sl", slXpPerHour);
-UpdateXPAndHours("hu", huval);
-UpdateXPAndHours("mi", mival);
-UpdateXPAndHours("sm", smval);
-UpdateXPAndHours("fi", fival);
-UpdateXPAndHours("ck", ckval);
-UpdateXPAndHours("fm", fmval);
-UpdateFarmingXpAndHours();
-//Find cost of each method
-FindCost();
-//Update hours to max
-UpdateMax();
+window.onload = function(){
+
+    //Pull the values from the URL into the global values
+    PullURLVariables();
+    RefreshPlayer(); //Refresh the players data from the hiscores website
+    //Update Hours To 99 for each skill
+    UpdateXPAndHours("ma", maval);
+    UpdateXPAndHours("wc", wcval);
+    UpdateXPAndHours("ra", raval);
+    UpdateXPAndHours("pr", prval);
+    UpdateXPAndHours("ru", ruval);
+    UpdateXPAndHours("co", coval);
+    UpdateXPAndHours("ag", agval);
+    UpdateXPAndHours("he", heval);
+    UpdateXPAndHours("th", thval);
+    UpdateXPAndHours("cr", crval);
+    UpdateXPAndHours("fl", flval);
+    UpdateXPAndHours("sl", slXpPerHour);
+    UpdateXPAndHours("hu", huval);
+    UpdateXPAndHours("mi", mival);
+    UpdateXPAndHours("sm", smval);
+    UpdateXPAndHours("fi", fival);
+    UpdateXPAndHours("ck", ckval);
+    UpdateXPAndHours("fm", fmval);
+    UpdateFarmingXpAndHours();
+    //Find cost of each method
+    FindCost();
+    //Update hours to max
+    UpdateMax();
+}
 
 function PullURLVariables() {
     //Get user name and dropdown selections from the URL parameters
@@ -287,6 +291,7 @@ function RuDropdownUpdate() {
     var ruDrop = document.getElementById("rudrop");
     ruval = ruDrop.value;
     UpdateXPAndHours("ru", ruval);
+    FindCost();
     UpdateMax();
     UpdateURL();
 }
@@ -885,6 +890,16 @@ function FindCost(){
     raGpArray[5] = -8.4;
 
 
+    //Calculate the total final cost
+    var remaningRangedXp = ninetyNine - raXp;
+    if (remaningRangedXp < 0){remaningRangedXp = 0;}
+    racost = raGpArray[raval-1] * remaningRangedXp;    
+    racost = Math.floor(racost);
+    racost = racost/1000000;
+    racost = Math.round(racost * 10) / 10;
+    document.getElementById('raCost').innerText = racost + "m GP";
+
+
     //Pray xp per gp estimations
     prGpArray[0] = -7; //Big Binea
     prGpArray[1] = -10;
@@ -893,22 +908,6 @@ function FindCost(){
     prGpArray[4] = -14;
     prGpArray[5] = -22;
 
-    //Mage Xp Array
-    maGpArray[0] = 7.7;//high level alchemy
-    maGpArray[1] = 4.4;//plank make
-    maGpArray[2] = -1;//String Jewellery spell
-    maGpArray[3] = 7.7-3;//alch spell then stun spell
-    maGpArray[4] = -2.5;//ice barrage cost given on wiki
-
-
-    //Calculate the total final cost
-    var remaningRangedXp = ninetyNine - raXp;
-    if (remaningRangedXp < 0){remaningRangedXp = 0;}
-    racost = raGpArray[raval-1] * remaningRangedXp;    
-    racost = Math.floor(racost);
-    racost = racost/1000000;
-    racost = Math.round(racost * 10) / 10;
-    document.getElementById('raCost').innerText = racost + " mGP";
 
     var remainingPrayerXp = ninetyNine - prXp;
     if(remaningRangedXp < 0){remainingPrayerXp = 0}
@@ -916,7 +915,15 @@ function FindCost(){
     prcost = Math.floor(prcost);
     prcost = prcost/1000000;
     prcost = Math.round(prcost * 10) / 10;
-    document.getElementById('prCost').innerText = prcost + " mGP";
+    document.getElementById('prCost').innerText = prcost + "m GP";
+
+    //Mage gp Array
+    maGpArray[0] = 7.7;//high level alchemy
+    maGpArray[1] = 4.4;//plank make
+    maGpArray[2] = -1;//String Jewellery spell
+    maGpArray[3] = 7.7-3;//alch spell then stun spell
+    maGpArray[4] = -2.5;//ice barrage cost given on wiki
+
 
     var remainingMagicXp = ninetyNine - maXp;
     if(remainingMagicXp < 0){remainingMagicXp = 0}
@@ -924,7 +931,28 @@ function FindCost(){
     macost = Math.floor(macost);
     macost = macost/1000000;
     macost = Math.round(macost * 10) / 10;
-    document.getElementById('maCost').innerText = macost + " mGP";
+    document.getElementById('maCost').innerText = macost + "m GP";
+
+    //Runecraft gp array
+    ruGpArray[0] = 11;// blood runes
+    ruGpArray[1] = -1;// solo lavas
+    ruGpArray[2] = 10;// gotr 
+    ruGpArray[3] = 5; //Ourania Altar
+    ruGpArray[4] = 0; //arceeus books
+    ruGpArray[5] = 5.7; //Steam runes
+
+
+    var remainingRunecraftXp = ninetyNine - ruXp;
+    if(remainingRunecraftXp < 0){remainingRunecraftXp = 0}
+    rucost = ruGpArray[ruval-1] * remainingRunecraftXp;
+    rucost = Math.floor(rucost);
+    rucost = rucost/1000000;
+    rucost = Math.round(rucost * 10) / 10;
+    document.getElementById('ruCost').innerText = rucost + "m GP";
+
+
+
+
 }
 
 function UpdateMax() {
@@ -981,12 +1009,11 @@ function ApplyLightClass() {
 	if(lights){
 			console.log("Lights on");
 			document.getElementById('maincontent').setAttribute('class', 'light-background maxw')
-			document.getElementById('wholescreen').setAttribute('class', 'whitebg');
+			//document.getElementById('thebody').setAttribute('class', 'whitebg');
 			document.getElementById('lightslider').setAttribute('class', 'slider round bluefont');
 			$("#lightinput").prop('checked', true);
 	}
 	if(lights === false){
-
 			document.getElementById('maincontent').setAttribute('class', 'dark-background maxw');
 			//document.getElementById('wholescreen').setAttribute('class', 'blackbg');
 			document.getElementById('lightslider').setAttribute('class', 'slider round whitefont');
