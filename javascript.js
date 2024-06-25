@@ -9,10 +9,10 @@ var lights = false;
 var raXpArray = [90000, 130000, 140000, 675000, 710000, 850000];
 //Cost per XP
 var raGpArray = [0,0,0,0,0,0];
-
-
 var prXpArray = [50000, 250000, 437000, 600000, 800000, 1250000];
+var prGpArray = [0,0,0,0,0,0]
 var maXpArray = [78000, 150000, 150000, 175000, 380000];
+var maGpArray = [0,0,0,0,0];
 var wcXpArray = [68000, 75000, 90000, 90000, 100000];
 var ruXpArray = [35000, 60000, 65000, 70000, 80000, 100000];
 var coXpArray = [190000, 400000, 450000, 500000, 580000, 850000, 1000000];
@@ -29,8 +29,9 @@ var ckXpArray = [150000,250000,300000,450000,900000];
 var fmXpArray = [250000,275000,290000,400000,450000];
 var treePatchesArray = [1,2,3,4,5];
 var seXpArray = [3043,7070,13768];
+var totalCostArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 
-//Dynamic multi layer array variables... I guess they are objects?
+//Dynamic multi layer array variables... I guess they are objects? 24 data points
 var shorthandArray = ["ov","at","de","st","hi","ra","pr","ma","ck","wc"
 	,"fl","fi","fm","cr","sm","mi","he","ag","th","sl","fa","ru","hu"
 	,"co"];
@@ -49,6 +50,7 @@ var prXp = 0;
 var prHoursTotal = 0
 var prXpPerHour = 0;
 var prval = "";
+var prcost = 0;
 
 var wcXp = 0;
 var wcHoursTotal = 0;
@@ -250,6 +252,7 @@ function MaDropdownUpdate() {
     //UpdateTh();
     //Try to update the XP for wc and Hours to 99 for wc via a shared function
     UpdateXPAndHours("ma", maval);
+    FindCost();
     UpdateMax();
     UpdateURL();
 }
@@ -275,6 +278,7 @@ function PrDropdownUpdate() {
     var prDrop = document.getElementById("prdrop");
     prval = prDrop.value;
     UpdateXPAndHours("pr", prval);
+    FindCost();
     UpdateMax();
     UpdateURL();
 }
@@ -872,26 +876,55 @@ function FindCost(){
     //Cannoning ice trolls is free
     raGpArray[0] = 0;
     //Pest control is 1 gp per XP? where a rune arrow has 20% chance to break, at 75 coins value
-    raGpArray[1] = 0.1; 
+    raGpArray[1] = -0.1; 
     //Venator bow 9 coins per attack, attack is maybe 40 xp each? 9/40 
-    raGpArray[2] = 0.2; 
+    raGpArray[2] = -0.2; 
     //Gp/Xp according to wiki
-    raGpArray[3] = 3.2;
-    raGpArray[4] = 4.7;
-    raGpArray[5] = 8.4;
+    raGpArray[3] = -3.2;
+    raGpArray[4] = -4.7;
+    raGpArray[5] = -8.4;
+
+
+    //Pray xp per gp estimations
+    prGpArray[0] = -7; //Big Binea
+    prGpArray[1] = -10;
+    prGpArray[2] = -11;
+    prGpArray[3] = -12;
+    prGpArray[4] = -14;
+    prGpArray[5] = -22;
+
+    //Mage Xp Array
+    maGpArray[0] = 7.7;//high level alchemy
+    maGpArray[1] = 4.4;//plank make
+    maGpArray[2] = -1;//String Jewellery spell
+    maGpArray[3] = 7.7-3;//alch spell then stun spell
+    maGpArray[4] = -2.5;//ice barrage cost given on wiki
 
 
     //Calculate the total final cost
     var remaningRangedXp = ninetyNine - raXp;
     if (remaningRangedXp < 0){remaningRangedXp = 0;}
     racost = raGpArray[raval-1] * remaningRangedXp;    
-    if(racost >= 1000000){
-        racost = (racost/1000000);
-        racost = Math.floor(racost);
-        racost = "" + racost + "m"
-    }
-    document.getElementById('raCost').innerText = racost + " GP";
-    
+    racost = Math.floor(racost);
+    racost = racost/1000000;
+    racost = Math.round(racost * 10) / 10;
+    document.getElementById('raCost').innerText = racost + " mGP";
+
+    var remainingPrayerXp = ninetyNine - prXp;
+    if(remaningRangedXp < 0){remainingPrayerXp = 0}
+    prcost = prGpArray[prval-1] * remainingPrayerXp;
+    prcost = Math.floor(prcost);
+    prcost = prcost/1000000;
+    prcost = Math.round(prcost * 10) / 10;
+    document.getElementById('prCost').innerText = prcost + " mGP";
+
+    var remainingMagicXp = ninetyNine - maXp;
+    if(remainingMagicXp < 0){remainingMagicXp = 0}
+    macost = maGpArray[maval-1] * remainingMagicXp;
+    macost = Math.floor(macost);
+    macost = macost/1000000;
+    macost = Math.round(macost * 10) / 10;
+    document.getElementById('maCost').innerText = macost + " mGP";
 }
 
 function UpdateMax() {
