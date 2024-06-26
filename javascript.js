@@ -17,8 +17,11 @@ var wcXpArray = [68000, 75000, 90000, 90000, 100000];
 var ruXpArray = [35000, 60000, 65000, 70000, 80000, 100000];
 var ruGpArray = [0,0,0,0,0,0];
 var coXpArray = [190000, 400000, 450000, 500000, 580000, 850000, 1000000];
+var coGpArray = [0,0,0,0,0,0,0]
 var agXpArray = [45000, 50000, 50000, 55000, 65000, 65000, 90000];
+var agGpArray = [0,0,0,0,0,0,0]
 var heXpArray = [110000, 170000, 210000, 400000, 500000];
+var heGpArray = [0,0,0,0,0];
 var thXpArray = [110000, 140000, 150000, 210000, 240000, 260000, 265000];
 var crXpArray = [150000,220000,270000,360000,415000];
 var flXpArray = [1900000,2250000,2500000,3000000,4000000];
@@ -300,6 +303,7 @@ function CoDropdownUpdate() {
     var coDrop = document.getElementById("codrop");
     coval = coDrop.value;
     UpdateXPAndHours("co", coval);
+    FindCost();
     UpdateMax();
     UpdateURL();
 }
@@ -308,6 +312,7 @@ function AgDropdownUpdate() {
     var agDrop = document.getElementById("agdrop");
     agval = agDrop.value;
     UpdateXPAndHours("ag", agval);
+    FindCost();
     UpdateMax();
     UpdateURL();
 }
@@ -316,6 +321,7 @@ function HeDropdownUpdate() {
     var heDrop = document.getElementById("hedrop");
     heval = heDrop.value;
     UpdateXPAndHours("he", heval);
+    FindCost();
     UpdateMax();
     UpdateURL();
 }
@@ -950,9 +956,55 @@ function FindCost(){
     rucost = Math.round(rucost * 10) / 10;
     document.getElementById('ruCost').innerText = rucost + "m GP";
 
+    //Construction Gp Per Xp estimates
+    coGpArray[0] = -6.5; //Contracts mahogany homes
+    coGpArray[1] = -7.9; //Mythical capes
+    coGpArray[2] = -8.5; //Oak Larders
+    coGpArray[3] = -8.5; //Oak dungeon doors
+    coGpArray[4] = -10.8;//Teak benches
+    coGpArray[5] = -16.2; //Mahogany Furniture
+    coGpArray[6] = -16.2; //Gnome Benches
+
+    var remainingConstructionXp = ninetyNine - coXp;
+    if(remainingConstructionXp < 0){remainingConstructionXp = 0}
+    cocost = coGpArray[coval-1] * remainingConstructionXp;
+    cocost = Math.floor(cocost);
+    cocost = cocost/1000000;
+    cocost = Math.round(cocost * 10) / 10;
+    document.getElementById('coCost').innerText = cocost + "m GP";
+
+    //Mark of grace 8500 gp ea, X 15 per hour = 127500/xp per hour
+    agGpArray[0] = (8500*15)/agXpArray[0];
+    agGpArray[1] = 5;// 5 ish gp per xp from wilderness agility loot?
+    agGpArray[2] = (8500*17)/agXpArray[2];
+    agGpArray[3] = (8500*14)/agXpArray[3];
+    agGpArray[4] = (8500*18)/agXpArray[4];
+    agGpArray[5] = 0; //Rewards with crystal shards
+    agGpArray[6] = 10; //Approx 100m gp total to 99 doing grand hallowed coffin
+
+    var remainingAgilityXp = ninetyNine - agXp;
+    if(remainingAgilityXp < 0){remainingAgilityXp = 0}
+    agcost = agGpArray[agval-1] * remainingAgilityXp;
+    agcost = Math.floor(agcost);
+    agcost = agcost/1000000;
+    agcost = Math.round(agcost * 10) / 10;
+    document.getElementById('agCost').innerText = agcost + "m GP";
+
+    //Mark of grace 8500 gp ea, X 15 per hour = 127500/xp per hour
+    heGpArray[0] = 0; //Degrime torstol spell breaks even!
+    heGpArray[1] = 26; //This is probably not viable hahaha
+    heGpArray[2] = 9; //combat potion
+    heGpArray[3] = 9; //Magic potion
+    heGpArray[4] = 33; //Ancient brew
 
 
-
+    var remainingHerbloreXp = ninetyNine - heXp;
+    if(remainingHerbloreXp < 0){remainingHerbloreXp = 0}
+    hecost = heGpArray[heval-1] * remainingHerbloreXp;
+    hecost = Math.floor(hecost);
+    hecost = hecost/1000000;
+    hecost = Math.round(hecost * 10) / 10;
+    document.getElementById('heCost').innerText = hecost + "m GP";
 }
 
 function UpdateMax() {
