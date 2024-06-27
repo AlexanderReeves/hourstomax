@@ -23,12 +23,19 @@ var agGpArray = [0,0,0,0,0,0,0]
 var heXpArray = [110000, 170000, 210000, 400000, 500000];
 var heGpArray = [0,0,0,0,0];
 var thXpArray = [110000, 140000, 150000, 210000, 240000, 260000, 265000];
+var thGpArray = [0,0,0,0,0,0,0];
 var crXpArray = [150000,220000,270000,360000,415000];
+var crGpArray = [0,0,0,0,0];
 var flXpArray = [1900000,2250000,2500000,3000000,4000000];
+var flGpArray = [0,0,0,0,0];
 var huXpArray = [80000,115000,125000,150000,160000,175000];
+var huGpArray = [0,0,0,0,0,0];
 var miXpArray = [25000,50000,60000,69000,70000,75000,78000,85000];
+var miGpArray = [0,0,0,0,0,0,0,0];
 var smXpArray = [200000,250000,350000];
+var smGpArray = [0,0,0];
 var fiXpArray = [40000,50000,75000,80000];
+var fiGpArray = [0,0,0,0];
 var ckXpArray = [150000,250000,300000,450000,900000];
 var fmXpArray = [250000,275000,290000,400000,450000];
 var treePatchesArray = [1,2,3,4,5];
@@ -330,6 +337,7 @@ function ThDropdownUpdate() {
     var thDrop = document.getElementById("thdrop");
     thval = thDrop.value;
     UpdateXPAndHours("th", thval);
+    FindCost();
     UpdateMax();
     UpdateURL();
 }
@@ -337,6 +345,7 @@ function CrDropdownUpdate() {
     var crDrop = document.getElementById("crdrop");
     crval = crDrop.value;
     UpdateXPAndHours("cr", crval);
+    FindCost();
     UpdateMax();
     UpdateURL();
 }
@@ -344,6 +353,7 @@ function FlDropdownUpdate() {
     var flDrop = document.getElementById("fldrop");
     flval = flDrop.value;
     UpdateXPAndHours("fl", flval);
+    FindCost();
     UpdateMax();
     UpdateURL();
 }
@@ -352,6 +362,7 @@ function HuDropdownUpdate() {
     var huDrop = document.getElementById("hudrop");
     huval = huDrop.value;
     UpdateXPAndHours("hu", huval);
+    FindCost();
     UpdateMax();
     UpdateURL();
 }
@@ -360,6 +371,7 @@ function MiDropdownUpdate() {
     var miDrop = document.getElementById("midrop");
     mival = miDrop.value;
     UpdateXPAndHours("mi", mival);
+    FindCost();
     UpdateMax();
     UpdateURL();
 }
@@ -367,6 +379,7 @@ function SmDropdownUpdate() {
     var smDrop = document.getElementById("smdrop");
     smval = smDrop.value;
     UpdateXPAndHours("sm", smval);
+    FindCost();
     UpdateMax();
     UpdateURL();
 }
@@ -374,6 +387,7 @@ function FiDropdownUpdate() {
     var fiDrop = document.getElementById("fidrop");
     fival = fiDrop.value;
     UpdateXPAndHours("fi", fival);
+    FindCost();
     UpdateMax();
     UpdateURL();
 }
@@ -992,10 +1006,10 @@ function FindCost(){
 
     //Mark of grace 8500 gp ea, X 15 per hour = 127500/xp per hour
     heGpArray[0] = 0; //Degrime torstol spell breaks even!
-    heGpArray[1] = 26; //This is probably not viable hahaha
-    heGpArray[2] = 9; //combat potion
-    heGpArray[3] = 9; //Magic potion
-    heGpArray[4] = 33; //Ancient brew
+    heGpArray[1] = -26; //This is probably not viable hahaha
+    heGpArray[2] = -9; //combat potion
+    heGpArray[3] = -9; //Magic potion
+    heGpArray[4] = -33; //Ancient brew
 
 
     var remainingHerbloreXp = ninetyNine - heXp;
@@ -1005,6 +1019,113 @@ function FindCost(){
     hecost = hecost/1000000;
     hecost = Math.round(hecost * 10) / 10;
     document.getElementById('heCost').innerText = hecost + "m GP";
+
+    thGpArray[0] = 3;//master farmers
+    thGpArray[1] = 16;// elves
+    thGpArray[2] = 23; // vyres
+    thGpArray[3] = 1.2; //ardy knights
+    thGpArray[4] = 0.9; //blackjacking
+    thGpArray[5] = 0.8; //rogues castle chests
+    thGpArray[6] = 3.5; //pyramid plunder
+
+    var remainingThievingXp = ninetyNine - thXp;
+    if(remainingThievingXp < 0){remainingThievingXp = 0}
+    thcost = thGpArray[thval-1] * remainingThievingXp;
+    thcost = Math.floor(thcost);
+    thcost = thcost/1000000;
+    thcost = Math.round(thcost * 10) / 10;
+    document.getElementById('thCost').innerText = thcost + "m GP";
+
+    crGpArray[0] = 3.39;//dragonstone bracelets
+    crGpArray[1] = -0.5;// cut rubies
+    crGpArray[2] = -2.5; // cut diamonds
+    crGpArray[3] = -14; //cut dragonstones
+    crGpArray[4] = -8.5; //blackjacking
+
+    var remainingCraftingXp = ninetyNine - crXp;
+    if(remainingCraftingXp < 0){remainingCraftingXp = 0}
+    crcost = crGpArray[crval-1] * remainingCraftingXp;
+    crcost = Math.floor(crcost);
+    crcost = crcost/1000000;
+    crcost = Math.round(crcost * 10) / 10;
+    document.getElementById('crCost').innerText = crcost + "m GP";
+
+
+    flGpArray[0] = -6;//mith dart
+    flGpArray[1] = -10;//Addy dart
+    flGpArray[2] = -28; //Rune darts
+    flGpArray[3] = -10; //Amethyst dart
+    flGpArray[4] = -13; //dragon dart
+
+    var remainingFletchingXp = ninetyNine - flXp;
+    if(remainingFletchingXp < 0){remainingFletchingXp = 0}
+    flcost = flGpArray[flval-1] * remainingFletchingXp;
+    flcost = Math.floor(flcost);
+    flcost = flcost/1000000;
+    flcost = Math.round(flcost * 10) / 10;
+    document.getElementById('flCost').innerText = flcost + "m GP";
+
+
+    huGpArray[0] = 0;//kebits
+    huGpArray[1] = 6.1; //red chins
+    huGpArray[2] = 0; // salamamders
+    huGpArray[3] = 1.6; //herbi
+    huGpArray[4] = 10; // black chins
+    huGpArray[5] = 0; //hunter rumors
+
+    var remainingHunterXp = ninetyNine - huXp;
+    if(remainingHunterXp < 0){remainingHunterXp = 0}
+    hucost = huGpArray[huval-1] * remainingHunterXp;
+    hucost = Math.floor(hucost);
+    hucost = hucost/1000000;
+    hucost = Math.round(hucost * 10) / 10;
+    document.getElementById('huCost').innerText = hucost + "m GP";
+
+
+
+    miGpArray[0] = 1; //stars
+    miGpArray[1] = 0; // iron ore
+    miGpArray[2] = 9; //Motherloade mine
+    miGpArray[3] = 5; //blast mine
+    miGpArray[4] = 10; //gem rocks
+    miGpArray[5] = 3.5; //crystal tool seed at Zalcano
+    miGpArray[6] = 2; //zalcano
+    miGpArray[7] = 2; //
+
+    var remainingMiningXp = ninetyNine - miXp;
+    if(remainingMiningXp < 0){remainingMiningXp = 0}
+    micost = miGpArray[mival-1] * remainingMiningXp;
+    micost = Math.floor(micost);
+    micost = micost/1000000;
+    micost = Math.round(micost * 10) / 10;
+    document.getElementById('miCost').innerText = micost + "m GP";
+
+
+    smGpArray[0] = 1; //Giants Foundry
+    smGpArray[1] = 1; //Anvil Smithing
+    smGpArray[2] = -1.2; //blast furnace
+
+    var remainingSmithingXp = ninetyNine - smXp;
+    if(remainingSmithingXp < 0){remainingSmithingXp = 0}
+    smcost = smGpArray[smval-1] * remainingSmithingXp;
+    smcost = Math.floor(smcost);
+    smcost = smcost/1000000;
+    smcost = Math.round(smcost * 10) / 10;
+    document.getElementById('smCost').innerText = smcost + "m GP";
+
+
+    fiGpArray[0] = 0; //Fly Fishing
+    fiGpArray[1] = 0; //Barb fishing
+    fiGpArray[2] = 0.8; //Tempoross
+    fiGpArray[3] = -4; //Drift net fishing
+
+    var remainingFishingXp = ninetyNine - fiXp;
+    if(remainingFishingXp < 0){remainingFishingXp = 0}
+    ficost = fiGpArray[fival-1] * remainingFishingXp;
+    ficost = Math.floor(ficost);
+    ficost = ficost/1000000;
+    ficost = Math.round(ficost * 10) / 10;
+    document.getElementById('fiCost').innerText = ficost + "m GP";
 }
 
 function UpdateMax() {
