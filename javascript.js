@@ -13,7 +13,6 @@ var prXpArray = [50000, 250000, 437000, 600000, 800000, 1250000];
 var prGpArray = [0,0,0,0,0,0]
 var maXpArray = [78000, 150000, 150000, 175000, 380000];
 var maGpArray = [0,0,0,0,0];
-var wcXpArray = [68000, 75000, 90000, 90000, 100000];
 var ruXpArray = [35000, 60000, 65000, 70000, 80000, 100000];
 var ruGpArray = [0,0,0,0,0,0];
 var coXpArray = [190000, 400000, 450000, 500000, 580000, 850000, 1000000];
@@ -37,9 +36,14 @@ var smGpArray = [0,0,0];
 var fiXpArray = [40000,50000,75000,80000];
 var fiGpArray = [0,0,0,0];
 var ckXpArray = [150000,250000,300000,450000,900000];
+var ckGpArray = [0,0,0,0,0];
 var fmXpArray = [250000,275000,290000,400000,450000];
+var fmGpArray = [0,0,0,0,0];
+var wcXpArray = [68000, 75000, 90000, 90000, 100000];
+var wcGpArray = [0,0,0,0,0];
 var treePatchesArray = [1,2,3,4,5];
 var seXpArray = [3043,7070,13768];
+var faGpArray = [0,0,0];
 var totalCostArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 
 //Dynamic multi layer array variables... I guess they are objects? 24 data points
@@ -275,6 +279,7 @@ function WcDropdownUpdate() {
     var wcDrop = document.getElementById("wcdrop");
     wcval = wcDrop.value;
     UpdateXPAndHours("wc", wcval);
+    FindCost();
     UpdateMax();
     UpdateURL();
 }
@@ -395,6 +400,7 @@ function CkDropdownUpdate() {
     var ckDrop = document.getElementById("ckdrop");
     ckval = ckDrop.value;
     UpdateXPAndHours("ck", ckval);
+    FindCost();
     UpdateMax();
     UpdateURL();
 }
@@ -402,6 +408,7 @@ function FmDropdownUpdate() {
     var fmDrop = document.getElementById("fmdrop");
     fmval = fmDrop.value;
     UpdateXPAndHours("fm", fmval);
+    FindCost();
     UpdateMax();
     UpdateURL();
 }
@@ -409,6 +416,7 @@ function FmDropdownUpdate() {
 
 function FaDropdownUpdate() {
     UpdateFarmingXpAndHours();
+    FindCost();
     UpdateMax();
     UpdateURL();
 }
@@ -1126,6 +1134,63 @@ function FindCost(){
     ficost = ficost/1000000;
     ficost = Math.round(ficost * 10) / 10;
     document.getElementById('fiCost').innerText = ficost + "m GP";
+
+    ckGpArray[0] = 0.5;//lobster
+    ckGpArray[1] = 0.4; //karambwan
+    ckGpArray[2] = 0;//angler
+    ckGpArray[3] = -2; //bake pie
+    ckGpArray[4] = 0.2;//1t karam
+
+    var remainingCookingXp = ninetyNine - ckXp;
+    if(remainingCookingXp < 0){remainingCookingXp = 0}
+    ckcost =ckGpArray[ckval-1] * remainingCookingXp;
+    clcost = Math.floor(ckcost);
+    ckcost = ckcost/1000000;
+    ckcost = Math.round(ckcost * 10) / 10;
+    document.getElementById('ckCost').innerText = ckcost + "m GP";
+
+
+    fmGpArray[0] = -3.3; //mahogany
+    fmGpArray[1] = -1.5; //yew
+    fmGpArray[2] = 1;//wintertodt
+    fmGpArray[3] = -3.6; //magic
+    fmGpArray[4] = -1.7; //redwood
+
+    var remainingFiremakingXp = ninetyNine - fmXp;
+    if(remainingFiremakingXp < 0){remainingFiremakingXp = 0}
+    fmcost =fmGpArray[fmval-1] * remainingFiremakingXp;
+    fmcost = Math.floor(fmcost);
+    fmcost = fmcost/1000000;
+    fmcost = Math.round(fmcost * 10) / 10;
+    document.getElementById('fmCost').innerText = fmcost + "m GP";
+
+
+    wcGpArray[0] = 0; //redwood
+    wcGpArray[1] = 0; //blisterwood
+    wcGpArray[2] = 0.3;//Forrestry at yews
+    wcGpArray[3] = 0;//teaks
+    wcGpArray[4] = -0.05; //scullicieps
+
+    var remainingWoodcuttingXp = ninetyNine - wcXp;
+    if(remainingWoodcuttingXp < 0){remainingWoodcuttingXp = 0}
+    wccost =wcGpArray[wcval-1] * remainingWoodcuttingXp;
+    wccost = Math.floor(wccost);
+    wccost = wccost/1000000;
+    wccost = Math.round(wccost * 10) / 10;
+    document.getElementById('wcCost').innerText = wccost + "m GP";
+
+
+    faGpArray[0] = -1.5; 
+    faGpArray[1] = -5.2;
+    faGpArray[2] = -9.8;
+
+    var remainingFarmingXp = ninetyNine - faXp;
+    if(remainingFarmingXp < 0){remainingFarmingXp = 0}
+    facost =faGpArray[seedval-1] * remainingFarmingXp;
+    facost = Math.floor(facost);
+    facost = facost/1000000;
+    facost = Math.round(facost * 10) / 10;
+    document.getElementById('faCost').innerText = facost + "m GP";
 }
 
 function UpdateMax() {
