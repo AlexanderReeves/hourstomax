@@ -4,6 +4,8 @@ $.ajaxSetup({ //Prevent future code loading before previous code finishes.
 
 var lights = false;
 
+var currentTab = "max";
+
 //Set variables
 //XP Per Hour based on training method
 var raXpArray = [90000, 130000, 140000, 675000, 710000, 850000];
@@ -50,7 +52,14 @@ var totalCostArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 var shorthandArray = ["ov","at","de","st","hi","ra","pr","ma","ck","wc"
 	,"fl","fi","fm","cr","sm","mi","he","ag","th","sl","fa","ru","hu"
 	,"co"];
+var questXpGoalArray = [0,0,0,0,0,273742,101333,1210421,737627,814445
+    ,273742,333804,1210421,737627,737627,899257,737627,737627,737627,668051,814445,273742,737627
+    ,737627];
+var achievementXpGoalArray = [0,0,0,0,0,737627,3258594,9684577,3258594,5346332
+    ,8771558,9684577,3258594,3258594,5902831,3258594,5346332,5346332,5902831,8771558,5902831,5902831,737627
+    ,1629200];
 var lvlArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+
 
 
 var ninetyNine = 13034431;
@@ -462,6 +471,8 @@ function UpdateXPAndHours(shortHand) {
     //Current XP of that skill
     var currentXp = 0;
     //Find which dropdown specifically was altered
+
+
     switch (shortHand) {
         //If Woodcutting drop was altered, check the xp in the array
         case "wc":
@@ -547,8 +558,39 @@ function UpdateXPAndHours(shortHand) {
             break;
     }
     //console.log("Current xp for " + shortHand + " is " + currentXp + ". Xp per hour is " + newXpPerHour + "from drop val ");
-    //Remaining XP = 
-    var remXP = ninetyNine - currentXp;
+    
+    //Find out the goal xp for that skill
+    var xpGoal = 0;
+
+    if(currentTab == "max"){
+        xpGoal = ninetyNine;
+    }
+
+    if(currentTab == "quest"){
+        for(let i = 0; i < shorthandArray.length; i++){
+            console.log(shorthandArray[i]);
+            if(shorthandArray[i] == shortHand){
+                //get the corresponding value from the matching array
+                xpGoal = questXpGoalArray[i]
+            }
+        }
+    }
+
+    if(currentTab == "achievement"){
+        for(let i = 0; i < shorthandArray.length; i++){
+            console.log(shorthandArray[i]);
+            if(shorthandArray[i] == shortHand){
+                //get the corresponding value from the matching array
+                xpGoal = achievementXpGoalArray[i]
+            }
+        }
+    }
+
+
+    var remXP = xpGoal - currentXp;
+
+    //Here we can do a different calculation for remaning XP, instead of 99 as the end point
+
     if (remXP < 0) {
         remXP = 0
     };

@@ -1,5 +1,32 @@
 function setTab(tabname) {
 console.log(tabname);
+currentTab = tabname;
+
+
+    UpdateXPAndHours("ma", maval);
+    UpdateXPAndHours("wc", wcval);
+    UpdateXPAndHours("ra", raval);
+    UpdateXPAndHours("pr", prval);
+    UpdateXPAndHours("ru", ruval);
+    UpdateXPAndHours("co", coval);
+    UpdateXPAndHours("ag", agval);
+    UpdateXPAndHours("he", heval);
+    UpdateXPAndHours("th", thval);
+    UpdateXPAndHours("cr", crval);
+    UpdateXPAndHours("fl", flval);
+    UpdateXPAndHours("sl", slXpPerHour);
+    UpdateXPAndHours("hu", huval);
+    UpdateXPAndHours("mi", mival);
+    UpdateXPAndHours("sm", smval);
+    UpdateXPAndHours("fi", fival);
+    UpdateXPAndHours("ck", ckval);
+    UpdateXPAndHours("fm", fmval);
+    UpdateFarmingXpAndHours();
+    //Find cost of each method
+    FindCost();
+    //Update hours to max
+    UpdateMax();
+    
   // Get all elements with class="tablinks" and remove the class "active"
   tablinks = document.getElementsByClassName("typebutton");
   for (i = 0; i < tablinks.length; i++) {
