@@ -31,6 +31,22 @@ background: linear-gradient(90deg, rgba(0,139,159,1) 0%, rgba(0,0,0,1) 6%, rgba(
 			overflow: hidden;
 		}
 
+.OutcomeColA{
+  width: 10%;
+  display:inline;
+}
+.OutcomeColB{
+  width: 40%;
+  display:inline;
+}
+.OutcomeColC{
+  width: 40%;
+  display:inline;
+}
+.OutcomeColD{
+  width: 10%;
+  display:inline;
+}
 			
 
 
