@@ -165,7 +165,8 @@ var seedval = "";
 var slXpPerHour = 0;
 var slXp = 0;
 var slHoursTotal = 0;
-maxHoursTotal = 0;
+var goalHoursTotal = 0;
+var goalGpTotal = 0;
 
 window.onload = function(){
 
@@ -1233,16 +1234,30 @@ function FindCost(){
     facost = facost/1000000;
     facost = Math.round(facost * 10) / 10;
     document.getElementById('faCost').innerText = facost + "m GP";
+
+
 }
 
 function UpdateMax() {
 	console.log("updating hours to max total");
-    maxHoursTotal = wcHoursTotal + maHoursTotal + raHoursTotal + ruHoursTotal + prHoursTotal +
+    goalHoursTotal = wcHoursTotal + maHoursTotal + raHoursTotal + ruHoursTotal + prHoursTotal +
         coHoursTotal + thHoursTotal + heHoursTotal + agHoursTotal + crHoursTotal + flHoursTotal + huHoursTotal
         + miHoursTotal + smHoursTotal + fiHoursTotal + ckHoursTotal + fmHoursTotal;
     console.log("updating hours to max total");
+    document.getElementById("goalHoursDisplay").innerText = goalHoursTotal;
 
-    
+    goalGpTotal = racost+prcost+macost+rucost+cocost+agcost+hecost+thcost+crcost+flcost+hucost
+    +micost+smcost+ficost+ckcost+fmcost+wccost+facost;
+    goalGpTotal = Math.floor(goalGpTotal);
+    document.getElementById("goalGpDisplay").innerText = goalGpTotal;
+
+    document.getElementById("goalFarmDisplay").innerText = faRemainingRuns;
+
+    document.getElementById("goalNameDisplay").innerText = user;
+
+
+
+
 
 }
 
