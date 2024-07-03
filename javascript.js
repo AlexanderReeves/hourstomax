@@ -59,6 +59,15 @@ var achievementXpGoalArray = [0,0,0,0,0,737627,3258594,9684577,3258594,5346332
     ,8771558,9684577,3258594,3258594,5902831,3258594,5346332,5346332,5902831,8771558,5902831,5902831,737627
     ,1629200];
 var lvlArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var achLvlArray = [0,0,0,0,0,70,85,96,95,90
+    ,95,96,85,85,91,85,90,90,91,95,91,91,70
+    ,78];
+var questLvlArray = [0,0,0,0,0,60,50,75,70,71
+    ,60,62,75,70,70,72,70,70,70,69,70,60,70
+    ,70];
+var maxLvlArray = [0,99,99,99,99,99,99,99,99,99
+    ,99,99,99,99,99,99,99,99,99,99,99,99,99
+    ,99];
 
 
 
@@ -597,7 +606,7 @@ function UpdateXPAndHours(shortHand) {
     };
 
     var remainingHours = remXP / newXpPerHour;
-    remainingHours = Math.floor(remainingHours);
+    remainingHours = Math.round(remainingHours * 10) / 10;
     if (shortHand == "wc") {
         wcHoursTotal = remainingHours;
     }
@@ -818,14 +827,15 @@ function RefreshPlayer() {
         			if (dlxp > 0){
         				//console.log("found " + shorthandArray[i] + " xp = " + field[i].xp);
         				lvlArray[i] = dllvl;
-                    	var myEle = document.getElementById(shorthandArray[i] + 'XpDisplay');
-                    	if(myEle){
-                    		myEle.innerText = "" + lvlArray[i];
-                    	}
+                    	//var myEle = document.getElementById(shorthandArray[i] + 'XpDisplay');
+                    	//if(myEle){
+                    	//	myEle.innerText = "" + lvlArray[i];
+                    	//}
                 	}
         		}
         		i++;
         	}
+            ShowRequirement();
             //json player data is returned one line at a time
             //the key aka outer value is a number
             //key 7 contains all magic values for example
@@ -945,9 +955,44 @@ function RefreshPlayer() {
 
     console.log("***RefreshPlayer Is Ending.***")
 }
+function ShowRequirement(){
+    //default value
+    var goalLevel = 99;
+
+    for(let i = 0; i < shorthandArray.length; i++){
+        var levelDisplay = document.getElementById(shorthandArray[i] + "XpDisplay");
+        if(currentTab == "quest"){goalLevel = questLvlArray[i]}
+        if(currentTab == "achievement"){goalLevel = achLvlArray[i]}
+        //if there is a display for that skill
+        if(levelDisplay){
+            levelDisplay.innerText = lvlArray[i] + "/" + goalLevel; 
+        }
+    }
+}
+
+function shorthandToXpGoal(shorthand){
+    //By default, assume we are looking at max cape
+    var xpForTab = ninetyNine ;
+    //Skip all this if we are on the max tab. otherwise find value.
+    if(currentTab != "max"){
+        console.log("Non max tab selected");
+        for(let i = 0; i < shorthandArray.length; i++){
+            if(shorthandArray[i] == shorthand){
+                //get the corresponding value from the matching array
+                if(currentTab == "quest"){xpForTab = questXpGoalArray[i]}
+                if(currentTab == "achievement"){xpForTab = achievementXpGoalArray[i];console.log("ach");}
+            }
+        }
+    }
+    return xpForTab;
+}
+
 
 function FindCost(){
     console.log("Finding cost of selected methods")
+
+    var xpGoal = 0;
+
     //raGpArray shows the cost per XP point
     //Cannoning ice trolls is free
     raGpArray[0] = 0;
@@ -962,12 +1007,20 @@ function FindCost(){
 
 
     //Calculate the total final cost
-    var remaningRangedXp = ninetyNine - raXp;
+    //Find the remaing Ranged XP based on current goal.
+    var remaningRangedXp = shorthandToXpGoal("ra") - raXp;
+    
+    //If less than 0, we set it to 0 so we don't get negative cost
     if (remaningRangedXp < 0){remaningRangedXp = 0;}
-    racost = raGpArray[raval-1] * remaningRangedXp;    
+    //Cost = Xp * Cost per Xp
+    racost = raGpArray[raval-1] * remaningRangedXp;  
+    //Round it down  
     racost = Math.floor(racost);
+    //Divide by 1 m
     racost = racost/1000000;
+    //Show only 2 decimal places
     racost = Math.round(racost * 10) / 10;
+    //Display result
     document.getElementById('raCost').innerText = racost + "m GP";
 
 
@@ -980,8 +1033,8 @@ function FindCost(){
     prGpArray[5] = -22;
 
 
-    var remainingPrayerXp = ninetyNine - prXp;
-    if(remaningRangedXp < 0){remainingPrayerXp = 0}
+    var remainingPrayerXp = shorthandToXpGoal("pr") - prXp;
+    if(remainingPrayerXp < 0){remainingPrayerXp = 0}
     prcost = prGpArray[prval-1] * remainingPrayerXp;
     prcost = Math.floor(prcost);
     prcost = prcost/1000000;
@@ -996,7 +1049,7 @@ function FindCost(){
     maGpArray[4] = -2.5;//ice barrage cost given on wiki
 
 
-    var remainingMagicXp = ninetyNine - maXp;
+    var remainingMagicXp = shorthandToXpGoal("ma") - maXp;
     if(remainingMagicXp < 0){remainingMagicXp = 0}
     macost = maGpArray[maval-1] * remainingMagicXp;
     macost = Math.floor(macost);
@@ -1013,7 +1066,7 @@ function FindCost(){
     ruGpArray[5] = 5.7; //Steam runes
 
 
-    var remainingRunecraftXp = ninetyNine - ruXp;
+    var remainingRunecraftXp = shorthandToXpGoal("ru") - ruXp;
     if(remainingRunecraftXp < 0){remainingRunecraftXp = 0}
     rucost = ruGpArray[ruval-1] * remainingRunecraftXp;
     rucost = Math.floor(rucost);
@@ -1030,7 +1083,7 @@ function FindCost(){
     coGpArray[5] = -16.2; //Mahogany Furniture
     coGpArray[6] = -16.2; //Gnome Benches
 
-    var remainingConstructionXp = ninetyNine - coXp;
+    var remainingConstructionXp = shorthandToXpGoal("co") - coXp;
     if(remainingConstructionXp < 0){remainingConstructionXp = 0}
     cocost = coGpArray[coval-1] * remainingConstructionXp;
     cocost = Math.floor(cocost);
@@ -1047,7 +1100,7 @@ function FindCost(){
     agGpArray[5] = 0; //Rewards with crystal shards
     agGpArray[6] = 10; //Approx 100m gp total to 99 doing grand hallowed coffin
 
-    var remainingAgilityXp = ninetyNine - agXp;
+    var remainingAgilityXp = shorthandToXpGoal("ag") - agXp;
     if(remainingAgilityXp < 0){remainingAgilityXp = 0}
     agcost = agGpArray[agval-1] * remainingAgilityXp;
     agcost = Math.floor(agcost);
@@ -1063,7 +1116,7 @@ function FindCost(){
     heGpArray[4] = -33; //Ancient brew
 
 
-    var remainingHerbloreXp = ninetyNine - heXp;
+    var remainingHerbloreXp = shorthandToXpGoal("he") - heXp;
     if(remainingHerbloreXp < 0){remainingHerbloreXp = 0}
     hecost = heGpArray[heval-1] * remainingHerbloreXp;
     hecost = Math.floor(hecost);
@@ -1079,7 +1132,7 @@ function FindCost(){
     thGpArray[5] = 0.8; //rogues castle chests
     thGpArray[6] = 3.5; //pyramid plunder
 
-    var remainingThievingXp = ninetyNine - thXp;
+    var remainingThievingXp = shorthandToXpGoal("th") - thXp;
     if(remainingThievingXp < 0){remainingThievingXp = 0}
     thcost = thGpArray[thval-1] * remainingThievingXp;
     thcost = Math.floor(thcost);
@@ -1093,7 +1146,7 @@ function FindCost(){
     crGpArray[3] = -14; //cut dragonstones
     crGpArray[4] = -8.5; //blackjacking
 
-    var remainingCraftingXp = ninetyNine - crXp;
+    var remainingCraftingXp = shorthandToXpGoal("cr") - crXp;
     if(remainingCraftingXp < 0){remainingCraftingXp = 0}
     crcost = crGpArray[crval-1] * remainingCraftingXp;
     crcost = Math.floor(crcost);
@@ -1108,7 +1161,7 @@ function FindCost(){
     flGpArray[3] = -10; //Amethyst dart
     flGpArray[4] = -13; //dragon dart
 
-    var remainingFletchingXp = ninetyNine - flXp;
+    var remainingFletchingXp = shorthandToXpGoal("fl") - flXp;
     if(remainingFletchingXp < 0){remainingFletchingXp = 0}
     flcost = flGpArray[flval-1] * remainingFletchingXp;
     flcost = Math.floor(flcost);
@@ -1124,7 +1177,7 @@ function FindCost(){
     huGpArray[4] = 10; // black chins
     huGpArray[5] = 0; //hunter rumors
 
-    var remainingHunterXp = ninetyNine - huXp;
+    var remainingHunterXp = shorthandToXpGoal("hu") - huXp;
     if(remainingHunterXp < 0){remainingHunterXp = 0}
     hucost = huGpArray[huval-1] * remainingHunterXp;
     hucost = Math.floor(hucost);
@@ -1143,7 +1196,7 @@ function FindCost(){
     miGpArray[6] = 2; //zalcano
     miGpArray[7] = 2; //
 
-    var remainingMiningXp = ninetyNine - miXp;
+    var remainingMiningXp = shorthandToXpGoal("mi") - miXp;
     if(remainingMiningXp < 0){remainingMiningXp = 0}
     micost = miGpArray[mival-1] * remainingMiningXp;
     micost = Math.floor(micost);
@@ -1156,7 +1209,7 @@ function FindCost(){
     smGpArray[1] = 1; //Anvil Smithing
     smGpArray[2] = -1.2; //blast furnace
 
-    var remainingSmithingXp = ninetyNine - smXp;
+    var remainingSmithingXp = shorthandToXpGoal("sm") - smXp;
     if(remainingSmithingXp < 0){remainingSmithingXp = 0}
     smcost = smGpArray[smval-1] * remainingSmithingXp;
     smcost = Math.floor(smcost);
@@ -1170,7 +1223,7 @@ function FindCost(){
     fiGpArray[2] = 0.8; //Tempoross
     fiGpArray[3] = -4; //Drift net fishing
 
-    var remainingFishingXp = ninetyNine - fiXp;
+    var remainingFishingXp = shorthandToXpGoal("fi") - fiXp;
     if(remainingFishingXp < 0){remainingFishingXp = 0}
     ficost = fiGpArray[fival-1] * remainingFishingXp;
     ficost = Math.floor(ficost);
@@ -1184,7 +1237,7 @@ function FindCost(){
     ckGpArray[3] = -2; //bake pie
     ckGpArray[4] = 0.2;//1t karam
 
-    var remainingCookingXp = ninetyNine - ckXp;
+    var remainingCookingXp = shorthandToXpGoal("ck") - ckXp;
     if(remainingCookingXp < 0){remainingCookingXp = 0}
     ckcost =ckGpArray[ckval-1] * remainingCookingXp;
     clcost = Math.floor(ckcost);
@@ -1199,7 +1252,7 @@ function FindCost(){
     fmGpArray[3] = -3.6; //magic
     fmGpArray[4] = -1.7; //redwood
 
-    var remainingFiremakingXp = ninetyNine - fmXp;
+    var remainingFiremakingXp = shorthandToXpGoal("fm") - fmXp;
     if(remainingFiremakingXp < 0){remainingFiremakingXp = 0}
     fmcost =fmGpArray[fmval-1] * remainingFiremakingXp;
     fmcost = Math.floor(fmcost);
@@ -1214,7 +1267,7 @@ function FindCost(){
     wcGpArray[3] = 0;//teaks
     wcGpArray[4] = -0.05; //scullicieps
 
-    var remainingWoodcuttingXp = ninetyNine - wcXp;
+    var remainingWoodcuttingXp = shorthandToXpGoal("wc") - wcXp;
     if(remainingWoodcuttingXp < 0){remainingWoodcuttingXp = 0}
     wccost =wcGpArray[wcval-1] * remainingWoodcuttingXp;
     wccost = Math.floor(wccost);
@@ -1227,7 +1280,7 @@ function FindCost(){
     faGpArray[1] = -5.2;
     faGpArray[2] = -9.8;
 
-    var remainingFarmingXp = ninetyNine - faXp;
+    var remainingFarmingXp = shorthandToXpGoal("fa") - faXp;
     if(remainingFarmingXp < 0){remainingFarmingXp = 0}
     facost =faGpArray[seedval-1] * remainingFarmingXp;
     facost = Math.floor(facost);
@@ -1244,19 +1297,39 @@ function UpdateMax() {
         coHoursTotal + thHoursTotal + heHoursTotal + agHoursTotal + crHoursTotal + flHoursTotal + huHoursTotal
         + miHoursTotal + smHoursTotal + fiHoursTotal + ckHoursTotal + fmHoursTotal;
     console.log("updating hours to max total");
-    document.getElementById("goalHoursDisplay").innerText = goalHoursTotal;
+    document.getElementById("goalHoursDisplay").innerText = Math.floor(goalHoursTotal) + " h";
 
     goalGpTotal = racost+prcost+macost+rucost+cocost+agcost+hecost+thcost+crcost+flcost+hucost
     +micost+smcost+ficost+ckcost+fmcost+wccost+facost;
+
     goalGpTotal = Math.floor(goalGpTotal);
-    document.getElementById("goalGpDisplay").innerText = goalGpTotal;
-
+    document.getElementById("goalGpDisplay").innerText = goalGpTotal + " m";
     document.getElementById("goalFarmDisplay").innerText = faRemainingRuns;
-
     document.getElementById("goalNameDisplay").innerText = user;
 
+    var totalLevelsNeeded = 0;
+    var totalSkillsCompleted = 0;
 
+    for(let i = 1; i < lvlArray.length; i++){
+        var levelsNeeded = 0;
+        if(currentTab == "quest"){
+            levelsNeeded = questLvlArray[i] - lvlArray[i];
+        }
+        if(currentTab == "achievement"){
+            levelsNeeded = achLvlArray[i] - lvlArray[i]
+        }
+        if(currentTab == "max"){
+            levelsNeeded = maxLvlArray[i] - lvlArray[i]
+        }
+        if (levelsNeeded <= 0 ){
+            levelsNeeded = 0;
+            totalSkillsCompleted ++;
+        }
+        totalLevelsNeeded += levelsNeeded;
+    }
 
+    document.getElementById('goalLvlsNeededDisplay').innerText = totalLevelsNeeded;
+    document.getElementById('goalCompleteSkillsDisplay').innerText = totalSkillsCompleted + "/23";
 
 
 }

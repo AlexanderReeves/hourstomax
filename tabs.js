@@ -26,6 +26,7 @@ currentTab = tabname;
     FindCost();
     //Update hours to max
     UpdateMax();
+    ShowRequirement();
     
   // Get all elements with class="tablinks" and remove the class "active"
   tablinks = document.getElementsByClassName("typebutton");
@@ -57,6 +58,9 @@ var element = document.getElementById(tabname);
        //document.getElementById('tabtext').innerText =
        //"Max Cape";
        document.getElementById('goalCapeDisplay').innerText = "Max Cape";
+       document.getElementById("finalCape").classList.remove('finalQuest');       
+       document.getElementById("finalCape").classList.remove('finalAchievement');       
+       document.getElementById("finalCape").classList.add('finalMax');
     }
 
     if(tabname == "quest"){
@@ -67,6 +71,10 @@ var element = document.getElementById(tabname);
        // document.getElementById('tabtext').innerText =
        //"Quest Cape";
        document.getElementById('goalCapeDisplay').innerText = "Quest Cape";
+
+       document.getElementById("finalCape").classList.remove('finalMax');       
+       document.getElementById("finalCape").classList.remove('finalAchievement');       
+       document.getElementById("finalCape").classList.add('finalQuest');
     }
 
     if(tabname == "achievement"){
@@ -77,6 +85,10 @@ var element = document.getElementById(tabname);
       //document.getElementById('tabtext').innerText =
       // "Achievement Cape";
        document.getElementById('goalCapeDisplay').innerText = "Achievement Cape";
+
+       document.getElementById("finalCape").classList.remove('finalQuest');       
+       document.getElementById("finalCape").classList.remove('finalMax');       
+       document.getElementById("finalCape").classList.add('finalAchievement');
 
     }
   }
