@@ -68,6 +68,9 @@ var questLvlArray = [0,0,0,0,0,60,50,75,70,71
 var maxLvlArray = [0,99,99,99,99,99,99,99,99,99
     ,99,99,99,99,99,99,99,99,99,99,99,99,99
     ,99];
+var zeroToGoalHoursArray = [0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,
+    0,0,0]; 
 
 
 
@@ -666,6 +669,18 @@ function UpdateXPAndHours(shortHand) {
     	document.getElementById(shortHand + 'Final').innerText = remainingHours + " hours";
     }else{
     	document.getElementById(shortHand + 'Final').innerText = "99 Achieved!";
+    }
+
+    //lets also apply the hours from to goal from 0 for each skill to our
+    // then get the total, and compare what percent of total hours are completed
+
+
+    for(let i = 0; i < shorthandArray.length; i++){
+        //current skill being updated, get location in array
+        if(shortHand == shorthandArray[i]){
+            //check how many hours
+            zeroToGoalHoursArray[i] = xpGoal/newXpPerHour;
+        }
     }
 }
 
@@ -1328,6 +1343,22 @@ function UpdateMax() {
         totalLevelsNeeded += levelsNeeded;
     }
 
+    //hours to goal from scratch
+    var hoursFromZero = 0;
+    for(let i = 0; i < zeroToGoalHoursArray.length; i++){
+        hoursFromZero += zeroToGoalHoursArray[i];
+    }
+    console.log("hours to goal from 0: " + hoursFromZero);
+    console.log("remaining hours: " + (goalHoursTotal));
+    var hoursCompleted = (hoursFromZero - goalHoursTotal);
+    console.log("hours completed: " + (hoursCompleted));
+    var percentCompleted = (hoursCompleted/hoursFromZero)*100;
+    percentCompleted = (Math.round(percentCompleted * 100) / 100).toFixed(2);
+    console.log("Percent completed: " + percentCompleted + "%");
+    document.getElementById("progressPercent").setAttribute("style","width:" + percentCompleted + "%");
+
+
+    document.getElementById('goalLvlsNeededDisplay').innerText = totalLevelsNeeded;
     document.getElementById('goalLvlsNeededDisplay').innerText = totalLevelsNeeded;
     document.getElementById('goalCompleteSkillsDisplay').innerText = totalSkillsCompleted + "/23";
 
