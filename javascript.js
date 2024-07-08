@@ -75,7 +75,7 @@ var zeroToGoalHoursArray = [0,0,0,0,0,0,0,0,0,0,
 
 
 var ninetyNine = 13034431;
-var user = "";
+var user = "Unknown";
 
 var maXp = 0;
 var maHoursTotal = 0;
@@ -240,29 +240,30 @@ function PullURLVariables() {
     //We can get slval to determine slayer xp per hour
     slXpPerHour = urlParams.get('slval');
     //Update the dropdowns to the correct values here?
+    if(user==null){console.log(user="Player");}
     //Apply the wcval from url to wcdropdown unless it was null
-    if(raval != null){selectElement('radrop', raval);}else{raval = 1}
-    if(wcval != null){selectElement('wcdrop', wcval);}else{wcval = 1}
-    if(maval != null){selectElement('madrop', maval);}else{maval = 1}
-    if(prval != null){selectElement('prdrop', prval);}else{prval = 1}
-    if(ruval != null){selectElement('rudrop', ruval);}else{ruval = 1}
-    if(coval != null){selectElement('codrop', coval);}else{coval = 1}
-    if(agval != null){selectElement('agdrop', agval);}else{agval = 1}
-    if(heval != null){selectElement('hedrop', heval);}else{heval = 1}
-    if(thval != null){selectElement('thdrop', thval);}else{thval = 1}
-    if(crval != null){selectElement('crdrop', crval);}else{crval = 1}
-    if(flval != null){selectElement('fldrop', flval);}else{flval = 1}
-    if(huval != null){selectElement('hudrop', huval);}else{huval = 1}
-    if(mival != null){selectElement('midrop', mival);}else{mival = 1}
-    if(smval != null){selectElement('smdrop', smval);}else{smval = 1}
-    if(fival != null){selectElement('fidrop', fival);}else{fival = 1}
-    if(ckval != null){selectElement('ckdrop', ckval);}else{ckval = 1}
-    if(fmval != null){selectElement('fmdrop', fmval);}else{fmval = 1}
-    if(treeval != null){selectElement('patchesdrop', treeval);}else{treeval = 1}
-    if(seedval != null){selectElement('seeddrop', seedval);}else{seedval = 1}
+    if(raval != null){selectElement('radrop', raval);}else{raval = 6}
+    if(wcval != null){selectElement('wcdrop', wcval);}else{wcval = 5}
+    if(maval != null){selectElement('madrop', maval);}else{maval = 5}
+    if(prval != null){selectElement('prdrop', prval);}else{prval = 6}
+    if(ruval != null){selectElement('rudrop', ruval);}else{ruval = 6}
+    if(coval != null){selectElement('codrop', coval);}else{coval = 7}
+    if(agval != null){selectElement('agdrop', agval);}else{agval = 7}
+    if(heval != null){selectElement('hedrop', heval);}else{heval = 5}
+    if(thval != null){selectElement('thdrop', thval);}else{thval = 7}
+    if(crval != null){selectElement('crdrop', crval);}else{crval = 5}
+    if(flval != null){selectElement('fldrop', flval);}else{flval = 5}
+    if(huval != null){selectElement('hudrop', huval);}else{huval = 6}
+    if(mival != null){selectElement('midrop', mival);}else{mival = 8}
+    if(smval != null){selectElement('smdrop', smval);}else{smval = 3}
+    if(fival != null){selectElement('fidrop', fival);}else{fival = 4}
+    if(ckval != null){selectElement('ckdrop', ckval);}else{ckval = 5}
+    if(fmval != null){selectElement('fmdrop', fmval);}else{fmval = 5}
+    if(treeval != null){selectElement('patchesdrop', treeval);}else{treeval = 5}
+    if(seedval != null){selectElement('seeddrop', seedval);}else{seedval = 3}
     if(lights == "true"){lights = true;}else{lights=false}
     console.log(lights);
-    ApplyLightClass();
+    //ApplyLightClass();
     console.log(treeval + ":t   s:" +seedval)
     //If there is no slayer XP in URL, set slayer XP to 40 000
     if(slXpPerHour == null){ 	slXpPerHour = 40000; }
@@ -680,6 +681,7 @@ function UpdateXPAndHours(shortHand) {
         if(shortHand == shorthandArray[i]){
             //check how many hours
             zeroToGoalHoursArray[i] = xpGoal/newXpPerHour;
+            console.log(shorthandArray[i] + "hours = " + zeroToGoalHoursArray[i]);
         }
     }
 }
@@ -817,13 +819,12 @@ function RefreshPlayer() {
     ckXp = 0;
     fmXp = 0;
 
-
-    if (user != null) {
+    document.getElementById('fname').value= user;
+    if (user != null && user != "Player") {
         console.log("Loading user " + user);
-        document.getElementById('fname').value= user;
+        
     } else {
         console.log("no user to load");
-        //document.getElementById('magicXpDisplay').innerText = 0+"xp";
 
         return;
     }
@@ -1307,11 +1308,11 @@ function FindCost(){
 }
 
 function UpdateMax() {
-	console.log("updating hours to max total");
     goalHoursTotal = wcHoursTotal + maHoursTotal + raHoursTotal + ruHoursTotal + prHoursTotal +
         coHoursTotal + thHoursTotal + heHoursTotal + agHoursTotal + crHoursTotal + flHoursTotal + huHoursTotal
-        + miHoursTotal + smHoursTotal + fiHoursTotal + ckHoursTotal + fmHoursTotal;
-    console.log("updating hours to max total");
+        + miHoursTotal + smHoursTotal + fiHoursTotal + ckHoursTotal + fmHoursTotal + slHoursTotal;
+
+    console.log("New goal hours total =========" + goalHoursTotal);
     document.getElementById("goalHoursDisplay").innerText = Math.floor(goalHoursTotal) + " h";
 
     goalGpTotal = racost+prcost+macost+rucost+cocost+agcost+hecost+thcost+crcost+flcost+hucost
@@ -1347,8 +1348,10 @@ function UpdateMax() {
     var hoursFromZero = 0;
     for(let i = 0; i < zeroToGoalHoursArray.length; i++){
         hoursFromZero += zeroToGoalHoursArray[i];
+        console.log("Zero to goal hours array i = " + i + " ,hours = " + zeroToGoalHoursArray[i] + " skill:" + shorthandArray[i]);
     }
     console.log("hours to goal from 0: " + hoursFromZero);
+
     console.log("remaining hours: " + (goalHoursTotal));
     var hoursCompleted = (hoursFromZero - goalHoursTotal);
     console.log("hours completed: " + (hoursCompleted));
@@ -1366,7 +1369,7 @@ function UpdateMax() {
 }
 
 function SaveAll() {
-    alert("Bookmark this page to save your selections, and automatically update your xp next time you visit!");
+    alert("!Bookmark this page to save your selections, and automatically update your xp next time you visit!");
 }
 
 function Lightswitch(){
