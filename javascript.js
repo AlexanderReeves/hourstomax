@@ -211,12 +211,23 @@ window.onload = function(){
     UpdateMax();
 }
 
-//Cancel page refresh!
-function answer(e) {
-    if (e.keyCode == 13) {
-        e.preventDefault();
-    }
-}
+$("#myform").keypress(function(e) {
+  //Enter key
+  if (e.which == 13) {
+    console.log("Forms submit");
+    e.preventDefault();
+    return false;
+  }
+});
+
+$("#fname").keypress(function(e) {
+  //Enter key
+  if (e.which == 13) {
+    e.preventDefault();
+    console.log("Forms submit");
+    return false;
+  }
+});
 
 function PullURLVariables() {
     //Get user name and dropdown selections from the URL parameters
@@ -805,8 +816,13 @@ function UpdateURL() {
 
 }
 
-function RefreshPlayer() {
+function RefreshPlayer(fromEnter) {
     console.log("***RefreshPlayer from Jagex is starting.***")
+    if(fromEnter){
+        console.log(document.getElementById('fname').value);
+        console.log("Loaded by enter button");
+        user = document.getElementById('fname').value
+    }
 
     //set user xp levels to 0 as default
     maXp = 0;
