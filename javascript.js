@@ -211,6 +211,13 @@ window.onload = function(){
     UpdateMax();
 }
 
+//Cancel page refresh!
+function answer(e) {
+    if (e.keyCode == 13) {
+        e.preventDefault();
+    }
+}
+
 function PullURLVariables() {
     //Get user name and dropdown selections from the URL parameters
     const queryString = window.location.search;
