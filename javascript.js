@@ -247,7 +247,7 @@ function PullURLVariables() {
     //We can get slval to determine slayer xp per hour
     slXpPerHour = urlParams.get('slval');
     //Update the dropdowns to the correct values here?
-    if(user==null){console.log(user="Player");}
+    //if(user==null){console.log(user="Player");}
     //Apply the wcval from url to wcdropdown unless it was null
     if(raval != null){selectElement('radrop', raval);}else{raval = 6}
     if(wcval != null){selectElement('wcdrop', wcval);}else{wcval = 5}
@@ -699,6 +699,7 @@ function SubmitUsername() {
     var newName = document.getElementById('fname').value;
     if (newName == "") {
         console.log("no username entered");
+        //return;
     } else {
         console.log("username submitted:" + newName);
         user = newName;
@@ -1329,6 +1330,9 @@ function UpdateMax() {
     document.getElementById("goalGpDisplay").innerText = goalGpTotal + " m";
     document.getElementById("goalFarmDisplay").innerText = faRemainingRuns;
     document.getElementById("goalNameDisplay").innerText = user;
+    if(user=="" || user==null){
+        document.getElementById("goalNameDisplay").innerText = "Player";
+    }
 
     var totalLevelsNeeded = 0;
     var totalSkillsCompleted = 0;
