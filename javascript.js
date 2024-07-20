@@ -687,7 +687,15 @@ function UpdateXPAndHours(shortHand) {
     if(!isNaN(remainingHours) && remainingHours != 0){
     	document.getElementById(shortHand + 'Final').innerText = remainingHours + " hours";
     }else{
-    	document.getElementById(shortHand + 'Final').innerText = "99 Achieved!";
+        if(currentTab == "max"){
+    	   document.getElementById(shortHand + 'Final').innerText = "99 Achieved!";
+        }
+        if(currentTab == "achievement"){
+           document.getElementById(shortHand + 'Final').innerText = "Completed!";
+        }
+        if(currentTab == "quest"){
+           document.getElementById(shortHand + 'Final').innerText = "Completed!";
+        }
     }
 
     //lets also apply the hours from to goal from 0 for each skill to our
