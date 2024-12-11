@@ -863,7 +863,7 @@ function RefreshPlayer(fromEnter) {
     //This code runs on page load, or submit username button.
 
 
-    $.getJSON("https://corsproxy.io/?https://secure.runescape.com/m=hiscore_oldschool/index_lite.json?player=" + user, function(result) {
+    $.getJSON("https://corsproxy.io/?url=https://secure.runescape.com/m=hiscore_oldschool/index_lite.json?player=" + user, function(result) {
         $.each(result, function(i, field) {
 
         	var i = 1;
